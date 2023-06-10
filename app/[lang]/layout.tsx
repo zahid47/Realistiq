@@ -1,6 +1,6 @@
 import "../globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import NextAuthProvider from "@/components/NextAuthProvider";
+import NextAuthProvider from "@/components/providers/NextAuthProvider";
 
 export const metadata = {
   title: "Your Path to Homeownership | Realistiq",
