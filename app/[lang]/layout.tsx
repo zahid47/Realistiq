@@ -1,5 +1,6 @@
-import { Analytics } from "@vercel/analytics/react";
 import "../globals.css";
+import { Analytics } from "@vercel/analytics/react";
+import NextAuthProvider from "@/components/NextAuthProvider";
 
 export const metadata = {
   title: "Your Path to Homeownership | Realistiq",
@@ -14,8 +15,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
-        <Analytics />
+        <NextAuthProvider>
+          {children}
+          <Analytics />
+        </NextAuthProvider>
       </body>
     </html>
   );
