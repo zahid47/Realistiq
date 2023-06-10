@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession, signIn, signOut } from "next-auth/react";
+import { RealistiqButton } from "./ui/button";
 
 export default function Profile() {
   const { data: session } = useSession();
@@ -11,10 +12,12 @@ export default function Profile() {
       {user ? (
         <>
           Signed in as {user.name} <br />
-          <button onClick={() => signOut()}>Logout</button>
+          <RealistiqButton onClick={() => signOut()}>Logout</RealistiqButton>
         </>
       ) : (
-        <button onClick={() => signIn("github")}>Login</button>
+        <RealistiqButton onClick={() => signIn("github")}>
+          Login
+        </RealistiqButton>
       )}
     </>
   );
