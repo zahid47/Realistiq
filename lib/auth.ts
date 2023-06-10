@@ -1,38 +1,41 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { type NextAuthOptions } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import prisma from "@/lib/db";
-import { env } from "../env.mjs";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { NextAuthOptions } from "next-auth";
+import GitHubProvider from "next-auth/providers/github";
+
+import { env } from "@/env.mjs";
+import { db } from "@/lib/db";
 
 export const authOptions: NextAuthOptions = {
-  //@ts-ignore
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(db),
+  session: {
+    strategy: "jwt",
+  },
+  pages: {
+    signIn: "/login",
+  },
   providers: [
-    GithubProvider({
+    GitHubProvider({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
   callbacks: {
     async session({ token, session }) {
       if (token) {
-        // @ts-ignore
+        // @ts-expect-error
         session.user.id = token.id;
-        // @ts-ignore
+        // @ts-expect-error
         session.user.name = token.name;
-        // @ts-ignore
+        // @ts-expect-error
         session.user.email = token.email;
-        // @ts-ignore
+        // @ts-expect-error
         session.user.image = token.picture;
       }
 
       return session;
     },
     async jwt({ token, user }) {
-      const dbUser = await prisma.user.findFirst({
+      const dbUser = await db.user.findFirst({
         where: {
           email: token.email,
         },
