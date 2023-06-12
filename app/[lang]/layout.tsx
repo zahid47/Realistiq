@@ -10,11 +10,13 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang: string };
 }) {
   return (
-    <html lang="en">
+    <html lang={params.lang}>
       <body>
         <NextAuthProvider>
           <Header />
