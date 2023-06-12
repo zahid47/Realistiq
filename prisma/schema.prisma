@@ -55,6 +55,7 @@ model User {
 
   accounts Account[]
   sessions Session[]
+  Listing  Listing[]
 
   stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
   stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
@@ -71,4 +72,15 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map(name: "verification_tokens")
+}
+
+model Listing {
+  id    Int    @id @default(autoincrement())
+  title String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
 }
