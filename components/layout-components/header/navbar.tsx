@@ -6,6 +6,7 @@ import useScroll from "@/lib/hooks/use-scroll";
 import { cn } from "@/lib/utils";
 import UserNav from "../user-nav";
 import { signIn } from "next-auth/react";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar({ session }: { session: Session | null }) {
   const scrolled = useScroll(30);
@@ -27,7 +28,14 @@ export default function Navbar({ session }: { session: Session | null }) {
             {session ? (
               <UserNav session={session} />
             ) : (
-              <Link href="/login">Sign In</Link>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  signIn("github");
+                }}
+              >
+                Sign In
+              </Button>
             )}
           </div>
         </div>
