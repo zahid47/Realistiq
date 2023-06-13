@@ -2,6 +2,7 @@ import "../globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import NextAuthProvider from "@/components/providers/NextAuthProvider";
 import Header from "@/components/layout-components/header";
+import QueryClientWrapper from "@/components/providers/QueryClientProvider";
 
 export const metadata = {
   title: "Your Path to Homeownership | Realistiq",
@@ -19,8 +20,10 @@ export default function RootLayout({
     <html lang={params.lang}>
       <body>
         <NextAuthProvider>
-          <Header />
-          <main className="relative z-10">{children}</main>
+          <QueryClientWrapper>
+            <Header />
+            <main className="relative z-10">{children}</main>
+          </QueryClientWrapper>
         </NextAuthProvider>
         <Analytics />
       </body>
