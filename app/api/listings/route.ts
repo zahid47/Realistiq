@@ -5,6 +5,9 @@ export async function GET() {
   const listings = await db.listing.findMany({
     include: {
       user: true,
+      ListingInfo: true,
+      ListingLocation: true,
+      ListingPhotos: true,
     },
   });
 

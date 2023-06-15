@@ -83,4 +83,42 @@ model Listing {
 
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @default(now()) @map(name: "updated_at")
+
+  ListingInfo     ListingInfo?
+  ListingLocation ListingLocation?
+  ListingPhotos   ListingPhotos[]
+
+  @@map(name: "listings")
+}
+
+model ListingInfo {
+  id          Int    @id @default(autoincrement())
+  description String
+
+  listingId Int     @unique
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@map(name: "listing_info")
+}
+
+model ListingLocation {
+  id  Int   @id @default(autoincrement())
+  lat Float
+  lng Float
+
+  listingId Int     @unique
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@map(name: "listing_location")
+}
+
+model ListingPhotos {
+  id  Int    @id @default(autoincrement())
+  url String
+  alt String
+
+  listingId Int
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@map(name: "listing_photos")
 }
