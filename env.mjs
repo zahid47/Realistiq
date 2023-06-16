@@ -15,10 +15,12 @@ export const env = createEnv({
 
   client: {
     NEXT_PUBLIC_APP_URL: z.string().min(1),
+    NEXT_PUBLIC_MAPBOX_TOKEN: z.string().min(1),
   },
 
   runtimeEnv: {
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_MAPBOX_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
     NEXT_TELEMETRY_DISABLED: process.env.NEXT_TELEMETRY_DISABLED,
     POSTGRES_URL: process.env.POSTGRES_URL,
     POSTGRES_PRISMA_URL: process.env.POSTGRES_PRISMA_URL,

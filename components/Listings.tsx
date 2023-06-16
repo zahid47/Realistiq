@@ -1,8 +1,9 @@
 "use client";
 
+import ListingsMap from "./ListingsMap";
 import { useQuery } from "@tanstack/react-query";
 import getListings from "@/actions/getListings";
-import Link from "next/link";
+import ListingsList from "./ListingsList";
 
 export default function Listings() {
   const { data: listings } = useQuery({
@@ -11,14 +12,9 @@ export default function Listings() {
   });
 
   return (
-    <ul>
-      {listings?.map((listing: any) => {
-        return (
-          <li key={listing.id}>
-            <Link href={`/listings/${listing.id}`}>{listing.title}</Link>
-          </li>
-        );
-      })}
-    </ul>
+    <div className="flex flex-row">
+      <ListingsMap listings={listings} />
+      <ListingsList listings={listings} />
+    </div>
   );
 }
