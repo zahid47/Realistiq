@@ -18,12 +18,14 @@ interface Props {
   listing: any;
   clickedListingId: null | number;
   setClickedListingId: Dispatch<SetStateAction<null | number>>;
+  setHoveringListingId: Dispatch<SetStateAction<null | number>>;
 }
 
 export default function ListingCard({
   listing,
   clickedListingId,
   setClickedListingId,
+  setHoveringListingId,
 }: Props) {
   const { toast } = useToast();
   const listingRef = useRef<HTMLDivElement>(null);
@@ -45,7 +47,15 @@ export default function ListingCard({
   }, [clickedListingId, listing.id, setClickedListingId]);
 
   return (
-    <Card ref={listingRef}>
+    <Card
+      ref={listingRef}
+      onMouseEnter={() => {
+        setHoveringListingId(listing.id);
+      }}
+      onMouseLeave={() => {
+        setHoveringListingId(null);
+      }}
+    >
       <CardHeader>
         <CardTitle>{listing.title}</CardTitle>
         <CardDescription>{listing.ListingInfo.description}</CardDescription>

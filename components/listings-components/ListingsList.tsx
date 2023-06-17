@@ -7,12 +7,14 @@ interface Props {
   listings: any;
   clickedListingId: null | number;
   setClickedListingId: Dispatch<SetStateAction<null | number>>;
+  setHoveringListingId: Dispatch<SetStateAction<null | number>>;
 }
 
 export default function ListingsList({
   listings,
   clickedListingId,
   setClickedListingId,
+  setHoveringListingId,
 }: Props) {
   return (
     <ul>
@@ -24,6 +26,7 @@ export default function ListingsList({
               listing={listing}
               clickedListingId={clickedListingId}
               setClickedListingId={setClickedListingId}
+              setHoveringListingId={setHoveringListingId}
             />
           </li>
         );
