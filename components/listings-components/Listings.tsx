@@ -4,6 +4,7 @@ import ListingsMap from "./ListingsMap";
 import { useQuery } from "@tanstack/react-query";
 import getListings from "@/actions/getListings";
 import ListingsList from "./ListingsList";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Listings() {
   const { data: listings } = useQuery({
@@ -13,9 +14,9 @@ export default function Listings() {
 
   return (
     <div className="flex flex-row">
-      <div className="max-h-screen w-1/3 overflow-y-auto">
+      <ScrollArea className="max-h-screen w-1/3">
         <ListingsList listings={listings} />
-      </div>
+      </ScrollArea>
       <div className="w-2/3">
         <ListingsMap listings={listings} />
       </div>
