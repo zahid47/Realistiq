@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { PrismaClient } from "@prisma/client";
+import slugify from "slugify";
 
 const capitalize = (s: string) => {
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -33,10 +34,12 @@ async function main() {
   console.log("Seeding...");
 
   const fakeListings = Array.from({ length: 100 }).map(() => {
+    const title = `${capitalize(
+      faker.word.adjective()
+    )} property in ${faker.location.city()}`;
     return {
-      title: `${capitalize(
-        faker.word.adjective()
-      )} property in ${faker.location.city()}`,
+      title,
+      slug: slugify(title, { lower: true }),
       userId: user.id,
       ListingInfo: {
         create: {
