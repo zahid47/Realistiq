@@ -22,7 +22,7 @@ export default function RootLayout({
         <NextAuthProvider>
           <QueryClientWrapper>
             <Header />
-            <main className="relative z-10">{children}</main>
+            <main>{children}</main>
           </QueryClientWrapper>
         </NextAuthProvider>
         <Analytics />

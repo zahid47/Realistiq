@@ -13,8 +13,12 @@ export default function Listings() {
 
   return (
     <div className="flex flex-row">
-      <ListingsMap listings={listings} />
-      <ListingsList listings={listings} />
+      <div className="max-h-screen w-1/3 overflow-y-auto">
+        <ListingsList listings={listings} />
+      </div>
+      <div className="w-2/3">
+        <ListingsMap listings={listings} />
+      </div>
     </div>
   );
 }

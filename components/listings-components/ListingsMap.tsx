@@ -4,7 +4,6 @@ import { useState } from "react";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { env } from "@/env.mjs";
-import Link from "next/link";
 
 const MAPBOX_TOKEN = env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const MAPBOX_STYLE = "mapbox://styles/mapbox/navigation-day-v1";
@@ -24,7 +23,6 @@ export default function ListingsMap({ listings }: any) {
       mapboxAccessToken={MAPBOX_TOKEN}
       mapStyle={MAPBOX_STYLE}
       onMove={(e) => setViewState(e.viewState)}
-      style={{ width: "100%", height: "100vh" }}
     >
       {listings.map((listing: any) => (
         <Marker

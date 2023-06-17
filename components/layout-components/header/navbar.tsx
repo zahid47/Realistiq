@@ -13,10 +13,10 @@ export default function Navbar({ session }: { session: Session | null }) {
   return (
     <header
       className={cn(
-        "z-30 w-full bg-transparent",
+        "z-30 h-16 w-full bg-transparent",
         scrolled
-          ? "sticky top-0 h-16 border-b backdrop-blur-xl  transition-all duration-300 ease-in-out"
-          : "relative h-20"
+          ? "sticky top-0 border-b backdrop-blur-xl  transition-all duration-300 ease-in-out"
+          : "relative"
       )}
     >
       <div className="container h-full">
