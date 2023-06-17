@@ -13,18 +13,17 @@ import { useToast } from "@/components/ui/use-toast";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
 
 interface Props {
   listing: any;
   clickedListingId: null | number;
-  setClickedListingId: Dispatch<SetStateAction<null | number>>;
   setHoveringListingId: Dispatch<SetStateAction<null | number>>;
 }
 
 export default function ListingCard({
   listing,
   clickedListingId,
-  setClickedListingId,
   setHoveringListingId,
 }: Props) {
   const { toast } = useToast();
@@ -40,14 +39,11 @@ export default function ListingCard({
         block: "start",
       });
     }
-
-    return () => {
-      setClickedListingId(null);
-    };
-  }, [clickedListingId, listing.id, setClickedListingId]);
+  }, [clickedListingId, listing.id]);
 
   return (
     <Card
+      className={cn(clickedListingId === listing.id ? `bg-slate-50` : ``)}
       ref={listingRef}
       onMouseEnter={() => {
         setHoveringListingId(listing.id);

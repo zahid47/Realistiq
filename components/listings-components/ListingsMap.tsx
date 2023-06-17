@@ -49,8 +49,8 @@ export default function ListingsMap({
             className={cn(
               ` rounded-full border-2 border-white transition-all duration-100 ease-in-out`,
               hoveringListingId === listing.id
-                ? `h-5 w-5 bg-violet-700`
-                : `h-4 w-4 bg-violet-600`
+                ? `h-5 w-5 bg-amber-400`
+                : `h-4 w-4 bg-violet-700`
             )}
           />
         </Marker>

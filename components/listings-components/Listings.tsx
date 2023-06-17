@@ -14,7 +14,9 @@ export default function Listings() {
   });
 
   const [clickedListingId, setClickedListingId] = useState<number | null>(null);
-  const [hoveringListingId, setHoveringListingId] = useState<number | null>(null);
+  const [hoveringListingId, setHoveringListingId] = useState<number | null>(
+    null
+  );
 
   return (
     <div className="flex flex-row">
@@ -22,7 +24,6 @@ export default function Listings() {
         <ListingsList
           listings={listings}
           clickedListingId={clickedListingId}
-          setClickedListingId={setClickedListingId}
           setHoveringListingId={setHoveringListingId}
         />
       </ScrollArea>

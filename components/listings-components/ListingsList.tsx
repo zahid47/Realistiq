@@ -6,14 +6,12 @@ import ListingCard from "./ListingCard";
 interface Props {
   listings: any;
   clickedListingId: null | number;
-  setClickedListingId: Dispatch<SetStateAction<null | number>>;
   setHoveringListingId: Dispatch<SetStateAction<null | number>>;
 }
 
 export default function ListingsList({
   listings,
   clickedListingId,
-  setClickedListingId,
   setHoveringListingId,
 }: Props) {
   return (
@@ -25,7 +23,6 @@ export default function ListingsList({
               key={listing.id}
               listing={listing}
               clickedListingId={clickedListingId}
-              setClickedListingId={setClickedListingId}
               setHoveringListingId={setHoveringListingId}
             />
           </li>
