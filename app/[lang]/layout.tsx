@@ -4,6 +4,7 @@ import NextAuthProvider from "@/components/providers/NextAuthProvider";
 import Header from "@/components/layout-components/header";
 import QueryClientWrapper from "@/components/providers/QueryClientProvider";
 import { Toaster } from "@/components/ui/toaster";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata = {
   title: "Your Path to Homeownership | Realistiq",
@@ -24,6 +25,7 @@ export default function RootLayout({
           <QueryClientWrapper>
             <Header />
             <main>{children}</main>
+            <NextTopLoader color="#6d28d9" shadow={false} height={4}/>
             <Toaster />
           </QueryClientWrapper>
         </NextAuthProvider>
