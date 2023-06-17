@@ -23,15 +23,10 @@ export default function ListingCard({ listing }: any) {
       </CardHeader>
       <CardContent>
         <Image
-          className="rounded-lg"
           src={listing.ListingPhotos[0].url}
           alt={listing.ListingPhotos[0].alt}
           height={300}
           width={300}
-          placeholder="blur"
-          blurDataURL={
-            "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
-          }
         />
       </CardContent>
       <CardFooter>
