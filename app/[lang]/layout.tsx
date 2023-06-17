@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import NextAuthProvider from "@/components/providers/NextAuthProvider";
 import Header from "@/components/layout-components/header";
 import QueryClientWrapper from "@/components/providers/QueryClientProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: "Your Path to Homeownership | Realistiq",
@@ -23,6 +24,7 @@ export default function RootLayout({
           <QueryClientWrapper>
             <Header />
             <main>{children}</main>
+            <Toaster />
           </QueryClientWrapper>
         </NextAuthProvider>
         <Analytics />

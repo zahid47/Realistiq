@@ -55,7 +55,7 @@ async function main() {
       ListingPhotos: {
         create: Array.from({ length: 3 }).map(() => {
           return {
-            url: faker.image.url(),
+            url: faker.image.urlPicsumPhotos(),
             alt: faker.lorem.sentence(),
           };
         }),

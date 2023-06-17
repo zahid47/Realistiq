@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
+import ListingCard from "./ListingCard";
 
 export default function ListingsList({ listings }: any) {
   return (
     <ul>
       {listings?.map((listing: any) => {
         return (
-          <li key={listing.id}>
-            <Link href={`/listings/${listing.slug}`}>{listing.title}</Link>
+          <li key={listing.id} className="m-2">
+            <ListingCard key={listing.id} listing={listing} />
           </li>
         );
       })}
