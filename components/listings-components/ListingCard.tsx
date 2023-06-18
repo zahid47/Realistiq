@@ -3,10 +3,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import Carousel from "./Carousel";
 
 interface Props {
   listing: any;
@@ -46,24 +46,23 @@ export default function ListingCard({
       }}
     >
       <CardContent>
-        <h1>{listing.title}</h1>
-        <h2>{listing.ListingInfo.description}</h2>
-        <Image
-          src={listing.ListingPhotos[0].url}
-          alt={listing.ListingPhotos[0].alt}
-          height={300}
-          width={300}
-        />
-        <Button
-          onClick={() => {
-            toast({
-              title: "Not Available Yet",
-              variant: "destructive",
-            });
-          }}
-        >
-          Contact
-        </Button>
+        <Carousel images={listing.ListingPhotos} />
+
+        <div>
+          <h1>{listing.title}</h1>
+          <h2>{listing.ListingInfo.description}</h2>
+
+          <Button
+            onClick={() => {
+              toast({
+                title: "Not Available Yet",
+                variant: "destructive",
+              });
+            }}
+          >
+            Contact
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );
