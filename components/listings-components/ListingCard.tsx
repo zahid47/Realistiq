@@ -6,7 +6,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Dispatch, SetStateAction } from "react";
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import Carousel from "./Carousel";
+import ImageCarousel from "./ImageCarousel";
 
 interface Props {
   listing: any;
@@ -45,12 +45,16 @@ export default function ListingCard({
         setHoveringListingId(null);
       }}
     >
-      <CardContent>
-        <Carousel images={listing.ListingPhotos} />
+      <CardContent className="flex items-center gap-4">
+        <ImageCarousel images={listing.ListingPhotos} />
 
         <div>
-          <h1>{listing.title}</h1>
-          <h2>{listing.ListingInfo.description}</h2>
+          <h1 className="py-2 text-xl font-bold antialiased">
+            {listing.title}
+          </h1>
+          <h2 className="pb-2 antialiased">
+            {listing.ListingInfo.description}
+          </h2>
 
           <Button
             onClick={() => {
