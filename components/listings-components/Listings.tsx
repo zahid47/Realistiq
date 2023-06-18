@@ -27,7 +27,7 @@ export default function Listings() {
           setHoveringListingId={setHoveringListingId}
         />
       </ScrollArea>
-      <div className="w-2/3">
+      <div className="w-2/3 overflow-hidden rounded-lg">
         <ListingsMap
           listings={listings}
           setClickedListingId={setClickedListingId}
