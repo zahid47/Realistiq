@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "../ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import Image from "next/image";
@@ -52,19 +45,15 @@ export default function ListingCard({
         setHoveringListingId(null);
       }}
     >
-      <CardHeader>
-        <CardTitle>{listing.title}</CardTitle>
-        <CardDescription>{listing.ListingInfo.description}</CardDescription>
-      </CardHeader>
       <CardContent>
+        <h1>{listing.title}</h1>
+        <h2>{listing.ListingInfo.description}</h2>
         <Image
           src={listing.ListingPhotos[0].url}
           alt={listing.ListingPhotos[0].alt}
           height={300}
           width={300}
         />
-      </CardContent>
-      <CardFooter>
         <Button
           onClick={() => {
             toast({
@@ -75,7 +64,7 @@ export default function ListingCard({
         >
           Contact
         </Button>
-      </CardFooter>
+      </CardContent>
     </Card>
   );
 }
