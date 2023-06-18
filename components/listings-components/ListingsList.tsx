@@ -18,7 +18,7 @@ export default function ListingsList({
     <ul>
       {listings?.map((listing: any) => {
         return (
-          <li key={listing.id} className="m-2">
+          <li key={listing.id} className="mb-2 ml-2 mr-2">
             <ListingCard
               key={listing.id}
               listing={listing}

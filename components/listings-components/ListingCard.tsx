@@ -36,7 +36,11 @@ export default function ListingCard({
 
   return (
     <Card
-      className={cn(clickedListingId === listing.id ? `bg-slate-50` : ``)}
+      className={cn(
+        clickedListingId === listing.id
+          ? `border-4 border-deep-purple-700 transition-all duration-100 ease-in-out`
+          : ``
+      )}
       ref={listingRef}
       onMouseEnter={() => {
         setHoveringListingId(listing.id);
