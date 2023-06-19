@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Realistiq",
   url: "https://realistiq.vercel.app",
   //   ogImage: "",
-  description: "Your Path to Homeownership",
+  description: "Stress-Free Home Renting",
   links: {
     github: "https://github.com/zahid47/Realistiq",
   },

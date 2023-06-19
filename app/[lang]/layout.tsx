@@ -7,8 +7,8 @@ import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
 
 export const metadata = {
-  title: "Your Path to Homeownership | Realistiq",
-  description: "Your Path to Homeownership",
+  title: "Stress-Free Home Renting | Realistiq",
+  description: "Stress-Free Home Renting with Realistiq",
 };
 
 export default function RootLayout({
