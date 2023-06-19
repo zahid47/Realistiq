@@ -8,7 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
 
 export default function Listings() {
-  const { data: listings } = useQuery({
+  const listingsQueryResult = useQuery({
     queryKey: ["listings"],
     queryFn: getListings,
   });
@@ -22,14 +22,14 @@ export default function Listings() {
     <div className="flex flex-row">
       <ScrollArea className="h-[calc(100vh-64px)] w-1/3">
         <ListingsList
-          listings={listings}
+          listingsQueryResult={listingsQueryResult}
           clickedListingId={clickedListingId}
           setHoveringListingId={setHoveringListingId}
         />
       </ScrollArea>
       <div className="mb-2 mr-2 w-2/3 overflow-hidden rounded-lg">
         <ListingsMap
-          listings={listings}
+          listingsQueryResult={listingsQueryResult}
           setClickedListingId={setClickedListingId}
           hoveringListingId={hoveringListingId}
         />

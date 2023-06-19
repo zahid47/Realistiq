@@ -6,21 +6,24 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { env } from "@/env.mjs";
 import { cn } from "@/lib/utils";
 import type { MapRef } from "react-map-gl";
+import { UseQueryResult } from "@tanstack/react-query";
+import ListingsMapSkeleton from "../skeletons/ListingsMapSkeleton";
 
 const MAPBOX_TOKEN = env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const MAPBOX_STYLE = "mapbox://styles/mapbox/streets-v12";
 
 interface Props {
-  listings: any;
+  listingsQueryResult: UseQueryResult<any, unknown>;
   setClickedListingId: Dispatch<SetStateAction<null | number>>;
   hoveringListingId: null | number;
 }
 
 export default function ListingsMap({
-  listings,
+  listingsQueryResult,
   setClickedListingId,
   hoveringListingId,
 }: Props) {
+  const listings = listingsQueryResult.data;
   const mapRef = useRef<MapRef>(null);
 
   const [viewState, setViewState] = useState({
@@ -54,6 +57,8 @@ export default function ListingsMap({
       )),
     [hoveringListingId, listings, setClickedListingId]
   );
+
+  if (listingsQueryResult.isLoading) return <ListingsMapSkeleton />;
 
   return (
     <Map
