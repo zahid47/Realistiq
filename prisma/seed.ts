@@ -27,13 +27,14 @@ async function main() {
   await Promise.all([
     db.listing.deleteMany({}),
     db.listingInfo.deleteMany({}),
+    db.listingPrice.deleteMany({}),
     db.listingLocation.deleteMany({}),
     db.listingPhotos.deleteMany({}),
   ]);
 
   console.log("Seeding...");
 
-  const fakeListings = Array.from({ length: 100 }).map(() => {
+  const fakeListings = Array.from({ length: 50 }).map(() => {
     const title = `${capitalize(
       faker.word.adjective()
     )} property in ${faker.location.city()}`;
@@ -44,6 +45,11 @@ async function main() {
       ListingInfo: {
         create: {
           description: faker.lorem.paragraph(),
+        },
+      },
+      ListingPrice: {
+        create: {
+          price: parseFloat(faker.commerce.price({ min: 10, max: 99999 })),
         },
       },
       ListingLocation: {

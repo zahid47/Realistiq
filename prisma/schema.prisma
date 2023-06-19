@@ -79,6 +79,8 @@ model Listing {
   title String
   slug  String @unique
 
+  status ListingStatus @default(PUBLISHED)
+
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -88,8 +90,14 @@ model Listing {
   ListingInfo     ListingInfo?
   ListingLocation ListingLocation?
   ListingPhotos   ListingPhotos[]
+  ListingPrice    ListingPrice?
 
   @@map(name: "listings")
+}
+
+enum ListingStatus {
+  PUBLISHED
+  UNPUBLISHED
 }
 
 model ListingInfo {
@@ -100,6 +108,25 @@ model ListingInfo {
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 
   @@map(name: "listing_info")
+}
+
+model ListingPrice {
+  id             Int          @id @default(autoincrement())
+  price          Float
+  currency       String       @default("EUR")
+  currencySymbol String       @default("€")
+  rentInterval   rentInterval @default(MONTH)
+
+  listingId Int     @unique
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@map(name: "listing_price")
+}
+
+enum rentInterval {
+  MONTH
+  WEEK
+  DAY
 }
 
 model ListingLocation {
