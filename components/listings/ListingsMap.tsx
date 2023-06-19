@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { env } from "@/env.mjs";
@@ -26,16 +26,10 @@ export default function ListingsMap({
     zoom: 3,
   });
 
-  if (!listings) return null;
-
-  return (
-    <Map
-      {...viewState}
-      mapboxAccessToken={MAPBOX_TOKEN}
-      mapStyle={MAPBOX_STYLE}
-      onMove={(e) => setViewState(e.viewState)}
-    >
-      {listings.map((listing: any) => (
+  const markers = useMemo(
+    () =>
+      listings &&
+      listings.map((listing: any) => (
         <Marker
           key={listing.id}
           latitude={listing.ListingLocation.lat}
@@ -54,7 +48,20 @@ export default function ListingsMap({
             )}
           />
         </Marker>
-      ))}
+      )),
+    [hoveringListingId, listings, setClickedListingId]
+  );
+
+  if (!listings) return null;
+
+  return (
+    <Map
+      {...viewState}
+      mapboxAccessToken={MAPBOX_TOKEN}
+      mapStyle={MAPBOX_STYLE}
+      onMove={(e) => setViewState(e.viewState)}
+    >
+      {markers}
     </Map>
   );
 }
