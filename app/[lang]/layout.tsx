@@ -25,7 +25,7 @@ export default function RootLayout({
           <QueryClientWrapper>
             <Header />
             <main>{children}</main>
-            <NextTopLoader color="#6d28d9" shadow={false} height={4}/>
+            <NextTopLoader color="#6d28d9" shadow={false} height={4} />
             <Toaster />
           </QueryClientWrapper>
         </NextAuthProvider>
