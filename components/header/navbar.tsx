@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import UserAvatar from "./user-avatar";
 import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/Icons";
+import { Icons } from "@/components/ui/Icons";
 
 export default function Navbar({ session }: { session: Session | null }) {
   const scrolled = useScroll(30);

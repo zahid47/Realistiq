@@ -1,7 +1,7 @@
 import "../globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import NextAuthProvider from "@/components/providers/NextAuthProvider";
-import Header from "@/components/layout-components/header";
+import Header from "@/components/header";
 import QueryClientWrapper from "@/components/providers/QueryClientProvider";
 import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
