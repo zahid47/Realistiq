@@ -38,7 +38,7 @@ export default function ListingCard({
     <Card
       className={cn(
         clickedListingId === listing.id
-          ? `border-4 border-deep-purple-700 transition-all duration-100 ease-in-out`
+          ? `border-4 border-deep-purple-600 transition-all duration-100 ease-in-out`
           : ``
       )}
       ref={listingRef}
