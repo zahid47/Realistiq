@@ -1,10 +1,11 @@
 "use client";
 
-import { Dispatch, SetStateAction, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useMemo, useState, useRef } from "react";
 import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { env } from "@/env.mjs";
 import { cn } from "@/lib/utils";
+import type { MapRef } from "react-map-gl";
 
 const MAPBOX_TOKEN = env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const MAPBOX_STYLE = "mapbox://styles/mapbox/streets-v12";
@@ -20,6 +21,8 @@ export default function ListingsMap({
   setClickedListingId,
   hoveringListingId,
 }: Props) {
+  const mapRef = useRef<MapRef>(null);
+
   const [viewState, setViewState] = useState({
     longitude: -82.5324,
     latitude: 39.71375,
@@ -52,14 +55,14 @@ export default function ListingsMap({
     [hoveringListingId, listings, setClickedListingId]
   );
 
-  if (!listings) return null;
-
   return (
     <Map
       {...viewState}
       mapboxAccessToken={MAPBOX_TOKEN}
       mapStyle={MAPBOX_STYLE}
+      ref={mapRef}
       onMove={(e) => setViewState(e.viewState)}
+      dragRotate={false}
     >
       {markers}
     </Map>
