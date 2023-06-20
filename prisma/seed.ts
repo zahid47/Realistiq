@@ -45,6 +45,8 @@ async function main() {
       ListingInfo: {
         create: {
           description: faker.lorem.paragraph(),
+          numberOfRooms: faker.number.int({ min: 1, max: 5 }),
+          hasElevator: faker.datatype.boolean(),
         },
       },
       ListingPrice: {
