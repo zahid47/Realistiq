@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Dispatch, SetStateAction } from "react";
 import { useEffect, useRef } from "react";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
 import ImageCarousel from "./ImageCarousel";
 
 interface Props {
@@ -60,16 +60,28 @@ export default function ListingCard({
             {listing.ListingInfo.description}
           </h2>
 
-          <Button
-            onClick={() => {
-              toast({
-                title: "Not Available Yet",
-                variant: "destructive",
-              });
-            }}
-          >
-            Contact
-          </Button>
+          <div>
+            <Button
+              onClick={() => {
+                toast({
+                  title: "Not Available Yet",
+                  variant: "destructive",
+                });
+              }}
+            >
+              Contact
+            </Button>
+
+            <p className="inline pl-2 text-lg font-bold antialiased">
+              {formatPrice(
+                listing.ListingPrice.price,
+                listing.ListingPrice.currency
+              )}
+            </p>
+            <p className="inline pl-1 text-sm text-blue-gray-400 antialiased">
+              {listing.ListingPrice.rentInterval.toLowerCase()}
+            </p>
+          </div>
         </div>
       </CardContent>
     </Card>

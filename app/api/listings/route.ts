@@ -6,6 +6,7 @@ export async function GET() {
     include: {
       user: true,
       ListingInfo: true,
+      ListingPrice: true,
       ListingLocation: true,
       ListingPhotos: true,
     },
