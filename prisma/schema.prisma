@@ -103,7 +103,7 @@ enum ListingStatus {
 model ListingInfo {
   id            Int     @id @default(autoincrement())
   description   String
-  numberOfRooms Int
+  numberOfBeds Int
   hasElevator   Boolean
 
   listingId Int     @unique

@@ -1,13 +1,13 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Dispatch, SetStateAction } from "react";
-import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import ImageCarousel from "./ImageCarousel";
-import ListingTitle from "./ListingTitle";
-import ListingPrice from "./ListingPrice";
 import ListingCTA from "./ListingCTA";
+import ListingPrice from "./ListingPrice";
+import ListingTitle from "./ListingTitle";
+import ListingBadges from "./ListingBadges";
 
 interface Props {
   listing: any;
@@ -53,6 +53,7 @@ export default function ListingCard({
 
         <div>
           <ListingTitle listing={listing} />
+          <ListingBadges listingInfo={listing.ListingInfo} />
           <ListingCTA />
           <ListingPrice listingPrice={listing.ListingPrice} />
         </div>

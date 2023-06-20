@@ -16,3 +16,14 @@ export function formatPrice(
     maximumFractionDigits: 0,
   }).format(price);
 }
+
+/**
+ * @description Returns "s" if the count is greater than 1
+ */
+export function pluralized(countOrItems: number | Array<any>) {
+  const count = Array.isArray(countOrItems)
+    ? countOrItems.length
+    : countOrItems;
+
+  return count > 1 ? "s" : "";
+}
