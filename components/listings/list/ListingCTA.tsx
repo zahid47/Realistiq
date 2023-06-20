@@ -8,6 +8,7 @@ export default function ListingCTA() {
 
   return (
     <Button
+      className="mt-2"
       onClick={() => {
         toast({
           title: "Not Available Yet",
