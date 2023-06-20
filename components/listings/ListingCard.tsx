@@ -37,9 +37,8 @@ export default function ListingCard({
   return (
     <Card
       className={cn(
-        clickedListingId === listing.id
-          ? `border-4 border-deep-purple-600 transition-all duration-100 ease-in-out`
-          : ``
+        clickedListingId === listing.id &&
+          `border-4 border-deep-purple-600 transition-all duration-100 ease-in-out`
       )}
       ref={listingRef}
       onMouseEnter={() => {
@@ -53,10 +52,10 @@ export default function ListingCard({
         <ImageCarousel images={listing.ListingPhotos} />
 
         <div>
-          <h1 className="py-2 text-xl font-bold antialiased">
+          <h1 className="my-2 text-xl font-bold line-clamp-2">
             {listing.title}
           </h1>
-          <h2 className="pb-2 antialiased">
+          <h2 className="mb-2 line-clamp-3">
             {listing.ListingInfo.description}
           </h2>
 
@@ -72,13 +71,13 @@ export default function ListingCard({
               Contact
             </Button>
 
-            <p className="inline pl-2 text-lg font-bold antialiased">
+            <p className="inline pl-2 text-lg font-bold">
               {formatPrice(
                 listing.ListingPrice.price,
                 listing.ListingPrice.currency
               )}
             </p>
-            <p className="inline pl-1 text-sm text-blue-gray-400 antialiased">
+            <p className="inline pl-1 text-sm text-blue-gray-400">
               {listing.ListingPrice.rentInterval.toLowerCase()}
             </p>
           </div>
