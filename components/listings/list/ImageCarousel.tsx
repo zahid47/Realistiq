@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Carousel } from "@material-tailwind/react";
-import ClientOnly from "../providers/ClientOnly";
+import ClientOnly from "../../providers/ClientOnly";
 
 export default function ImageCarousel({ images }: { images: any[] }) {
   return (

@@ -7,7 +7,7 @@ import { env } from "@/env.mjs";
 import { cn } from "@/lib/utils";
 import type { MapRef } from "react-map-gl";
 import { UseQueryResult } from "@tanstack/react-query";
-import ListingsMapSkeleton from "../skeletons/ListingsMapSkeleton";
+import ListingsMapSkeleton from "../../skeletons/ListingsMapSkeleton";
 
 const MAPBOX_TOKEN = env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const MAPBOX_STYLE = "mapbox://styles/mapbox/streets-v12";

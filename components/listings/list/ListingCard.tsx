@@ -1,12 +1,13 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "../ui/button";
-import { useToast } from "@/components/ui/use-toast";
 import { Dispatch, SetStateAction } from "react";
 import { useEffect, useRef } from "react";
-import { cn, formatPrice } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import ImageCarousel from "./ImageCarousel";
+import ListingTitle from "./ListingTitle";
+import ListingPrice from "./ListingPrice";
+import ListingCTA from "./ListingCTA";
 
 interface Props {
   listing: any;
@@ -19,7 +20,6 @@ export default function ListingCard({
   clickedListingId,
   setHoveringListingId,
 }: Props) {
-  const { toast } = useToast();
   const listingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,35 +52,9 @@ export default function ListingCard({
         <ImageCarousel images={listing.ListingPhotos} />
 
         <div>
-          <h1 className="my-2 text-xl font-bold line-clamp-2">
-            {listing.title}
-          </h1>
-          <h2 className="mb-2 line-clamp-3">
-            {listing.ListingInfo.description}
-          </h2>
-
-          <div>
-            <Button
-              onClick={() => {
-                toast({
-                  title: "Not Available Yet",
-                  variant: "destructive",
-                });
-              }}
-            >
-              Contact
-            </Button>
-
-            <p className="inline pl-2 text-lg font-bold">
-              {formatPrice(
-                listing.ListingPrice.price,
-                listing.ListingPrice.currency
-              )}
-            </p>
-            <p className="inline pl-1 text-sm text-blue-gray-400">
-              {listing.ListingPrice.rentInterval.toLowerCase()}
-            </p>
-          </div>
+          <ListingTitle listing={listing} />
+          <ListingCTA />
+          <ListingPrice listingPrice={listing.ListingPrice} />
         </div>
       </CardContent>
     </Card>

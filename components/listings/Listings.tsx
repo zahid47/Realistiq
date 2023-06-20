@@ -1,9 +1,9 @@
 "use client";
 
-import ListingsMap from "./ListingsMap";
+import ListingsMap from "./map/ListingsMap";
 import { useQuery } from "@tanstack/react-query";
 import getListings from "@/actions/getListings";
-import ListingsList from "./ListingsList";
+import ListingsList from "./list/ListingsList";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
 

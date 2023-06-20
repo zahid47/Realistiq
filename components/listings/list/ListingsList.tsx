@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction } from "react";
 import ListingCard from "./ListingCard";
-import ListingsListSkeleton from "../skeletons/ListingsListSkeleton";
+import ListingsListSkeleton from "../../skeletons/ListingsListSkeleton";
 import { UseQueryResult } from "@tanstack/react-query";
 
 interface Props {
