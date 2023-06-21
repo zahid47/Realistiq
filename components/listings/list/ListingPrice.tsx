@@ -6,13 +6,13 @@ interface Props {
 
 export default function ListingPrice({ listingPrice }: Props) {
   return (
-    <>
-      <p className="inline pl-2 text-lg font-bold">
+    <p className="mt-2">
+      <span className="text-lg font-bold">
         {formatPrice(listingPrice.price, listingPrice.currency)}
-      </p>
-      <p className="inline pl-1 text-sm text-blue-gray-400">
+      </span>{" "}
+      <span className="text-sm text-blue-gray-400">
         {listingPrice.rentInterval.toLowerCase()}
-      </p>
-    </>
+      </span>
+    </p>
   );
 }

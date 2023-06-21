@@ -4,10 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import ImageCarousel from "./ImageCarousel";
-import ListingCTA from "./ListingCTA";
 import ListingPrice from "./ListingPrice";
 import ListingTitle from "./ListingTitle";
-import ListingBadges from "./ListingBadges";
 
 interface Props {
   listing: any;
@@ -51,10 +49,8 @@ export default function ListingCard({
       <CardContent className="flex items-center gap-4">
         <ImageCarousel images={listing.ListingPhotos} />
 
-        <div>
+        <div className="flex flex-col gap-2">
           <ListingTitle listing={listing} />
-          <ListingBadges listingInfo={listing.ListingInfo} />
-          <ListingCTA />
           <ListingPrice listingPrice={listing.ListingPrice} />
         </div>
       </CardContent>

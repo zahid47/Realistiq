@@ -27,3 +27,7 @@ export function pluralized(countOrItems: number | Array<any>) {
 
   return count > 1 ? "s" : "";
 }
+
+export function captitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}

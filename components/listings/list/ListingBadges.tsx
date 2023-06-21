@@ -1,5 +1,5 @@
-import { Icons } from "@/components/ui/Icons";
 import { pluralized } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
   listingInfo: any;
@@ -7,20 +7,14 @@ interface Props {
 
 export default function ListingBadges({ listingInfo }: Props) {
   return (
-    <div className="flex gap-4">
-      <div className="mb-2 flex items-center gap-2">
-        <Icons.Bed />
-        <span className="font-bold">
-          {listingInfo.numberOfBeds} Bed
-          {pluralized(listingInfo.numberOfBeds)}
-        </span>
-      </div>
+    <div className="flex gap-1">
+      <Badge variant="outline">
+        {listingInfo.numberOfBeds} Bed
+        {pluralized(listingInfo.numberOfBeds)}
+      </Badge>
 
       {listingInfo.hasElevator && (
-        <div className="mb-2 flex items-center gap-2">
-          <Icons.Elevator />
-          <span className="font-bold">Includes Elevator</span>
-        </div>
+        <Badge variant="outline">Includes Elevator</Badge>
       )}
     </div>
   );
