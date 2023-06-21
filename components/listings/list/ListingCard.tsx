@@ -6,6 +6,7 @@ import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import ImageCarousel from "./ImageCarousel";
 import ListingPrice from "./ListingPrice";
 import ListingTitle from "./ListingTitle";
+import Link from "next/link";
 
 interface Props {
   listing: any;
@@ -49,10 +50,13 @@ export default function ListingCard({
       <CardContent className="flex items-center gap-4">
         <ImageCarousel images={listing.ListingPhotos} />
 
-        <div className="flex flex-col gap-2">
+        <Link
+          href={`/listings/${listing.slug}`}
+          className="flex flex-col gap-2"
+        >
           <ListingTitle listing={listing} />
           <ListingPrice listingPrice={listing.ListingPrice} />
-        </div>
+        </Link>
       </CardContent>
     </Card>
   );
