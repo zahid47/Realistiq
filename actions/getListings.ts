@@ -12,5 +12,7 @@ import { env } from "@/env.mjs";
 // }
 
 export default async function getListings() {
-  return await fetch(`${env.NEXT_PUBLIC_APP_URL}/api/listings`).then((response) => response.json());
+  return await fetch(`${env.NEXT_PUBLIC_APP_URL}/api/listings`).then(
+    (response) => response.json()
+  );
 }
