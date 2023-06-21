@@ -20,14 +20,14 @@ export default function Listings() {
 
   return (
     <div className="flex flex-row">
-      <ScrollArea className="h-[calc(100vh-64px)] w-1/3">
+      <ScrollArea className="h-[calc(100vh-64px)] w-2/5">
         <ListingsList
           listingsQueryResult={listingsQueryResult}
           clickedListingId={clickedListingId}
           setHoveringListingId={setHoveringListingId}
         />
       </ScrollArea>
-      <div className="mb-2 mr-2 w-2/3 overflow-hidden rounded-lg">
+      <div className="mb-2 mr-2 w-3/5 overflow-hidden rounded-lg">
         <ListingsMap
           listingsQueryResult={listingsQueryResult}
           setClickedListingId={setClickedListingId}
