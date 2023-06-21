@@ -21,7 +21,7 @@ export default async function Home() {
               href="/listings"
               className={cn(buttonVariants({ variant: "default", size: "lg" }))}
             >
-              Get Started
+              <p className="text-lg">Browse Listings</p>
             </Link>
           </div>
         </div>
