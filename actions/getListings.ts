@@ -1,3 +1,4 @@
+import { env } from "@/env.mjs";
 // import { db } from "@/lib/db";
 
 // export default async function getListings() {
@@ -11,5 +12,5 @@
 // }
 
 export default async function getListings() {
-  return await fetch("/api/listings").then((response) => response.json());
+  return await fetch(`${env.NEXT_PUBLIC_APP_URL}/api/listings`).then((response) => response.json());
 }
