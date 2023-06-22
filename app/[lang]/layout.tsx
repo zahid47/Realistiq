@@ -8,23 +8,27 @@ import NextTopLoader from "nextjs-toploader";
 
 export const metadata = {
   title: "Stress-Free Home Renting | Realistiq",
-  description: "Stress-Free Home Renting with Realistiq",
+  description:
+    "Find stress-free rental with Realistiq. Explore premium listings, connect with trusted landlords, and experience a hassle-free renting process.",
 };
 
-export default function RootLayout({
-  children,
-  params,
-}: {
+interface Props {
   children: React.ReactNode;
   params: { lang: string };
-}) {
+  listingModal?: boolean;
+}
+
+export default function RootLayout({ children, params, listingModal }: Props) {
   return (
     <html lang={params.lang}>
       <body>
         <NextAuthProvider>
           <QueryClientWrapper>
             <Header />
-            <main>{children}</main>
+            <main>
+              {children}
+              {listingModal}
+            </main>
             <NextTopLoader color="#6d28d9" shadow={false} height={4} />
             <Toaster />
           </QueryClientWrapper>

@@ -13,8 +13,10 @@ export default async function ListingsPage() {
   const dehydratedState = dehydrate(queryClient);
 
   return (
-    <HydrateWrapper state={dehydratedState}>
-      <Listings />
-    </HydrateWrapper>
+    <>
+      <HydrateWrapper state={dehydratedState}>
+        <Listings />
+      </HydrateWrapper>
+    </>
   );
 }

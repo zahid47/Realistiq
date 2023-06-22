@@ -4,6 +4,6 @@ interface Props {
   };
 }
 
-export default function page(props: Props) {
-  return <div>{JSON.stringify(props.params.slug)}</div>;
+export default function page({ params }: Props) {
+  return <div>{params.slug}</div>;
 }
