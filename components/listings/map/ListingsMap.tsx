@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useMemo, useState, useRef } from "react";
-import Map, { Marker } from "react-map-gl";
+import Map, { Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { env } from "@/env.mjs";
 import { cn } from "@/lib/utils";
@@ -32,6 +32,8 @@ export default function ListingsMap({
     zoom: 3,
   });
 
+  const [popup, setPopup] = useState<any>(null);
+
   const markers = useMemo(
     () =>
       listings &&
@@ -39,12 +41,18 @@ export default function ListingsMap({
         <Marker
           key={listing.id}
           latitude={listing.ListingLocation.lat}
-          longitude={-listing.ListingLocation.lng}
+          longitude={listing.ListingLocation.lng}
           anchor="bottom"
         >
           <button
             onClick={() => {
               setClickedListingId(listing.id);
+            }}
+            onMouseEnter={() => {
+              setPopup(listing);
+            }}
+            onMouseLeave={() => {
+              setPopup(null);
             }}
             className={cn(
               ` rounded-full border-2 border-white transition-all duration-100 ease-in-out`,
@@ -70,6 +78,17 @@ export default function ListingsMap({
       dragRotate={false}
     >
       {markers}
+      {popup && (
+        <Popup
+          latitude={popup.ListingLocation.lat}
+          longitude={popup.ListingLocation.lng}
+          anchor="bottom"
+          closeButton={false}
+          offset={[0, -20]}
+        >
+          {popup.title}
+        </Popup>
+      )}
     </Map>
   );
 }
