@@ -34,7 +34,7 @@ async function main() {
 
   console.log("Seeding...");
 
-  const fakeListings = Array.from({ length: 50 }).map(() => {
+  const fakeListings = Array.from({ length: 200 }).map(() => {
     const title = `${capitalize(
       faker.word.adjective()
     )} property in ${faker.location.city()}`;
