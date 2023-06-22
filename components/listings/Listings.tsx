@@ -2,7 +2,7 @@
 
 import ListingsMap from "./map/ListingsMap";
 import { useQuery } from "@tanstack/react-query";
-import getListings from "@/actions/getListings";
+import { getListings } from "@/actions/listing";
 import ListingsList from "./list/ListingsList";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";

@@ -1,3 +1,4 @@
+import ListingDetails from "@/components/listings/listing-details/ListingDetails";
 import InterceptedDialog from "@/components/ui/intercepted-dialog";
 
 interface Props {
@@ -6,10 +7,10 @@ interface Props {
   };
 }
 
-export default function page({ params }: Props) {
+export default function page({ params: { slug } }: Props) {
   return (
     <InterceptedDialog>
-      <div>{params.slug}</div>
+      <ListingDetails slug={slug} />
     </InterceptedDialog>
   );
 }

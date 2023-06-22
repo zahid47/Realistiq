@@ -1,5 +1,5 @@
 import getQueryClient from "@/lib/getQueryClient";
-import getListings from "@/actions/getListings";
+import { getListings } from "@/actions/listing";
 import { dehydrate } from "@tanstack/react-query";
 import HydrateWrapper from "@/components/providers/Hydrate";
 import Listings from "@/components/listings/Listings";

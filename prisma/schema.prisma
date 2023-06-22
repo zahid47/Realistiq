@@ -92,6 +92,7 @@ model Listing {
   ListingPhotos   ListingPhotos[]
   ListingPrice    ListingPrice?
 
+  @@index([slug])
   @@map(name: "listings")
 }
 
@@ -101,10 +102,10 @@ enum ListingStatus {
 }
 
 model ListingInfo {
-  id            Int     @id @default(autoincrement())
-  description   String
+  id           Int     @id @default(autoincrement())
+  description  String
   numberOfBeds Int
-  hasElevator   Boolean
+  hasElevator  Boolean
 
   listingId Int     @unique
   listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
@@ -114,7 +115,7 @@ model ListingInfo {
 
 model ListingPrice {
   id             Int          @id @default(autoincrement())
-  price          Float
+  price          Decimal
   currency       String       @default("EUR")
   currencySymbol String       @default("€")
   rentInterval   rentInterval @default(MONTH)
