@@ -82,7 +82,6 @@ export default function ListingsMap({
         <Popup
           latitude={popup.ListingLocation.lat}
           longitude={popup.ListingLocation.lng}
-          anchor="bottom"
           closeButton={false}
           offset={[0, -20]}
         >
