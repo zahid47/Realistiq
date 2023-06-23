@@ -1,4 +1,4 @@
 # Realistiq
 
 ## Next up todo:
-    - filters
+    - filters + pagination + sorting + map clustering
