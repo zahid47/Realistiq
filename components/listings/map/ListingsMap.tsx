@@ -1,12 +1,12 @@
 "use client";
 
-import { Dispatch, SetStateAction, useMemo, useState, useRef } from "react";
-import Map, { Marker, Popup } from "react-map-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
 import { env } from "@/env.mjs";
 import { cn } from "@/lib/utils";
-import type { MapRef } from "react-map-gl";
 import { UseQueryResult } from "@tanstack/react-query";
+import "mapbox-gl/dist/mapbox-gl.css";
+import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
+import type { MapRef } from "react-map-gl";
+import Map, { Marker, Popup, NavigationControl } from "react-map-gl";
 import ListingsMapSkeleton from "../../skeletons/ListingsMapSkeleton";
 
 const MAPBOX_TOKEN = env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -77,6 +77,7 @@ export default function ListingsMap({
       onMove={(e) => setViewState(e.viewState)}
       dragRotate={false}
     >
+      <NavigationControl showCompass={false} />
       {markers}
       {popup && (
         <Popup
