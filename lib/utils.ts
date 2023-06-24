@@ -46,3 +46,7 @@ export const getRGBDataURL = (r: number, g: number, b: number) => {
     triplet(0, r, g) + triplet(b, 255, 255)
   }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 };
+
+export const getSearchParamsObject = (searchParams: URLSearchParams) => {
+  return Object.fromEntries(searchParams);
+};

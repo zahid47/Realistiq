@@ -4,11 +4,12 @@ import { dehydrate } from "@tanstack/react-query";
 import HydrateWrapper from "@/components/providers/Hydrate";
 import Listings from "@/components/listings/Listings";
 
+
 export default async function ListingsPage() {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["listings"],
-    queryFn: getListings,
+    queryKey: ["listings", 1], // FIXME: get this from the router
+    queryFn: () => getListings(),
   });
   const dehydratedState = dehydrate(queryClient);
 

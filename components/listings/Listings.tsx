@@ -8,9 +8,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
 
 export default function Listings() {
+  const [page, setPage] = useState<number>(1);
+  
   const listingsQueryResult = useQuery({
-    queryKey: ["listings"],
-    queryFn: getListings,
+    queryKey: ["listings", page],
+    queryFn: () => getListings({ page }),
+    keepPreviousData: true,
   });
 
   const [clickedListingId, setClickedListingId] = useState<number | null>(null);
