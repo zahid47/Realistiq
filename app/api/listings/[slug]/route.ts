@@ -8,7 +8,7 @@ interface Context {
 }
 
 export async function GET(_request: NextRequest, context: Context) {
-  const listing = await db.listing.findUniqueOrThrow({
+  const listing = await db.listing.findUnique({
     where: { slug: context.params.slug },
     include: {
       user: true,
