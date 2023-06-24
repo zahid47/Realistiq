@@ -9,7 +9,7 @@ import { useState } from "react";
 
 export default function Listings() {
   const [page, setPage] = useState<number>(1);
-  
+
   const listingsQueryResult = useQuery({
     queryKey: ["listings", page],
     queryFn: () => getListings({ page }),
