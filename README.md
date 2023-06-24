@@ -1,4 +1,5 @@
 # Realistiq
 
 ## Next up todo:
-    - filters + pagination + sorting + map clustering
+    - filters + pagination + sorting
+    - suspense, error boundary, server side loading skeleton
