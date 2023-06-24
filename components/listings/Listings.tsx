@@ -20,7 +20,7 @@ export default function Listings() {
 
   return (
     <div className="flex flex-row">
-      <ScrollArea className="h-[calc(100vh-64px)] w-2/5">
+      <ScrollArea className="h-[calc(100vh-4rem)] w-2/5">
         <ListingsList
           listingsQueryResult={listingsQueryResult}
           clickedListingId={clickedListingId}
