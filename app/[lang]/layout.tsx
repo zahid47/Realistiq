@@ -14,7 +14,7 @@ const font = Inter({
 });
 
 export const metadata = {
-  title: "Stress-Free Home Renting | Realistiq",
+  title: "Stress free Home Renting | Realistiq",
   description:
     "Find stress-free rental with Realistiq. Explore premium listings, connect with trusted landlords, and experience a hassle-free renting process.",
 };

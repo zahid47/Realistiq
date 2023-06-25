@@ -1,7 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-const withMT = require("@material-tailwind/react/utils/withMT");
-
 const tailwindConfig = {
   darkMode: ["class"],
   content: [
@@ -74,7 +72,7 @@ const tailwindConfig = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/line-clamp")],
+  plugins: [require("tailwindcss-animate")],
 };
 
-module.exports = withMT(tailwindConfig);
+module.exports = tailwindConfig;

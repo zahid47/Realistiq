@@ -10,7 +10,7 @@ export default function ListingPrice({ listingPrice }: Props) {
       <span className="text-lg font-bold">
         {formatPrice(listingPrice.price, listingPrice.currency)}
       </span>{" "}
-      <span className="text-sm text-blue-gray-400">
+      <span className="text-blue-gray-400 text-sm">
         {listingPrice.rentInterval.toLowerCase()}
       </span>
     </p>
