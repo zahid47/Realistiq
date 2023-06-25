@@ -41,6 +41,12 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ listings: listings[0], meta });
   } catch (err) {
-    return NextResponse.json(err);
+    return NextResponse.json({
+      error: {
+        isError: true,
+        error: err,
+        context: "Error while fetching listings",
+      },
+    });
   }
 }
