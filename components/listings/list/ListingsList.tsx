@@ -16,13 +16,15 @@ export default function ListingsList({
   clickedListingId,
   setHoveringListingId,
 }: Props) {
+  const listings = listingsQueryResult.data.listings;
+
   if (listingsQueryResult.isLoading) return <ListingsListSkeleton />;
 
-  if (!listingsQueryResult.data?.length) return <p>No listings found</p>;
+  if (!listings?.length) return <p>No listings found</p>;
 
   return (
     <ul>
-      {listingsQueryResult.data?.map((listing: any) => {
+      {listings.map((listing: any) => {
         return (
           <li key={listing.id} className="mb-2 ml-2 mr-2">
             <ListingCard

@@ -8,8 +8,9 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
 import { z } from "zod";
 import { listingsSearchParamsSchema } from "@/schema/listings";
-import { usePathname, useRouter } from "next/navigation";
+import Pagination from "../ui/pagination";
 import { getSearchParamsString } from "@/lib/utils";
+import { usePathname, useRouter } from "next/navigation";
 
 interface Props {
   searchParams: z.infer<typeof listingsSearchParamsSchema>;
@@ -18,6 +19,7 @@ interface Props {
 export default function Listings({ searchParams }: Props) {
   const router = useRouter();
   const pathname = usePathname();
+
   const listingsQueryResult = useQuery({
     queryKey: ["listings", searchParams.page],
     queryFn: () => getListings({ page: searchParams.page }),
@@ -30,44 +32,20 @@ export default function Listings({ searchParams }: Props) {
     null
   );
 
+  const onPageChange = (page: number) => {
+    const newSearchParams = { ...searchParams, page };
+    const qs = getSearchParamsString(newSearchParams);
+    const url = `${pathname}?${qs}`;
+    router.push(url);
+  };
+
   return (
     <div className="flex flex-row">
       <ScrollArea className="h-[calc(100vh-4rem)] w-2/5">
-        <>
-          <button
-            onClick={() => {
-              const newSearchParams = {
-                ...searchParams,
-                page: searchParams.page - 1,
-              };
-
-              const qs = getSearchParamsString(newSearchParams);
-              const url = `${pathname}?${qs}`;
-
-              router.push(url);
-            }}
-          >
-            prev
-          </button>
-          <span className="mx-2 text-lg font-semibold">
-            {searchParams.page}
-          </span>
-          <button
-            onClick={() => {
-              const newSearchParams = {
-                ...searchParams,
-                page: searchParams.page + 1,
-              };
-
-              const qs = getSearchParamsString(newSearchParams);
-              const url = `${pathname}?${qs}`;
-
-              router.push(url);
-            }}
-          >
-            next
-          </button>
-        </>
+        <Pagination
+          meta={listingsQueryResult.data?.meta}
+          onPageChange={onPageChange}
+        />
         <ListingsList
           listingsQueryResult={listingsQueryResult}
           clickedListingId={clickedListingId}

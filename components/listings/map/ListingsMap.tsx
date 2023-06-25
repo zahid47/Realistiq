@@ -23,7 +23,7 @@ export default function ListingsMap({
   setClickedListingId,
   hoveringListingId,
 }: Props) {
-  const listings = listingsQueryResult.data;
+  const listings = listingsQueryResult.data.listings;
   const mapRef = useRef<MapRef>(null);
 
   const [viewState, setViewState] = useState({
