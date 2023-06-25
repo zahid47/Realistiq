@@ -64,7 +64,7 @@
     "@types/negotiator": "^0.6.1",
     "@types/node": "^20.3.0",
     "eslint-config-prettier": "^8.8.0",
-    "husky": "^8.0.0",
+    "husky": "^8.0.3",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "prisma": "^4.15.0",
