@@ -1,4 +1,4 @@
-import { Pagination as MantinePagination } from "@mantine/core";
+import { Pagination } from "@mantine/core";
 
 interface Props {
   meta: {
@@ -11,7 +11,7 @@ interface Props {
   onPageChange: (page: number) => void;
 }
 
-export default function Pagination({ meta, onPageChange }: Props) {
+export default function ListingPagination({ meta, onPageChange }: Props) {
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
@@ -23,7 +23,7 @@ export default function Pagination({ meta, onPageChange }: Props) {
           </p>
         </div>
 
-        <MantinePagination
+        <Pagination
           color="violet"
           siblings={1}
           total={meta.total_pages}

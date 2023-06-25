@@ -1,16 +1,16 @@
 "use client";
 
-import ListingsMap from "./map/ListingsMap";
-import { useQuery } from "@tanstack/react-query";
 import { getListings } from "@/actions/listing";
-import ListingsList from "./list/ListingsList";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { getSearchParamsString } from "@/lib/utils";
+import { listingsSearchParamsSchema } from "@/schema/listings";
+import { useQuery } from "@tanstack/react-query";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
-import { listingsSearchParamsSchema } from "@/schema/listings";
-import Pagination from "../ui/pagination";
-import { getSearchParamsString } from "@/lib/utils";
-import { usePathname, useRouter } from "next/navigation";
+import ListingPagination from "./list/ListingPagination";
+import ListingsList from "./list/ListingsList";
+import ListingsMap from "./map/ListingsMap";
 
 interface Props {
   searchParams: z.infer<typeof listingsSearchParamsSchema>;
@@ -42,7 +42,7 @@ export default function Listings({ searchParams }: Props) {
   return (
     <div className="flex flex-row">
       <ScrollArea className="h-[calc(100vh-4rem)] w-2/5">
-        <Pagination
+        <ListingPagination
           meta={listingsQueryResult.data?.meta}
           onPageChange={onPageChange}
         />
