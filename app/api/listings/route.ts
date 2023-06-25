@@ -20,7 +20,12 @@ import { listingsSearchParamsSchema } from "@/schema/listings";
 
 export async function GET(request: NextRequest) {
   try {
-    const { page, limit, sort } = listingsSearchParamsSchema.parse(
+    const {
+      page,
+      limit = 50,
+      sort_by,
+      sort_order,
+    } = listingsSearchParamsSchema.parse(
       getSearchParamsObject(request.nextUrl.searchParams)
     );
 
@@ -34,9 +39,7 @@ export async function GET(request: NextRequest) {
       },
       take: limit,
       skip: (page - 1) * limit,
-      orderBy: {
-        [sort.key]: sort.direction,
-      },
+      orderBy: { [sort_by]: sort_order },
     });
 
     return NextResponse.json(listings);

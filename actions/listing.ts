@@ -3,7 +3,7 @@ import { listingsSearchParamsSchema } from "@/schema/listings";
 import { z } from "zod";
 
 export async function getListings(
-  data?: z.input<typeof listingsSearchParamsSchema>
+  data: z.input<typeof listingsSearchParamsSchema>
 ) {
   const { page } = listingsSearchParamsSchema.parse(data);
   const query = new URLSearchParams({ page: page.toString() });

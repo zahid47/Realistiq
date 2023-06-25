@@ -29,7 +29,7 @@ export default function ListingsMap({
   const [viewState, setViewState] = useState({
     longitude: -82.5324,
     latitude: 39.71375,
-    zoom: 3,
+    zoom: 0,
   });
 
   const [popup, setPopup] = useState<any>(null);

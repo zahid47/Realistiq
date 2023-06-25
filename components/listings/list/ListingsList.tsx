@@ -18,6 +18,8 @@ export default function ListingsList({
 }: Props) {
   if (listingsQueryResult.isLoading) return <ListingsListSkeleton />;
 
+  if (!listingsQueryResult.data?.length) return <p>No listings found</p>;
+
   return (
     <ul>
       {listingsQueryResult.data?.map((listing: any) => {

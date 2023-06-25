@@ -3,19 +3,28 @@ import { getListings } from "@/actions/listing";
 import { dehydrate } from "@tanstack/react-query";
 import HydrateWrapper from "@/components/providers/Hydrate";
 import Listings from "@/components/listings/Listings";
+import { listingsSearchParamsSchema } from "@/schema/listings";
 
-export default async function ListingsPage() {
+interface Props {
+  searchParams: {
+    page: string;
+  };
+}
+
+export default async function ListingsPage({ searchParams }: Props) {
+  const parsedSearchParams = listingsSearchParamsSchema.parse(searchParams);
+
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["listings", 1], // FIXME: get this from the router
-    queryFn: () => getListings(),
+    queryKey: ["listings", parsedSearchParams.page],
+    queryFn: () => getListings({ page: parsedSearchParams.page }),
   });
   const dehydratedState = dehydrate(queryClient);
 
   return (
     <>
       <HydrateWrapper state={dehydratedState}>
-        <Listings />
+        <Listings searchParams={parsedSearchParams} />
       </HydrateWrapper>
     </>
   );

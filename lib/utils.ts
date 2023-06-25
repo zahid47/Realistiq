@@ -50,3 +50,7 @@ export const getRGBDataURL = (r: number, g: number, b: number) => {
 export const getSearchParamsObject = (searchParams: URLSearchParams) => {
   return Object.fromEntries(searchParams);
 };
+
+export const getSearchParamsString = (object: Record<string, any>) => {
+  return new URLSearchParams(object).toString();
+};
