@@ -11,8 +11,8 @@ dependencies:
     specifier: ^11.11.0
     version: 11.11.0
   '@formatjs/intl-localematcher':
-    specifier: ^0.3.0
-    version: 0.3.0
+    specifier: ^0.4.0
+    version: 0.4.0
   '@mantine/carousel':
     specifier: ^6.0.14
     version: 6.0.14(@mantine/core@6.0.14)(@mantine/hooks@6.0.14)(embla-carousel-react@8.0.0-rc07)(react@18.2.0)
@@ -441,8 +441,8 @@ packages:
       tabbable: 6.1.2
     dev: false
 
-  /@formatjs/intl-localematcher@0.3.0:
-    resolution: {integrity: sha512-NFoxXX3dtZ6B53NlCErq181NxN/noMZOWKHfcEPQRNfV0a19THxyjxu2RTSNS3532wGm6fOdid5qsBQWg0Rhtw==}
+  /@formatjs/intl-localematcher@0.4.0:
+    resolution: {integrity: sha512-bRTd+rKomvfdS4QDlVJ6TA/Jx1F2h/TBVO5LjvhQ7QPPHp19oPNMIum7W2CMEReq/zPxpmCeB31F9+5gl/qtvw==}
     dependencies:
       tslib: 2.5.3
     dev: false
