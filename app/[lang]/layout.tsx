@@ -1,4 +1,4 @@
-import "../globals.css";
+import "../../styles/globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import NextAuthProvider from "@/components/providers/NextAuthProvider";
 import Header from "@/components/header";
