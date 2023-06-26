@@ -25,6 +25,7 @@ export async function GET(request: NextRequest) {
           ListingLocation: true,
           ListingPhotos: true,
         },
+        where: { status: "PUBLISHED" },
         take: limit,
         skip: (page - 1) * limit,
         orderBy: { [sort_by]: sort_order },
