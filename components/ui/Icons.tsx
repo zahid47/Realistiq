@@ -1,4 +1,4 @@
-import { BedSingle, ArrowUpSquare, LucideProps } from "lucide-react";
+import { LucideProps, Box } from "lucide-react";
 
 export const Icons = {
   logo: (props: LucideProps) => (
@@ -14,6 +14,5 @@ export const Icons = {
       />
     </svg>
   ),
-  Bed: BedSingle,
-  Elevator: ArrowUpSquare,
+  Box: Box,
 };
