@@ -114,8 +114,8 @@ model ListingInfo {
 model ListingPrice {
   id             Int          @id @default(autoincrement())
   price          Decimal
-  currency       String       @default("EUR")
-  currencySymbol String       @default("€")
+  currency       String       @default("USD")
+  currencySymbol String       @default("$")
   rentInterval   rentInterval @default(MONTH)
 
   listingId Int     @unique

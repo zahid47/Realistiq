@@ -51,17 +51,25 @@ async function main() {
       },
       ListingPrice: {
         create: {
-          price: parseFloat(faker.commerce.price({ min: 99, max: 9999 })),
+          price: parseFloat(
+            faker.commerce.price({ min: 99, max: 9999 })
+          ).toFixed(2),
         },
       },
       ListingLocation: {
         create: {
-          lat: faker.location.latitude(),
-          lng: faker.location.longitude(),
+          lat: faker.location.latitude({
+            min: 33,
+            max: 48,
+          }),
+          lng: faker.location.longitude({
+            min: -121,
+            max: -76,
+          }),
         },
       },
       ListingPhotos: {
-        create: Array.from({ length: 3 }).map(() => {
+        create: Array.from({ length: 4 }).map(() => {
           return {
             url: faker.image.urlPicsumPhotos(),
             alt: faker.lorem.sentence(),
