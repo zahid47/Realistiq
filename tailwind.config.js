@@ -16,6 +16,9 @@ const tailwindConfig = {
       },
     },
     extend: {
+      gridTemplateRows: {
+        "[auto,auto,1fr]": "auto auto 1fr",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -77,7 +80,7 @@ const tailwindConfig = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate", "@tailwindcss/aspect-ratio")],
 };
 
 module.exports = tailwindConfig;
