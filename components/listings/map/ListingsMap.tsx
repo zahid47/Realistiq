@@ -1,13 +1,13 @@
 "use client";
 
 import { env } from "@/env.mjs";
-import { cn } from "@/lib/utils";
 import { UseQueryResult } from "@tanstack/react-query";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
 import type { MapRef } from "react-map-gl";
 import Map, { Marker, Popup, NavigationControl } from "react-map-gl";
 import ListingsMapSkeleton from "../../skeletons/ListingsMapSkeleton";
+import MarkerIcon from "./MarkerIcon";
 
 const MAPBOX_TOKEN = env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const MAPBOX_STYLE = "mapbox://styles/mapbox/streets-v12";
@@ -44,7 +44,7 @@ export default function ListingsMap({
           longitude={listing.ListingLocation.lng}
           anchor="bottom"
         >
-          <button
+          <MarkerIcon
             onClick={() => {
               setClickedListingId(listing.id);
             }}
@@ -54,12 +54,8 @@ export default function ListingsMap({
             onMouseLeave={() => {
               setPopup(null);
             }}
-            className={cn(
-              `h-4 w-4 rounded-full border-2 border-white transition-all ease-in-out`,
-              hoveringListingId === listing.id
-                ? `animate-ping bg-amber-400`
-                : `bg-primary`
-            )}
+            isHovering={hoveringListingId === listing.id}
+            isBookmarked={listing.SavedListings.length}
           />
         </Marker>
       )),

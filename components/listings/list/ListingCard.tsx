@@ -7,6 +7,7 @@ import ImageCarousel from "./ImageCarousel";
 import ListingPrice from "./ListingPrice";
 import ListingTitle from "./ListingTitle";
 import Link from "next/link";
+import ListingBookMark from "./ListingBookMark";
 
 interface Props {
   listing: any;
@@ -36,6 +37,7 @@ export default function ListingCard({
   return (
     <Card
       className={cn(
+        "relative",
         clickedListingId === listing.id &&
           `border-4 border-primary transition-all duration-100 ease-in-out`
       )}
@@ -57,6 +59,7 @@ export default function ListingCard({
           <ListingTitle listing={listing} />
           <ListingPrice listingPrice={listing.ListingPrice} />
         </Link>
+        <ListingBookMark listingId={listing.SavedListings[0]} />
       </CardContent>
     </Card>
   );

@@ -1,4 +1,4 @@
-import { LucideProps, Box } from "lucide-react";
+import { LucideProps, Box, Bookmark, Circle } from "lucide-react";
 
 export const Icons = {
   logo: (props: LucideProps) => (
@@ -15,4 +15,6 @@ export const Icons = {
     </svg>
   ),
   Box: Box,
+  BookMark: Bookmark,
+  Circle: Circle,
 };

@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getSearchParamsObject } from "@/lib/utils";
 import { listingsSearchParamsSchema } from "@/schema/listings";
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 
 export async function GET(request: NextRequest) {
   try {
@@ -16,14 +18,51 @@ export async function GET(request: NextRequest) {
       getSearchParamsObject(request.nextUrl.searchParams)
     );
 
+    const session = await getServerSession(authOptions);
+
     const listings = await db.$transaction([
       db.listing.findMany({
-        include: {
-          user: true,
-          ListingInfo: true,
-          ListingPrice: true,
-          ListingLocation: true,
-          ListingPhotos: true,
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          ListingInfo: {
+            select: {
+              description: true,
+              numberOfBeds: true,
+              flooAreaInM2: true,
+              floor: true,
+            },
+          },
+          ListingPrice: {
+            select: {
+              price: true,
+              currency: true,
+              currencySymbol: true,
+              rentInterval: true,
+            },
+          },
+          ListingLocation: {
+            select: {
+              lat: true,
+              lng: true,
+            },
+          },
+          ListingPhotos: {
+            select: {
+              url: true,
+              alt: true,
+            },
+          },
+          SavedListings: {
+            select: {
+              listingId: true,
+            },
+            where: {
+              // @ts-ignore (user.id exists, issue with this version of next auth)
+              userId: session?.user?.id,
+            },
+          },
         },
         where: { status: "PUBLISHED" },
         take: limit,
@@ -48,7 +87,6 @@ export async function GET(request: NextRequest) {
       error: {
         isError: true,
         error: err,
-        context: "Error while fetching listings",
       },
     });
   }
