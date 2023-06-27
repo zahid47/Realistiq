@@ -1,3 +1,5 @@
+import ListingDetailsSkeleton from "@/components/skeletons/ListingDetailsSkeleton";
+
 export default function loading() {
-  return <div>Loading details...</div>;
+  return <ListingDetailsSkeleton />;
 }
