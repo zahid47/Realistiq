@@ -55,10 +55,10 @@ export default function ListingsMap({
               setPopup(null);
             }}
             className={cn(
-              ` rounded-full border-2 border-white transition-all duration-100 ease-in-out`,
+              `h-4 w-4 rounded-full border-2 border-white transition-all ease-in-out`,
               hoveringListingId === listing.id
-                ? `h-5 w-5 bg-amber-400`
-                : `h-4 w-4 bg-primary`
+                ? `animate-ping bg-amber-400`
+                : `bg-primary`
             )}
           />
         </Marker>
