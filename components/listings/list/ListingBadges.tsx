@@ -13,9 +13,9 @@ export default function ListingBadges({ listingInfo }: Props) {
         {pluralized(listingInfo.numberOfBeds)}
       </Badge>
 
-      {listingInfo.hasElevator && (
-        <Badge variant="outline">Includes Elevator</Badge>
-      )}
+      <Badge variant="outline">
+        Area {listingInfo.flooAreaInM2} m<sup>2</sup>
+      </Badge>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Floor } from "@prisma/client";
 import slugify from "slugify";
 
 const capitalize = (s: string) => {
@@ -18,7 +18,7 @@ async function main() {
   const user = await db.user.findFirst();
 
   if (!user) {
-    console.error("No user found");
+    console.error("❌ No user found");
     return;
   }
 
@@ -46,7 +46,11 @@ async function main() {
         create: {
           description: faker.lorem.paragraph(),
           numberOfBeds: faker.number.int({ min: 1, max: 5 }),
-          hasElevator: faker.datatype.boolean(),
+          flooAreaInM2: faker.number.int({ min: 20, max: 200 }),
+          floor:
+            Object.values(Floor)[
+              Math.floor(Math.random() * Object.values(Floor).length)
+            ],
         },
       },
       ListingPrice: {
