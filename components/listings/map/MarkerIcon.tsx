@@ -18,7 +18,7 @@ export default function MarkerIcon({
 }: Props) {
   return (
     <div
-      className={cn(isHovering && "animate-pulse")}
+      className={cn("cursor-pointer", isHovering && "animate-pulse")}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

@@ -9,12 +9,14 @@ interface Props {
   listingsQueryResult: UseQueryResult<any, unknown>;
   clickedListingId: null | number;
   setHoveringListingId: Dispatch<SetStateAction<null | number>>;
+  setPopup: Dispatch<SetStateAction<null | any>>;
 }
 
 export default function ListingsList({
   listingsQueryResult,
   clickedListingId,
   setHoveringListingId,
+  setPopup,
 }: Props) {
   const listings = listingsQueryResult.data.listings;
 
@@ -32,6 +34,7 @@ export default function ListingsList({
               listing={listing}
               clickedListingId={clickedListingId}
               setHoveringListingId={setHoveringListingId}
+              setPopup={setPopup}
             />
           </li>
         );

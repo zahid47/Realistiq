@@ -16,12 +16,16 @@ interface Props {
   listingsQueryResult: UseQueryResult<any, unknown>;
   setClickedListingId: Dispatch<SetStateAction<null | number>>;
   hoveringListingId: null | number;
+  popup: any;
+  setPopup: Dispatch<SetStateAction<null | any>>;
 }
 
 export default function ListingsMap({
   listingsQueryResult,
   setClickedListingId,
   hoveringListingId,
+  popup,
+  setPopup,
 }: Props) {
   const listings = listingsQueryResult.data.listings;
   const mapRef = useRef<MapRef>(null);
@@ -31,8 +35,6 @@ export default function ListingsMap({
     latitude: 39.71375,
     zoom: 0,
   });
-
-  const [popup, setPopup] = useState<any>(null);
 
   const markers = useMemo(
     () =>
@@ -59,7 +61,7 @@ export default function ListingsMap({
           />
         </Marker>
       )),
-    [hoveringListingId, listings, setClickedListingId]
+    [hoveringListingId, listings, setClickedListingId, setPopup]
   );
 
   if (listingsQueryResult.isLoading) return <ListingsMapSkeleton />;

@@ -27,6 +27,7 @@ export default function Listings({ searchParams }: Props) {
     enabled: false, //FIXME: temporary
   });
 
+  const [popup, setPopup] = useState<any>(null);
   const [clickedListingId, setClickedListingId] = useState<number | null>(null);
   const [hoveringListingId, setHoveringListingId] = useState<number | null>(
     null
@@ -50,6 +51,7 @@ export default function Listings({ searchParams }: Props) {
           listingsQueryResult={listingsQueryResult}
           clickedListingId={clickedListingId}
           setHoveringListingId={setHoveringListingId}
+          setPopup={setPopup}
         />
       </ScrollArea>
       <div className="mb-2 mr-2 hidden overflow-hidden rounded-lg lg:block lg:w-3/5">
@@ -57,6 +59,8 @@ export default function Listings({ searchParams }: Props) {
           listingsQueryResult={listingsQueryResult}
           setClickedListingId={setClickedListingId}
           hoveringListingId={hoveringListingId}
+          popup={popup}
+          setPopup={setPopup}
         />
       </div>
     </div>

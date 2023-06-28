@@ -13,12 +13,14 @@ interface Props {
   listing: any;
   clickedListingId: null | number;
   setHoveringListingId: Dispatch<SetStateAction<null | number>>;
+  setPopup: Dispatch<SetStateAction<null | any>>;
 }
 
 export default function ListingCard({
   listing,
   clickedListingId,
   setHoveringListingId,
+  setPopup,
 }: Props) {
   const listingRef = useRef<HTMLDivElement>(null);
 
@@ -44,9 +46,11 @@ export default function ListingCard({
       ref={listingRef}
       onMouseEnter={() => {
         setHoveringListingId(listing.id);
+        setPopup(listing);
       }}
       onMouseLeave={() => {
         setHoveringListingId(null);
+        setPopup(null);
       }}
     >
       <CardContent className="flex flex-col items-center gap-4 sm:flex-row lg:flex-col 2xl:flex-row">
