@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { sendNextError } from "@/lib/utils";
 
 interface Context {
   params: {
@@ -8,16 +9,20 @@ interface Context {
 }
 
 export async function GET(_request: NextRequest, context: Context) {
-  const listing = await db.listing.findUnique({
-    where: { slug: context.params.slug },
-    include: {
-      user: true,
-      ListingInfo: true,
-      ListingPrice: true,
-      ListingLocation: true,
-      ListingPhotos: true,
-    },
-  });
+  try {
+    const listing = await db.listing.findUnique({
+      where: { slug: context.params.slug },
+      include: {
+        user: true,
+        ListingInfo: true,
+        ListingPrice: true,
+        ListingLocation: true,
+        ListingPhotos: true,
+      },
+    });
 
-  return NextResponse.json(listing);
+    return NextResponse.json(listing);
+  } catch (err) {
+    return sendNextError(err);
+  }
 }

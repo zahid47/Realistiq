@@ -1,10 +1,11 @@
-import { supportedCurrencies } from "@/constants";
+import { prismaErrors, supportedCurrencies } from "@/constants";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import { ClassValue, clsx } from "clsx";
 import Negotiator from "negotiator";
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { twMerge } from "tailwind-merge";
 import { i18n } from "../i18n-config";
+import { ZodError } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -70,3 +71,32 @@ export function getLocale(request: NextRequest): string | undefined {
   const locales: string[] = i18n.locales;
   return matchLocale(languages, locales, i18n.defaultLocale);
 }
+
+export const sendNextError = (err: any) => {
+  console.error(err);
+
+  const isZodError = err instanceof ZodError;
+  const isPrismaError = err.code && prismaErrors.has(err.code);
+
+  const status = isZodError
+    ? 422
+    : isPrismaError
+    ? prismaErrors.get(err.code)?.statusCode
+    : 500;
+
+  const message = isZodError
+    ? "Unprocessable Entity"
+    : isPrismaError
+    ? prismaErrors.get(err.code)?.message
+    : err;
+
+  return NextResponse.json({ error: message }, { status });
+};
+
+export const getRequestBodyGracefully = async (request: NextRequest) => {
+  let body = {};
+  try {
+    body = await request.json();
+  } catch {}
+  return body;
+};

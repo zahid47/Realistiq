@@ -2,7 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { getSearchParamsObject } from "@/lib/utils";
+import { getSearchParamsObject, sendNextError } from "@/lib/utils";
 import { listingsSearchParamsSchema } from "@/schema/listings";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
@@ -83,11 +83,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ listings: listings[0], meta });
   } catch (err) {
-    return NextResponse.json({
-      error: {
-        isError: true,
-        error: err,
-      },
-    });
+    return sendNextError(err);
   }
 }
