@@ -25,6 +25,7 @@ export default function ListingBookMark({ listingId }: Props) {
 
   return (
     <Lottie
+      title="Save for later"
       animationData={bookmarkIconAnimationData}
       className="absolute right-2 top-2 w-[2.5rem] cursor-pointer"
       autoplay={false}
