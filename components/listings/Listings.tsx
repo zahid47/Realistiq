@@ -24,7 +24,6 @@ export default function Listings({ searchParams }: Props) {
     queryKey: ["listings", searchParams.page],
     queryFn: () => getListings({ page: searchParams.page }),
     keepPreviousData: true,
-    enabled: false, //FIXME: temporary
   });
 
   const [popup, setPopup] = useState<any>(null);
