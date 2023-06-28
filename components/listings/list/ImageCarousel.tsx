@@ -3,8 +3,9 @@ import { Carousel } from "@mantine/carousel";
 import { rem } from "@mantine/core";
 import { getRGBDataURL } from "@/lib/utils";
 import { createStyles, getStylesRef } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 
-const useStyles = createStyles(() => ({
+const largeScreenStyles = createStyles(() => ({
   controls: {
     ref: getStylesRef("controls"),
     transition: "opacity 150ms ease",
@@ -29,32 +30,35 @@ const useStyles = createStyles(() => ({
   },
 }));
 
+const essentialStyles = {
+  indicator: {
+    backgroundColor: "#ffffff !important",
+    width: rem(12),
+    height: rem(4),
+    transition: "width 250ms ease",
+
+    "&[data-active]": {
+      width: rem(40),
+    },
+  },
+  control: {
+    backgroundColor: "#ffffff !important",
+  },
+};
+
 export default function ImageCarousel({ images }: { images: any[] }) {
-  const { classes } = useStyles();
+  const isSmallScreen = useMediaQuery("(max-width: 1535px)");
+  const { classes } = largeScreenStyles();
 
   return (
     <Carousel
-      classNames={classes}
+      classNames={!isSmallScreen ? classes : undefined}
       loop
-      maw={320}
+      maw={320} //FIXME: doesn't look very good in certain screen sizes
       mx="auto"
       height={200}
       withIndicators={true}
-      styles={{
-        indicator: {
-          backgroundColor: "#ffffff !important",
-          width: rem(12),
-          height: rem(4),
-          transition: "width 250ms ease",
-
-          "&[data-active]": {
-            width: rem(40),
-          },
-        },
-        control: {
-          backgroundColor: "#ffffff !important",
-        },
-      }}
+      styles={essentialStyles}
     >
       {images.map((image) => (
         <Carousel.Slide

@@ -14,8 +14,8 @@ interface Props {
 export default function ListingPagination({ meta, onPageChange }: Props) {
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-      <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-        <div>
+      <div className="flex flex-1 items-center justify-end sm:justify-between lg:justify-end xl:justify-between">
+        <div className="hidden sm:block lg:hidden xl:block">
           <p className="text-sm text-gray-700">
             Showing <span className="font-medium">{meta.from}</span> to{" "}
             <span className="font-medium">{meta.to}</span> of{" "}
@@ -25,7 +25,6 @@ export default function ListingPagination({ meta, onPageChange }: Props) {
 
         <Pagination
           color="violet"
-          siblings={1}
           total={meta.total_pages}
           value={meta.current_page}
           onChange={onPageChange}

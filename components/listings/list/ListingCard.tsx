@@ -49,7 +49,7 @@ export default function ListingCard({
         setHoveringListingId(null);
       }}
     >
-      <CardContent className="flex items-center gap-4">
+      <CardContent className="flex flex-col items-center gap-4 sm:flex-row lg:flex-col 2xl:flex-row">
         <ImageCarousel images={listing.ListingPhotos} />
 
         <Link
