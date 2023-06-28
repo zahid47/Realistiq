@@ -1,6 +1,10 @@
 import { supportedCurrencies } from "@/constants";
+import { match as matchLocale } from "@formatjs/intl-localematcher";
 import { ClassValue, clsx } from "clsx";
+import Negotiator from "negotiator";
+import type { NextRequest } from "next/server";
 import { twMerge } from "tailwind-merge";
+import { i18n } from "../i18n-config";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -54,3 +58,15 @@ export const getSearchParamsObject = (searchParams: URLSearchParams) => {
 export const getSearchParamsString = (object: Record<string, any>) => {
   return new URLSearchParams(object).toString();
 };
+
+export function getLocale(request: NextRequest): string | undefined {
+  // Negotiator expects plain object so we need to transform headers
+  const negotiatorHeaders: Record<string, string> = {};
+  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+
+  // Use negotiator and intl-localematcher to get best locale
+  let languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+  // @ts-ignore locales are readonly
+  const locales: string[] = i18n.locales;
+  return matchLocale(languages, locales, i18n.defaultLocale);
+}
