@@ -3,9 +3,8 @@ import { dehydrate } from "@tanstack/react-query";
 import HydrateWrapper from "@/components/providers/Hydrate";
 import Listings from "@/components/listings/Listings";
 import { listingsSearchParamsSchema } from "@/schema/listings";
-import { env } from "@/env.mjs";
 import { z } from "zod";
-import { headers } from "next/headers";
+import { getListingsFromDB } from "@/app/api/listings/route";
 
 interface Props {
   searchParams: {
@@ -16,16 +15,13 @@ interface Props {
 export async function getListingsServer(
   data: z.input<typeof listingsSearchParamsSchema>
 ) {
-  const { page } = listingsSearchParamsSchema.parse(data);
-  const query = new URLSearchParams({ page: page.toString() });
-  const url = new URL(`${env.NEXT_PUBLIC_APP_URL}/api/listings?${query}`);
-  const res = await fetch(url, { cache: "no-store", headers: headers() });
+  const payload = listingsSearchParamsSchema.parse(data);
 
-  if (!res.ok) {
-    throw new Error(res.statusText);
+  try {
+    return await getListingsFromDB(payload);
+  } catch {
+    throw new Error();
   }
-
-  return await res.json();
 }
 
 export default async function ListingsPage({ searchParams }: Props) {
