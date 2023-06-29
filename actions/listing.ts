@@ -8,7 +8,7 @@ export async function getListings(
   const { page } = listingsSearchParamsSchema.parse(data);
   const query = new URLSearchParams({ page: page.toString() });
   const url = new URL(`${env.NEXT_PUBLIC_APP_URL}/api/listings?${query}`);
-  const res = await fetch(url, { next: { revalidate: 60 } });
+  const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {
     throw new Error(res.statusText);
@@ -19,7 +19,7 @@ export async function getListings(
 
 export async function getListing(slug: string) {
   const url = new URL(`${env.NEXT_PUBLIC_APP_URL}/api/listings/${slug}`);
-  const res = await fetch(url, { next: { revalidate: 60 } });
+  const res = await fetch(url, { cache: "no-store" });
 
   if (!res.ok) {
     throw new Error(res.statusText);
