@@ -55,7 +55,7 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
       });
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["listings", page] });
+      queryClient.invalidateQueries({ queryKey: ["listings"] }); // FIXME: adding page to the query key, doesn't refetch the data for some reason
     },
   });
 
