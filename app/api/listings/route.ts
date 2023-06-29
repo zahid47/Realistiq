@@ -4,8 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getSearchParamsObject, sendNextError } from "@/lib/utils";
 import { listingsSearchParamsSchema } from "@/schema/listings";
-import { authOptions } from "@/lib/auth";
-import { getServerSession } from "next-auth";
+import { getServerAuthSession } from "@/lib/auth";
 
 export async function GET(request: NextRequest) {
   try {
@@ -18,8 +17,7 @@ export async function GET(request: NextRequest) {
       getSearchParamsObject(request.nextUrl.searchParams)
     );
 
-    const session = await getServerSession(authOptions);
-    // @ts-ignore (user.id exists, issue with this version of next auth)
+    const session = await getServerAuthSession();
     const userId = session?.user?.id || "";
 
     const listings = await db.$transaction([
