@@ -4,6 +4,7 @@ import { rem } from "@mantine/core";
 import { getRGBDataURL } from "@/lib/utils";
 import { createStyles, getStylesRef } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import { env } from "@/env.mjs";
 
 const largeScreenStyles = createStyles(() => ({
   controls: {
@@ -73,6 +74,7 @@ export default function ImageCarousel({ images }: { images: any[] }) {
             alt={image.alt}
             placeholder="blur"
             blurDataURL={getRGBDataURL(209, 209, 209)} // grey
+            unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
           />
         </Carousel.Slide>
       ))}
