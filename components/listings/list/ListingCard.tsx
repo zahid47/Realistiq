@@ -63,7 +63,10 @@ export default function ListingCard({
           <ListingTitle listing={listing} />
           <ListingPrice listingPrice={listing.ListingPrice} />
         </Link>
-        <ListingBookMark listingId={listing.SavedListings[0]} />
+        <ListingBookMark
+          listingId={listing.id}
+          isSaved={listing.SavedListings.length}
+        />
       </CardContent>
     </Card>
   );
