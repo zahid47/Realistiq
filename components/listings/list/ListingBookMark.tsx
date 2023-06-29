@@ -18,7 +18,7 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
   const pathName = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const page = searchParams.get("page") || 1;
+  // const page = searchParams.get("page") || 1;
   const queryClient = useQueryClient();
 
   const handleBookMark = async () => {
@@ -63,7 +63,7 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
 
   return (
     <Icons.BookMark
-      className="absolute right-2 top-2 w-[2.5rem] cursor-pointer text-slate-500"
+      className="absolute right-2 top-2 w-[2.5rem] cursor-pointer text-slate-500 hover:text-slate-700"
       fill={saved ? "currentColor" : "none"}
       onClick={() => {
         mutation.mutate();
