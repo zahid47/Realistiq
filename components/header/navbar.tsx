@@ -8,9 +8,34 @@ import UserAvatar from "./user-avatar";
 import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/ui/Icons";
+import { useState } from "react";
+import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/components/ui/use-toast";
 
 export default function Navbar({ session }: { session: Session | null }) {
   const scrolled = useScroll(30);
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    setLoading(true);
+    try {
+      signIn("github");
+    } catch {
+      toast({
+        variant: "destructive",
+        title: "Something went wrong!",
+        description: "There was an error while signing in. Please try again.",
+        action: (
+          <ToastAction altText="Retry" onClick={handleLogin}>
+            Retry
+          </ToastAction>
+        ),
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <header
       className={cn(
@@ -29,12 +54,7 @@ export default function Navbar({ session }: { session: Session | null }) {
             {session ? (
               <UserAvatar session={session} />
             ) : (
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  signIn("github");
-                }}
-              >
+              <Button variant="ghost" onClick={handleLogin} isLoading={loading}>
                 Sign In
               </Button>
             )}
