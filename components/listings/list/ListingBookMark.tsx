@@ -5,7 +5,7 @@ import { toast } from "@/components/ui/use-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   listingId: number;
@@ -20,6 +20,11 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
   const searchParams = useSearchParams();
   // const page = searchParams.get("page") || 1;
   const queryClient = useQueryClient();
+
+  // FIXME: need to sync with after tanstack query has fetched the latest data, because in the server fetch, auth is not working, so the data is not accurate. really don't like this fml
+  useEffect(() => {
+    setSaved(isSaved);
+  }, [isSaved]);
 
   const handleBookMark = async () => {
     if (status !== "authenticated")
