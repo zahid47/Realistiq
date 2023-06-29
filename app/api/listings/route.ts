@@ -19,6 +19,8 @@ export async function GET(request: NextRequest) {
     );
 
     const session = await getServerSession(authOptions);
+    // @ts-ignore (user.id exists, issue with this version of next auth)
+    const userId = session?.user?.id || "";
 
     const listings = await db.$transaction([
       db.listing.findMany({
@@ -57,10 +59,10 @@ export async function GET(request: NextRequest) {
           SavedListings: {
             select: {
               listingId: true,
+              userId: true,
             },
             where: {
-              // @ts-ignore (user.id exists, issue with this version of next auth)
-              userId: session?.user?.id,
+              userId,
             },
           },
         },
