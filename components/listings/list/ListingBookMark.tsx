@@ -23,7 +23,9 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
 
   const handleBookMark = async () => {
     if (status !== "authenticated")
-      return router.push(`/api/auth/signin?callbackUrl=${pathName}`);
+      return router.push(
+        `/api/auth/signin?callbackUrl=${pathName}?${searchParams.toString()}`
+      );
 
     await saveOrRemoveListing(listingId);
   };
