@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
               userId: true,
             },
             where: {
-              userId: session?.user?.id,
+              userId: session?.user?.id || "",
             },
           },
         },
