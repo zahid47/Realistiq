@@ -27,7 +27,7 @@ export default function Listings({ searchParams }: Props) {
     queryKey: ["listings", payload],
     queryFn: () => getListings(payload),
     keepPreviousData: true,
-    enabled: false,
+    // enabled: false,
   });
 
   const [popup, setPopup] = useState<any>(null);

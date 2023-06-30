@@ -1,7 +1,7 @@
 import { addOrRemoveSaved } from "@/actions/api-calls/saved-listing";
 import { Icons } from "@/components/ui/Icons";
-import { ToastAction } from "@/components/ui/toast";
 import { toast } from "@/lib/hooks/use-toast";
+import { getSearchParamsObject } from "@/lib/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -13,12 +13,11 @@ interface Props {
 }
 
 export default function ListingBookMark({ listingId, isSaved }: Props) {
-  const [loading, setLoading] = useState(false);
+  const [saved, setSaved] = useState(isSaved);
   const { status } = useSession();
   const pathName = usePathname();
-  const router = useRouter();
   const searchParams = useSearchParams();
-  // const page = searchParams.get("page") || 1;
+  const router = useRouter();
   const queryClient = useQueryClient();
 
   const handleBookmark = async () => {
@@ -26,55 +25,36 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
       return router.push(
         `/api/auth/signin?callbackUrl=${pathName}?${searchParams.toString()}`
       );
-    setLoading(true);
+
     await addOrRemoveSaved(listingId);
   };
 
   const mutation = useMutation({
     mutationFn: handleBookmark,
+    onMutate: () => {
+      setSaved((prev) => !prev);
+    },
     onError: () => {
-      const description = isSaved
-        ? "Failed to remove."
-        : "Could not save the listing.";
+      setSaved((prev) => !prev);
       toast({
         variant: "destructive",
         title: "Error",
-        description: description + " Please try again.",
-        action: (
-          <ToastAction
-            altText="Retry"
-            onClick={() => {
-              mutation.mutate();
-            }}
-          >
-            Retry
-          </ToastAction>
-        ),
+        description: `Could not ${isSaved && "un"}save the listing.`,
       });
     },
-    onSuccess: () => {
-      // FIXME: adding page to the query key, doesn't refetch the data for some reason
-      // queryClient.invalidateQueries({ queryKey: ["listings"] });
-      router.refresh();
-    },
     onSettled: () => {
-      setLoading(false);
+      queryClient.invalidateQueries({ queryKey: ["listings"] });
+      router.refresh();
     },
   });
 
   return (
-    <>
-      {loading ? (
-        "Loading..."
-      ) : (
-        <Icons.BookMark
-          className="absolute right-2 top-2 cursor-pointer text-slate-500 hover:text-slate-700"
-          fill={isSaved ? "currentColor" : "none"}
-          onClick={() => {
-            mutation.mutate();
-          }}
-        />
-      )}
-    </>
+    <Icons.BookMark
+      className="absolute right-2 top-2 cursor-pointer text-slate-500 hover:text-slate-700"
+      fill={saved ? "currentColor" : "none"}
+      onClick={() => {
+        mutation.mutate();
+      }}
+    />
   );
 }
