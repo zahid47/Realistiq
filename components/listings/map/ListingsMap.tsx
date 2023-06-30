@@ -1,23 +1,25 @@
 "use client";
 
 import { env } from "@/env.mjs";
-import { UseQueryResult } from "@tanstack/react-query";
+import { QueryObserverSuccessResult } from "@tanstack/react-query";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
 import type { MapRef } from "react-map-gl";
 import Map, { Marker, Popup, NavigationControl } from "react-map-gl";
 import ListingsMapSkeleton from "../../skeletons/ListingsMapSkeleton";
 import MarkerIcon from "./MarkerIcon";
+import { ExtendedListing } from "@/types/db";
+import { ReturnData } from "@/actions/api-calls/listing";
 
 const MAPBOX_TOKEN = env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const MAPBOX_STYLE = "mapbox://styles/mapbox/streets-v12";
 
 interface Props {
-  listingsQueryResult: UseQueryResult<any, unknown>;
+  listingsQueryResult: QueryObserverSuccessResult<ReturnData, unknown>;
   setClickedListingId: Dispatch<SetStateAction<null | number>>;
   hoveringListingId: null | number;
-  popup: any;
-  setPopup: Dispatch<SetStateAction<null | any>>;
+  popup: ExtendedListing | null;
+  setPopup: Dispatch<SetStateAction<null | ExtendedListing>>;
 }
 
 export default function ListingsMap({
@@ -38,8 +40,7 @@ export default function ListingsMap({
 
   const markers = useMemo(
     () =>
-      listings &&
-      listings.map((listing: any) => (
+      listings.map((listing: ExtendedListing) => (
         <Marker
           key={listing.id}
           latitude={listing.ListingLocation.lat}
@@ -57,7 +58,7 @@ export default function ListingsMap({
               setPopup(null);
             }}
             isHovering={hoveringListingId === listing.id}
-            isBookmarked={listing.SavedListings.length}
+            isSaved={!!listing.SavedListings.length}
           />
         </Marker>
       )),

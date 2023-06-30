@@ -5,6 +5,7 @@ import { getRGBDataURL } from "@/lib/utils";
 import { createStyles, getStylesRef } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { env } from "@/env.mjs";
+import { ListingPhotos } from "@prisma/client";
 
 const largeScreenStyles = createStyles(() => ({
   controls: {
@@ -47,7 +48,11 @@ const essentialStyles = {
   },
 };
 
-export default function ImageCarousel({ images }: { images: any[] }) {
+export default function ImageCarousel({
+  images,
+}: {
+  images: Array<ListingPhotos>;
+}) {
   const isSmallScreen = useMediaQuery("(max-width: 1535px)");
   const { classes } = largeScreenStyles();
 

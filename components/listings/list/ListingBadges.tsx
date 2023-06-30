@@ -1,8 +1,9 @@
 import { pluralized } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import type { ListingInfo } from "@prisma/client";
 
 interface Props {
-  listingInfo: any;
+  listingInfo: ListingInfo;
 }
 
 export default function ListingBadges({ listingInfo }: Props) {

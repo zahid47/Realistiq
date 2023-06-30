@@ -1,7 +1,8 @@
 import ListingBadges from "./ListingBadges";
+import { ExtendedListing } from "@/types/db";
 
 interface Props {
-  listing: any;
+  listing: ExtendedListing;
 }
 
 export default function ListingTitle({ listing }: Props) {

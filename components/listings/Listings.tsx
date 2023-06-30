@@ -13,6 +13,7 @@ import { useState } from "react";
 import ListingPagination from "./list/ListingPagination";
 import ListingsList from "./list/ListingsList";
 import ListingsMap from "./map/ListingsMap";
+import { ExtendedListing } from "@/types/db";
 
 interface Props {
   searchParams: GetListingsPayload;
@@ -30,7 +31,7 @@ export default function Listings({ searchParams }: Props) {
     // enabled: false,
   });
 
-  const [popup, setPopup] = useState<any>(null);
+  const [popup, setPopup] = useState<ExtendedListing | null>(null);
   const [clickedListingId, setClickedListingId] = useState<number | null>(null);
   const [hoveringListingId, setHoveringListingId] = useState<number | null>(
     null
@@ -42,6 +43,8 @@ export default function Listings({ searchParams }: Props) {
     const url = `${pathname}?${qs}`;
     router.push(url);
   };
+
+  if (!listingsQueryResult.isSuccess) return null;
 
   return (
     <div className="flex flex-row">

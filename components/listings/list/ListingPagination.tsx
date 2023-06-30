@@ -1,13 +1,8 @@
+import { Meta } from "@/types/db";
 import { Pagination } from "@mantine/core";
 
 interface Props {
-  meta: {
-    current_page: number;
-    total_pages: number;
-    total: number;
-    from: number;
-    to: number;
-  };
+  meta: Meta;
   onPageChange: (page: number) => void;
 }
 

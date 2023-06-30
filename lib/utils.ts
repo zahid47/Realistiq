@@ -11,10 +11,7 @@ export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
 };
 
-export const formatPrice = (
-  price: number,
-  currency: (typeof supportedCurrencies)[number]
-) => {
+export const formatPrice = (price: number, currency: string) => {
   return new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: currency,

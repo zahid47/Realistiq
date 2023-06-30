@@ -6,7 +6,7 @@ interface Props {
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   isHovering: boolean;
-  isBookmarked: boolean;
+  isSaved: boolean;
 }
 
 export default function MarkerIcon({
@@ -14,7 +14,7 @@ export default function MarkerIcon({
   onMouseEnter,
   onMouseLeave,
   isHovering,
-  isBookmarked,
+  isSaved,
 }: Props) {
   return (
     <div
@@ -23,7 +23,7 @@ export default function MarkerIcon({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {isBookmarked ? (
+      {isSaved ? (
         <Icons.BookMark
           color="#fff"
           fill={isHovering ? "#fbbf24" : "#6d28d9"}

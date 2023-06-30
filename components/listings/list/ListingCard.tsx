@@ -8,12 +8,13 @@ import ListingPrice from "./ListingPrice";
 import ListingTitle from "./ListingTitle";
 import Link from "next/link";
 import ListingBookMark from "./ListingBookMark";
+import type { ExtendedListing } from "@/types/db";
 
 interface Props {
-  listing: any;
+  listing: ExtendedListing;
   clickedListingId: null | number;
   setHoveringListingId: Dispatch<SetStateAction<null | number>>;
-  setPopup: Dispatch<SetStateAction<null | any>>;
+  setPopup: Dispatch<SetStateAction<null | ExtendedListing>>;
 }
 
 export default function ListingCard({
@@ -65,7 +66,7 @@ export default function ListingCard({
         </Link>
         <ListingBookMark
           listingId={listing.id}
-          isSaved={listing.SavedListings.length}
+          isSaved={!!listing.SavedListings.length}
         />
       </CardContent>
     </Card>

@@ -1,7 +1,8 @@
 import { formatPrice } from "@/lib/utils";
+import { ListingPrice } from "@prisma/client";
 
 interface Props {
-  listingPrice: any;
+  listingPrice: ListingPrice;
 }
 
 export default function ListingPrice({ listingPrice }: Props) {

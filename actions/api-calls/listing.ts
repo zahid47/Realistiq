@@ -1,7 +1,15 @@
 import { get } from "@/lib/customFetch";
 import { GetListingsPayload } from "@/lib/validators/listing";
+import { ExtendedListing, Meta } from "@/types/db";
 
-export async function getListings(payload: GetListingsPayload) {
+export interface ReturnData {
+  listings: Array<ExtendedListing>;
+  meta: Meta;
+}
+
+export async function getListings(
+  payload: GetListingsPayload
+): Promise<ReturnData> {
   return await get("/listings", payload);
 }
 

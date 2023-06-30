@@ -6,6 +6,7 @@ import QueryClientWrapper from "@/components/providers/QueryClientProvider";
 import { Toaster } from "@/components/ui/toaster";
 import NextTopLoader from "nextjs-toploader";
 import { Inter } from "next/font/google";
+import { siteConfig } from "@/config/site";
 
 const font = Inter({
   subsets: ["latin"],
@@ -14,9 +15,8 @@ const font = Inter({
 });
 
 export const metadata = {
-  title: "Stress free home renting | Realistiq",
-  description:
-    "Find stress free rental with Realistiq. Explore premium listings, connect with trusted landlords, and experience a hassle-free renting process.",
+  title: siteConfig.title,
+  description: siteConfig.description,
 };
 
 interface Props {
