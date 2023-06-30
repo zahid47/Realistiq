@@ -21,15 +21,15 @@ export default async function Home() {
         <div className="mb-8 flex justify-center">
           <div className="text-mute relative rounded-full px-3 py-1 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
             <span className="animate-text-shimmer bg-[linear-gradient(110deg,#171717,45%,#1e293b,55%,#6b6b6b)] bg-[length:250%_100%] bg-clip-text text-transparent">
-              We are open source.
-            </span>{" "}
+              Realistiq is open source
+            </span>
             <a
               href="https://github.com/zahid47/Realistiq"
               target="_blank"
               className="font-semibold text-primary"
             >
               <span className="absolute inset-0" aria-hidden="true" />
-              Learn more <span aria-hidden="true">&rarr;</span>
+              <span aria-hidden="true"> &rarr;</span>
             </a>
           </div>
         </div>
