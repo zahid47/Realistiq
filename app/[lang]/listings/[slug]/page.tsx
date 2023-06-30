@@ -1,6 +1,6 @@
 import ListingDetails from "@/components/listings/listing-details/ListingDetails";
 import getQueryClient from "@/lib/getQueryClient";
-import { getListing } from "@/actions/listing";
+import { getListing } from "@/actions/api-calls/listing";
 import { dehydrate } from "@tanstack/react-query";
 import HydrateWrapper from "@/components/providers/Hydrate";
 

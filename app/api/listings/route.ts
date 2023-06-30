@@ -1,88 +1,19 @@
 export const dynamic = "force-dynamic";
 
-import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { getListingsFromDB } from "@/actions/db-calls/listing";
 import { getSearchParamsObject, sendNextError } from "@/lib/utils";
 import { getListingsPayload } from "@/lib/validators/listing";
-import { getCurrentUser } from "@/lib/auth";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    const {
-      page,
-      limit = 50,
-      sort_by,
-      sort_order,
-    } = getListingsPayload.parse(
+    const parsedPayload = getListingsPayload.parse(
       getSearchParamsObject(request.nextUrl.searchParams)
     );
 
-    const user = await getCurrentUser();
+    const { listings, meta } = await getListingsFromDB(parsedPayload);
 
-    const listings = await db.$transaction([
-      db.listing.findMany({
-        select: {
-          id: true,
-          title: true,
-          slug: true,
-          ListingInfo: {
-            select: {
-              description: true,
-              numberOfBeds: true,
-              flooAreaInM2: true,
-              floor: true,
-            },
-          },
-          ListingPrice: {
-            select: {
-              price: true,
-              currency: true,
-              currencySymbol: true,
-              rentInterval: true,
-            },
-          },
-          ListingLocation: {
-            select: {
-              lat: true,
-              lng: true,
-            },
-          },
-          ListingPhotos: {
-            select: {
-              url: true,
-              alt: true,
-            },
-          },
-          SavedListings: {
-            select: {
-              listingId: true,
-              userId: true,
-            },
-            where: {
-              userId: user?.id || "",
-            },
-          },
-        },
-        where: { status: "PUBLISHED" },
-        take: limit,
-        skip: (page - 1) * limit,
-        orderBy: { [sort_by]: sort_order },
-      }),
-      db.listing.count(),
-    ]);
-
-    const meta = {
-      total: listings[1],
-      per_page: limit,
-      from: listings[0].length ? (page - 1) * limit + 1 : 0,
-      to: listings[0].length ? page * limit : 0,
-      current_page: page,
-      total_pages: Math.ceil(listings[1] / limit),
-    };
-    return NextResponse.json({
-      listings: listings[0],
-      meta,
-    });
+    return NextResponse.json({ listings, meta });
   } catch (err) {
     return sendNextError(err);
   }

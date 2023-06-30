@@ -55,9 +55,7 @@ async function main() {
       },
       ListingPrice: {
         create: {
-          price: parseFloat(
-            faker.commerce.price({ min: 99, max: 9999 })
-          ).toFixed(2),
+          price: parseFloat(faker.commerce.price({ min: 99, max: 9999 })),
         },
       },
       ListingLocation: {

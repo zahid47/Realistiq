@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
 import { sendNextError } from "@/lib/utils";
+import { getListingFromDB } from "@/actions/db-calls/listing";
 
 interface Context {
   params: {
@@ -9,17 +9,9 @@ interface Context {
 }
 
 export async function GET(_request: NextRequest, context: Context) {
+  const slug = context.params.slug;
   try {
-    const listing = await db.listing.findUnique({
-      where: { slug: context.params.slug },
-      include: {
-        user: true,
-        ListingInfo: true,
-        ListingPrice: true,
-        ListingLocation: true,
-        ListingPhotos: true,
-      },
-    });
+    const listing = await getListingFromDB(slug);
 
     return NextResponse.json(listing);
   } catch (err) {

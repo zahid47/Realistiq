@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getListing } from "@/actions/listing";
+import { getListing } from "@/actions/api-calls/listing";
 import ListingDetailsSkeleton from "@/components/skeletons/ListingDetailsSkeleton";
 
 interface Props {

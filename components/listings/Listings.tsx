@@ -1,6 +1,6 @@
 "use client";
 
-import { getListings } from "@/actions/listing";
+import { getListings } from "@/actions/api-calls/listing";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getSearchParamsString } from "@/lib/utils";
 import {
