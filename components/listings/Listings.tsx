@@ -48,7 +48,7 @@ export default function Listings({ searchParams }: Props) {
 
   return (
     <div className="flex flex-row">
-      <ScrollArea className="h-[calc(100vh-4rem)] lg:w-2/5">
+      <ScrollArea className="m-auto h-[calc(100vh-4rem)] lg:w-[38%]">
         <ListingPagination
           meta={listingsQueryResult.data?.meta}
           onPageChange={onPageChange}
@@ -60,7 +60,7 @@ export default function Listings({ searchParams }: Props) {
           setPopup={setPopup}
         />
       </ScrollArea>
-      <div className="mb-2 mr-2 hidden overflow-hidden rounded-lg lg:block lg:w-3/5">
+      <div className="mb-2 mr-2 hidden overflow-hidden rounded-lg lg:block lg:w-[62%]">
         <ListingsMap
           listingsQueryResult={listingsQueryResult}
           setClickedListingId={setClickedListingId}

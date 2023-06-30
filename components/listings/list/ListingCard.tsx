@@ -54,7 +54,7 @@ export default function ListingCard({
         setPopup(null);
       }}
     >
-      <CardContent className="flex flex-col items-center gap-4 sm:flex-row lg:flex-col 2xl:flex-row">
+      <CardContent className="flex flex-col items-center gap-4 md:flex-row lg:flex-col 3xl:flex-row">
         <ImageCarousel
           photos={listing.photos}
           listingId={listing.id}
@@ -65,7 +65,7 @@ export default function ListingCard({
           href={`/listings/${listing.uuid}`}
           className="flex flex-col gap-1"
         >
-          <h1 className="line-clamp-2 text-lg font-semibold">
+          <h1 className="line-clamp-2 text-center text-lg font-semibold md:text-start">
             {listing.location.address}
           </h1>
           <Separator className="my-2 bg-muted" />

@@ -8,13 +8,13 @@ interface Props {
 
 export default function ListingBadges({ details }: Props) {
   return (
-    <div className="flex gap-7">
-      <div className="flex items-center gap-1">
+    <div className="flex justify-evenly gap-7 md:justify-start">
+      <div className="flex flex-col items-center gap-1 sm:flex-row">
         <Icons.SqFt className="text-primary" />
         <p>{details.floor_area} SqFt</p>
       </div>
 
-      <div className="flex items-center gap-1">
+      <div className="flex flex-col items-center gap-1 sm:flex-row">
         <Icons.Bed className="text-primary" />
         <p>
           {details.beds} Bed
@@ -22,7 +22,7 @@ export default function ListingBadges({ details }: Props) {
         </p>
       </div>
 
-      <div className="flex items-center gap-1">
+      <div className="flex flex-col items-center gap-1 sm:flex-row">
         <Icons.Bath className="text-primary" />
         <p>
           {details.baths} Bath

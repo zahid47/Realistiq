@@ -12,6 +12,9 @@ const tailwindConfig = {
       },
     },
     extend: {
+      screens: {
+        "3xl": "1700px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

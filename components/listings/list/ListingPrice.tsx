@@ -7,7 +7,7 @@ interface Props {
 
 export default function ListingPrice({ price }: Props) {
   return (
-    <div className="mt-2">
+    <div className="mt-2 text-center md:text-start">
       <p className="text-sm text-slate-500">Rent</p>
       <span className="text-lg font-bold">
         {formatPrice(price.amount, price.currency)}

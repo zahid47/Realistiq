@@ -48,7 +48,7 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
       <Carousel
         classNames={!isSmallScreen ? classes : undefined}
         loop
-        maw={320} //FIXME: doesn't look very good in certain screen sizes
+        maw={isSmallScreen ? 280 : 320} //FIXME: doesn't look very good in certain screen sizes
         height={200}
         styles={essentialStyles}
         onSlideChange={(index) => setCurrentSlide(index + 1)}
