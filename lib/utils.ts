@@ -1,4 +1,4 @@
-import { prismaErrors, supportedCurrencies } from "@/constants";
+import { PRISMA_ERRORS } from "@/constants";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import { ClassValue, clsx } from "clsx";
 import Negotiator from "negotiator";
@@ -71,18 +71,18 @@ export const getLocale = (request: NextRequest): string | undefined => {
 
 export const sendNextError = (err: any) => {
   const isZodError = err instanceof ZodError;
-  const isPrismaError = err.code && prismaErrors.has(err.code);
+  const isPrismaError = err.code && PRISMA_ERRORS.has(err.code);
 
   const status = isZodError
     ? 422
     : isPrismaError
-    ? prismaErrors.get(err.code)?.statusCode
+    ? PRISMA_ERRORS.get(err.code)?.statusCode
     : 500;
 
   const message = isZodError
     ? "Unprocessable Entity"
     : isPrismaError
-    ? prismaErrors.get(err.code)?.message
+    ? PRISMA_ERRORS.get(err.code)?.message
     : err;
 
   return NextResponse.json({ error: message }, { status });

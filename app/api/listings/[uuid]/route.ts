@@ -4,14 +4,14 @@ import { getListingFromDB } from "@/actions/db-calls/listing";
 
 interface Context {
   params: {
-    slug: string;
+    uuid: string;
   };
 }
 
 export async function GET(_request: NextRequest, context: Context) {
-  const slug = context.params.slug;
+  const uuid = context.params.uuid;
   try {
-    const listing = await getListingFromDB(slug);
+    const listing = await getListingFromDB(uuid);
 
     return NextResponse.json(listing);
   } catch (err) {

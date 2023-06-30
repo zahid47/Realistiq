@@ -28,7 +28,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/[lang]/listings/[slug]"
+    "app/[lang]/listings/[uuid]"
   ],
   "exclude": ["node_modules"]
 }

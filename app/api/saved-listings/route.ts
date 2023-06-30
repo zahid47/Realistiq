@@ -21,8 +21,8 @@ export async function POST(request: NextRequest) {
     try {
       await db.savedListings.create({
         data: {
-          listingId: parsedBody.listingId,
-          userId: session?.user?.id,
+          listing_id: parsedBody.listingId,
+          user_id: session?.user?.id,
         },
       });
     } catch (err: any) {
@@ -32,9 +32,9 @@ export async function POST(request: NextRequest) {
         // so in that case, we delete it instead.
         await db.savedListings.delete({
           where: {
-            userId_listingId: {
-              userId: session?.user?.id,
-              listingId: parsedBody.listingId,
+            user_id_listing_id: {
+              user_id: session?.user?.id,
+              listing_id: parsedBody.listingId,
             },
           },
         });

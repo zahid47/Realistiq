@@ -10,6 +10,7 @@ import ListingsMapSkeleton from "../../skeletons/ListingsMapSkeleton";
 import MarkerIcon from "./MarkerIcon";
 import { ExtendedListing } from "@/types/db";
 import { ReturnData } from "@/actions/api-calls/listing";
+import { DEFAULT_LAT, DEFAULT_LNG, DEFAULT_ZOOM } from "@/constants";
 
 const MAPBOX_TOKEN = env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const MAPBOX_STYLE = "mapbox://styles/mapbox/streets-v12";
@@ -33,9 +34,9 @@ export default function ListingsMap({
   const mapRef = useRef<MapRef>(null);
 
   const [viewState, setViewState] = useState({
-    longitude: -82.5324,
-    latitude: 39.71375,
-    zoom: 0,
+    latitude: DEFAULT_LAT,
+    longitude: DEFAULT_LNG,
+    zoom: DEFAULT_ZOOM,
   });
 
   const markers = useMemo(
@@ -43,8 +44,8 @@ export default function ListingsMap({
       listings.map((listing: ExtendedListing) => (
         <Marker
           key={listing.id}
-          latitude={listing.ListingLocation.lat}
-          longitude={listing.ListingLocation.lng}
+          latitude={listing.location.lat}
+          longitude={listing.location.lng}
           anchor="bottom"
         >
           <MarkerIcon
@@ -58,7 +59,7 @@ export default function ListingsMap({
               setPopup(null);
             }}
             isHovering={hoveringListingId === listing.id}
-            isSaved={!!listing.SavedListings.length}
+            isSaved={!!listing.saved.length}
           />
         </Marker>
       )),
@@ -80,12 +81,13 @@ export default function ListingsMap({
       {markers}
       {popup && (
         <Popup
-          latitude={popup.ListingLocation.lat}
-          longitude={popup.ListingLocation.lng}
+          latitude={popup.location.lat}
+          longitude={popup.location.lng}
           closeButton={false}
           offset={[0, -20]}
         >
-          {popup.title}
+          {/* TODO */}
+          {popup.uuid}
         </Popup>
       )}
     </Map>

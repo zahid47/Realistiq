@@ -5,10 +5,11 @@ import { cn } from "@/lib/utils";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import ImageCarousel from "./ImageCarousel";
 import ListingPrice from "./ListingPrice";
-import ListingTitle from "./ListingTitle";
+import ListingAddress from "./ListingAddress";
 import Link from "next/link";
 import ListingBookMark from "./ListingBookMark";
 import type { ExtendedListing } from "@/types/db";
+import ListingBadges from "./ListingBadges";
 
 interface Props {
   listing: ExtendedListing;
@@ -55,18 +56,19 @@ export default function ListingCard({
       }}
     >
       <CardContent className="flex flex-col items-center gap-4 sm:flex-row lg:flex-col 2xl:flex-row">
-        <ImageCarousel images={listing.ListingPhotos} />
+        <ImageCarousel photos={listing.photos} />
 
         <Link
-          href={`/listings/${listing.slug}`}
+          href={`/listings/${listing.uuid}`}
           className="flex flex-col gap-2"
         >
-          <ListingTitle listing={listing} />
-          <ListingPrice listingPrice={listing.ListingPrice} />
+          <ListingBadges details={listing.details} />
+          <ListingAddress address={listing.location.address} />
+          <ListingPrice price={listing.price} />
         </Link>
         <ListingBookMark
           listingId={listing.id}
-          isSaved={!!listing.SavedListings.length}
+          isSaved={!!listing.saved.length}
         />
       </CardContent>
     </Card>

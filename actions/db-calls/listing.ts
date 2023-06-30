@@ -18,43 +18,43 @@ export const getListingsFromDB = async ({
     db.listing.findMany({
       select: {
         id: true,
-        title: true,
-        slug: true,
-        ListingInfo: {
+        uuid: true,
+        details: {
           select: {
             description: true,
-            numberOfBeds: true,
-            flooAreaInM2: true,
-            floor: true,
+            beds: true,
+            baths: true,
+            floor_area: true,
           },
         },
-        ListingPrice: {
+        price: {
           select: {
-            price: true,
+            amount: true,
             currency: true,
-            currencySymbol: true,
-            rentInterval: true,
+            symbol: true,
+            interval: true,
           },
         },
-        ListingLocation: {
+        location: {
           select: {
             lat: true,
             lng: true,
+            address: true,
           },
         },
-        ListingPhotos: {
+        photos: {
           select: {
             url: true,
             alt: true,
           },
         },
-        SavedListings: {
+        saved: {
           select: {
-            listingId: true,
-            userId: true,
+            listing_id: true,
+            user_id: true,
           },
           where: {
-            userId: user?.id || "",
+            user_id: user?.id || "",
           },
         },
       },
@@ -78,15 +78,14 @@ export const getListingsFromDB = async ({
   return { listings: listings[0], meta };
 };
 
-export const getListingFromDB = async (slug: string) => {
+export const getListingFromDB = async (uuid: string) => {
   const user = await getCurrentUser();
 
   return await db.listing.findUnique({
     select: {
       id: true,
-      title: true,
-      slug: true,
-      user: {
+      uuid: true,
+      owner: {
         select: {
           id: true,
           name: true,
@@ -94,44 +93,45 @@ export const getListingFromDB = async (slug: string) => {
           image: true,
         },
       },
-      ListingInfo: {
+      details: {
         select: {
           description: true,
-          numberOfBeds: true,
-          flooAreaInM2: true,
-          floor: true,
+          beds: true,
+          baths: true,
+          floor_area: true,
         },
       },
-      ListingPrice: {
+      price: {
         select: {
-          price: true,
+          amount: true,
           currency: true,
-          currencySymbol: true,
-          rentInterval: true,
+          symbol: true,
+          interval: true,
         },
       },
-      ListingLocation: {
+      location: {
         select: {
           lat: true,
           lng: true,
+          address: true,
         },
       },
-      ListingPhotos: {
+      photos: {
         select: {
           url: true,
           alt: true,
         },
       },
-      SavedListings: {
+      saved: {
         select: {
-          listingId: true,
-          userId: true,
+          listing_id: true,
+          user_id: true,
         },
         where: {
-          userId: user?.id || "",
+          user_id: user?.id || "",
         },
       },
     },
-    where: { slug },
+    where: { uuid },
   });
 };

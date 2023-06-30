@@ -1,27 +1,27 @@
-import ListingDetails from "@/components/listings/listing-details/ListingDetails";
+import ListingDetails from "@/components/listings/single-listing/SingleListing";
 import getQueryClient from "@/lib/getQueryClient";
-import { getListing } from "@/actions/api-calls/listing";
 import { dehydrate } from "@tanstack/react-query";
 import HydrateWrapper from "@/components/providers/Hydrate";
+import { getListingFromDB } from "@/actions/db-calls/listing";
 
 interface Props {
   params: {
-    slug: string;
+    uuid: string;
   };
 }
 
-export default async function page({ params: { slug } }: Props) {
+export default async function page({ params: { uuid } }: Props) {
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["listing", slug],
-    queryFn: () => getListing(slug),
+    queryKey: ["listing", uuid],
+    queryFn: () => getListingFromDB(uuid),
   });
   const dehydratedState = dehydrate(queryClient);
 
   return (
     <>
       <HydrateWrapper state={dehydratedState}>
-        <ListingDetails slug={slug} />
+        <ListingDetails uuid={uuid} />
       </HydrateWrapper>
     </>
   );

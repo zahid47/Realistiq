@@ -1,10 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { PrismaClient, Floor } from "@prisma/client";
-import slugify from "slugify";
-
-const capitalize = (s: string) => {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-};
+import { PrismaClient } from "@prisma/client";
 
 const db = new PrismaClient();
 
@@ -26,7 +21,7 @@ async function main() {
 
   await Promise.all([
     db.listing.deleteMany({}),
-    db.listingInfo.deleteMany({}),
+    db.listingDetails.deleteMany({}),
     db.listingPrice.deleteMany({}),
     db.listingLocation.deleteMany({}),
     db.listingPhotos.deleteMany({}),
@@ -35,30 +30,22 @@ async function main() {
   console.log("Seeding...");
 
   const fakeListings = Array.from({ length: 200 }).map(() => {
-    const title = `${capitalize(
-      faker.word.adjective()
-    )} property in ${faker.location.city()}`;
     return {
-      title,
-      slug: slugify(title, { lower: true }),
-      userId: user.id,
-      ListingInfo: {
+      user_id: user.id,
+      details: {
         create: {
           description: faker.lorem.paragraph(),
-          numberOfBeds: faker.number.int({ min: 1, max: 5 }),
-          flooAreaInM2: faker.number.int({ min: 20, max: 200 }),
-          floor:
-            Object.values(Floor)[
-              Math.floor(Math.random() * Object.values(Floor).length)
-            ],
+          beds: faker.number.int({ min: 1, max: 5 }),
+          baths: faker.number.int({ min: 1, max: 5 }),
+          floor_area: faker.number.int({ min: 20, max: 200 }),
         },
       },
-      ListingPrice: {
+      price: {
         create: {
-          price: parseFloat(faker.commerce.price({ min: 99, max: 9999 })),
+          amount: parseFloat(faker.commerce.price({ min: 99, max: 9999 })),
         },
       },
-      ListingLocation: {
+      location: {
         create: {
           lat: faker.location.latitude({
             min: 33,
@@ -68,9 +55,10 @@ async function main() {
             min: -121,
             max: -76,
           }),
+          address: faker.location.streetAddress(),
         },
       },
-      ListingPhotos: {
+      photos: {
         create: Array.from({ length: 4 }).map(() => {
           return {
             url: faker.image.urlPicsumPhotos(),

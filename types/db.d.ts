@@ -1,7 +1,7 @@
 import type {
   User,
   Listing,
-  ListingInfo,
+  ListingDetails,
   ListingPrice,
   ListingLocation,
   ListingPhotos,
@@ -10,11 +10,11 @@ import type {
 
 export type ExtendedListing = Listing & {
   user: User;
-  ListingInfo: ListingInfo;
-  ListingPrice: ListingPrice;
-  ListingLocation: ListingLocation;
-  ListingPhotos: Array<ListingPhotos>;
-  SavedListings: Array<SavedListings>;
+  details: ListingDetails;
+  price: ListingPrice;
+  location: ListingLocation;
+  photos: Array<ListingPhotos>;
+  saved: Array<SavedListings>;
 };
 
 export type Meta = {

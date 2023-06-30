@@ -1,7 +1,7 @@
 import { addOrRemoveSaved } from "@/actions/api-calls/saved-listing";
 import { Icons } from "@/components/ui/Icons";
+import { Button } from "@/components/ui/button";
 import { toast } from "@/lib/hooks/use-toast";
-import { getSearchParamsObject } from "@/lib/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -49,12 +49,17 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
   });
 
   return (
-    <Icons.BookMark
+    <Button
+      size="icon"
+      variant="ghost"
       className="absolute right-2 top-2 cursor-pointer text-slate-500 hover:text-slate-700"
-      fill={saved ? "currentColor" : "none"}
-      onClick={() => {
-        mutation.mutate();
-      }}
-    />
+    >
+      <Icons.BookMark
+        fill={saved ? "currentColor" : "none"}
+        onClick={() => {
+          mutation.mutate();
+        }}
+      />
+    </Button>
   );
 }

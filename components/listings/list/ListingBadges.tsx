@@ -1,22 +1,25 @@
 import { pluralized } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import type { ListingInfo } from "@prisma/client";
+import type { ListingDetails } from "@prisma/client";
 
 interface Props {
-  listingInfo: ListingInfo;
+  details: ListingDetails;
 }
 
-export default function ListingBadges({ listingInfo }: Props) {
+export default function ListingBadges({ details }: Props) {
   return (
     <div className="flex gap-1">
       <Badge variant="outline">
-        {listingInfo.numberOfBeds} Bed
-        {pluralized(listingInfo.numberOfBeds)}
+        {details.beds} Bed
+        {pluralized(details.beds)}
       </Badge>
 
       <Badge variant="outline">
-        Area {listingInfo.flooAreaInM2} m<sup>2</sup>
+        {details.baths} Bath
+        {pluralized(details.baths)}
       </Badge>
+
+      <Badge variant="outline">{details.floor_area} SqFt</Badge>
     </div>
   );
 }

@@ -13,6 +13,6 @@ export async function getListings(
   return await get("/listings", payload);
 }
 
-export async function getListing(slug: string) {
-  return await get(`/listings/${slug}`);
+export async function getListing(uuid: string): Promise<ExtendedListing> {
+  return await get(`/listings/${uuid}`);
 }

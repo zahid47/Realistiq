@@ -2,17 +2,17 @@ import { formatPrice } from "@/lib/utils";
 import { ListingPrice } from "@prisma/client";
 
 interface Props {
-  listingPrice: ListingPrice;
+  price: ListingPrice;
 }
 
-export default function ListingPrice({ listingPrice }: Props) {
+export default function ListingPrice({ price }: Props) {
   return (
     <p className="mt-2">
       <span className="text-lg font-bold">
-        {formatPrice(listingPrice.price, listingPrice.currency)}
+        {formatPrice(price.amount, price.currency)}
       </span>{" "}
       <span className="text-blue-gray-400 text-sm">
-        {listingPrice.rentInterval.toLowerCase()}
+        {price.interval.toLowerCase()}
       </span>
     </p>
   );
