@@ -6,6 +6,7 @@ import ListingsListSkeleton from "../../skeletons/ListingsListSkeleton";
 import { QueryObserverSuccessResult } from "@tanstack/react-query";
 import { ExtendedListing } from "@/types/db";
 import { ReturnData } from "@/actions/api-calls/listing";
+import EmptyState from "@/components/skeletons/EmptyState";
 
 interface Props {
   listingsQueryResult: QueryObserverSuccessResult<ReturnData, unknown>;
@@ -24,7 +25,13 @@ export default function ListingsList({
 
   if (listingsQueryResult.isLoading) return <ListingsListSkeleton />;
 
-  if (!listings?.length) return <p>No listings found</p>;
+  if (!listings?.length)
+    return (
+      <EmptyState
+        title="No listings found"
+        description="Please check back later"
+      />
+    );
 
   return (
     <ul>
