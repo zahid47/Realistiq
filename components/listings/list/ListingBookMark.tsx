@@ -1,7 +1,7 @@
 import { addOrRemoveSaved } from "@/actions/api-calls/saved-listing";
 import { Icons } from "@/components/ui/Icons";
 import { ToastAction } from "@/components/ui/toast";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/lib/hooks/use-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";

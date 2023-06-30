@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/ui/Icons";
 import { useState } from "react";
 import { ToastAction } from "@/components/ui/toast";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/lib/hooks/use-toast";
 
 export default function Navbar({ session }: { session: Session | null }) {
   const scrolled = useScroll(30);
