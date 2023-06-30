@@ -5,7 +5,7 @@ const bodySchema = z.object({
   listingId: z.coerce.number().int().positive(),
 });
 
-export async function saveOrRemoveListing(listingId: number) {
+export async function addOrRemoveSaved(listingId: number) {
   const url = new URL(`${env.NEXT_PUBLIC_APP_URL}/api/saved-listings`);
   const body = bodySchema.parse({ listingId });
 
