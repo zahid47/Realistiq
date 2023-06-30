@@ -1,4 +1,5 @@
 import { env } from "@/env.mjs";
+import { post } from "@/lib/customFetch";
 import { z } from "zod";
 
 const bodySchema = z.object({
@@ -6,20 +7,6 @@ const bodySchema = z.object({
 });
 
 export async function addOrRemoveSaved(listingId: number) {
-  const url = new URL(`${env.NEXT_PUBLIC_APP_URL}/api/saved-listings`);
-  const body = bodySchema.parse({ listingId });
-
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
-
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-
-  return await res.json();
+  const parsedBody = bodySchema.parse({ listingId });
+  return await post("/saved-listings", parsedBody);
 }

@@ -2,11 +2,7 @@
 
 const tailwindConfig = {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-  ],
+  content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
   theme: {
     container: {
       center: true,
@@ -16,9 +12,6 @@ const tailwindConfig = {
       },
     },
     extend: {
-      gridTemplateRows: {
-        "[auto,auto,1fr]": "auto auto 1fr",
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -80,7 +73,7 @@ const tailwindConfig = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate", "@tailwindcss/aspect-ratio")],
+  plugins: [require("tailwindcss-animate")],
 };
 
 module.exports = tailwindConfig;

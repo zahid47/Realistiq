@@ -7,35 +7,35 @@ import { twMerge } from "tailwind-merge";
 import { i18n } from "../i18n-config";
 import { ZodError } from "zod";
 
-export function cn(...inputs: ClassValue[]) {
+export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
-}
+};
 
-export function formatPrice(
+export const formatPrice = (
   price: number,
   currency: (typeof supportedCurrencies)[number]
-) {
+) => {
   return new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: currency,
     maximumFractionDigits: 0,
   }).format(price);
-}
+};
 
 /**
  * @description Returns "s" if the count is greater than 1
  */
-export function pluralized(countOrItems: number | Array<any>) {
+export const pluralized = (countOrItems: number | Array<any>) => {
   const count = Array.isArray(countOrItems)
     ? countOrItems.length
     : countOrItems;
 
   return count > 1 ? "s" : "";
-}
+};
 
-export function captitalize(str: string) {
+export const captitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-}
+};
 
 export const getRGBDataURL = (r: number, g: number, b: number) => {
   const keyStr =
@@ -60,7 +60,7 @@ export const getSearchParamsString = (object: Record<string, any>) => {
   return new URLSearchParams(object).toString();
 };
 
-export function getLocale(request: NextRequest): string | undefined {
+export const getLocale = (request: NextRequest): string | undefined => {
   // Negotiator expects plain object so we need to transform headers
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
@@ -70,11 +70,9 @@ export function getLocale(request: NextRequest): string | undefined {
   // @ts-ignore locales are readonly
   const locales: string[] = i18n.locales;
   return matchLocale(languages, locales, i18n.defaultLocale);
-}
+};
 
 export const sendNextError = (err: any) => {
-  console.error(err);
-
   const isZodError = err instanceof ZodError;
   const isPrismaError = err.code && prismaErrors.has(err.code);
 
@@ -99,4 +97,20 @@ export const getRequestBodyGracefully = async (request: NextRequest) => {
     body = await request.json();
   } catch {}
   return body;
+};
+
+export const parseRelativePath = (relativePath: string) => {
+  // if path starts with /api/ remove it
+  if (relativePath.startsWith("/api/")) {
+    relativePath = relativePath.slice(5);
+  }
+  // if path starts with / remove it
+  if (relativePath.startsWith("/")) {
+    relativePath = relativePath.slice(1);
+  }
+  // if path ends with / remove it
+  if (relativePath.endsWith("/")) {
+    relativePath = relativePath.slice(0, -1);
+  }
+  return relativePath;
 };

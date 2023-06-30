@@ -3,8 +3,8 @@ export const dynamic = "force-dynamic";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { getSearchParamsObject, sendNextError } from "@/lib/utils";
-import { listingsSearchParamsSchema } from "@/schema/listings";
-import { getServerAuthSession } from "@/lib/auth";
+import { getListingsPayload } from "@/lib/validators/listing";
+import { getCurrentUser } from "@/lib/auth";
 
 export async function GET(request: NextRequest) {
   try {
@@ -13,11 +13,11 @@ export async function GET(request: NextRequest) {
       limit = 50,
       sort_by,
       sort_order,
-    } = listingsSearchParamsSchema.parse(
+    } = getListingsPayload.parse(
       getSearchParamsObject(request.nextUrl.searchParams)
     );
 
-    const session = await getServerAuthSession();
+    const user = await getCurrentUser();
 
     const listings = await db.$transaction([
       db.listing.findMany({
@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
               userId: true,
             },
             where: {
-              userId: session?.user?.id || "",
+              userId: user?.id || "",
             },
           },
         },

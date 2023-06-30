@@ -2,9 +2,12 @@ import getQueryClient from "@/lib/getQueryClient";
 import { dehydrate } from "@tanstack/react-query";
 import HydrateWrapper from "@/components/providers/Hydrate";
 import Listings from "@/components/listings/Listings";
-import { listingsSearchParamsSchema } from "@/schema/listings";
+import {
+  GetListingsPayload,
+  getListingsPayload,
+} from "@/lib/validators/listing";
 import { db } from "@/lib/db";
-import { getServerAuthSession } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/auth";
 
 interface Props {
   searchParams: {
@@ -12,15 +15,13 @@ interface Props {
   };
 }
 
-const getListingsFromDB = async (payload: any) => {
-  const {
-    page,
-    limit = 50,
-    sort_by,
-    sort_order,
-  } = listingsSearchParamsSchema.parse(payload);
-
-  const session = await getServerAuthSession();
+const getListingsFromDB = async ({
+  page,
+  limit = 50,
+  sort_by,
+  sort_order,
+}: GetListingsPayload) => {
+  const user = await getCurrentUser();
 
   const listings = await db.$transaction([
     db.listing.findMany({
@@ -62,7 +63,7 @@ const getListingsFromDB = async (payload: any) => {
             userId: true,
           },
           where: {
-            userId: session?.user?.id || "",
+            userId: user?.id || "",
           },
         },
       },
@@ -83,20 +84,16 @@ const getListingsFromDB = async (payload: any) => {
     total_pages: Math.ceil(listings[1] / limit),
   };
 
-  const res = { listings: listings[0], meta };
-
-  console.log(res);
-
-  return res;
+  return { listings: listings[0], meta };
 };
 
 export default async function ListingsPage({ searchParams }: Props) {
-  const parsedSearchParams = listingsSearchParamsSchema.parse(searchParams);
+  const parsedSearchParams = getListingsPayload.parse(searchParams);
 
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
-    queryKey: ["listings", parsedSearchParams.page],
-    queryFn: () => getListingsFromDB({ page: parsedSearchParams.page }),
+    queryKey: ["listings", parsedSearchParams],
+    queryFn: () => getListingsFromDB(parsedSearchParams),
   });
   const dehydratedState = dehydrate(queryClient);
 

@@ -3,26 +3,29 @@
 import { getListings } from "@/actions/listing";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getSearchParamsString } from "@/lib/utils";
-import { listingsSearchParamsSchema } from "@/schema/listings";
+import {
+  GetListingsPayload,
+  getListingsPayload,
+} from "@/lib/validators/listing";
 import { useQuery } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { z } from "zod";
 import ListingPagination from "./list/ListingPagination";
 import ListingsList from "./list/ListingsList";
 import ListingsMap from "./map/ListingsMap";
 
 interface Props {
-  searchParams: z.infer<typeof listingsSearchParamsSchema>;
+  searchParams: GetListingsPayload;
 }
 
 export default function Listings({ searchParams }: Props) {
   const router = useRouter();
   const pathname = usePathname();
+  const payload = getListingsPayload.parse(searchParams);
 
   const listingsQueryResult = useQuery({
-    queryKey: ["listings", searchParams.page],
-    queryFn: () => getListings({ page: searchParams.page }),
+    queryKey: ["listings", payload],
+    queryFn: () => getListings(payload),
     keepPreviousData: true,
     enabled: false,
   });
