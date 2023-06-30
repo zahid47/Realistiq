@@ -55,7 +55,9 @@ async function main() {
             min: -121,
             max: -76,
           }),
-          address: faker.location.streetAddress(),
+          address: `${faker.location.streetAddress()}, ${faker.location.city()}, ${faker.location.state(
+            { abbreviated: true }
+          )} ${faker.location.zipCode()}`,
         },
       },
       photos: {
