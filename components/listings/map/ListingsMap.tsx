@@ -87,7 +87,7 @@ export default function ListingsMap({
           offset={[0, -20]}
         >
           {/* TODO */}
-          {popup.uuid}
+          Property for rent in <b>{popup.location.address}</b>
         </Popup>
       )}
     </Map>

@@ -5,11 +5,10 @@ import { cn } from "@/lib/utils";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import ImageCarousel from "./ImageCarousel";
 import ListingPrice from "./ListingPrice";
-import ListingAddress from "./ListingAddress";
 import Link from "next/link";
-import ListingBookMark from "./ListingBookMark";
 import type { ExtendedListing } from "@/types/db";
 import ListingBadges from "./ListingBadges";
+import { Separator } from "@/components/ui/separator";
 
 interface Props {
   listing: ExtendedListing;
@@ -56,20 +55,24 @@ export default function ListingCard({
       }}
     >
       <CardContent className="flex flex-col items-center gap-4 sm:flex-row lg:flex-col 2xl:flex-row">
-        <ImageCarousel photos={listing.photos} />
-
-        <Link
-          href={`/listings/${listing.uuid}`}
-          className="flex flex-col gap-2"
-        >
-          <ListingBadges details={listing.details} />
-          <ListingAddress address={listing.location.address} />
-          <ListingPrice price={listing.price} />
-        </Link>
-        <ListingBookMark
+        <ImageCarousel
+          photos={listing.photos}
           listingId={listing.id}
           isSaved={!!listing.saved.length}
         />
+
+        <Link
+          href={`/listings/${listing.uuid}`}
+          className="flex flex-col gap-1"
+        >
+          <h1 className="line-clamp-2 text-lg font-semibold">
+            {listing.location.address}
+          </h1>
+          <Separator className="my-2 bg-muted" />
+          <ListingBadges details={listing.details} />
+          <Separator className="my-2 bg-muted" />
+          <ListingPrice price={listing.price} />
+        </Link>
       </CardContent>
     </Card>
   );

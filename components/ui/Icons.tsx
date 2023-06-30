@@ -1,4 +1,12 @@
-import { LucideProps, Box, Bookmark, Circle } from "lucide-react";
+import {
+  Bath,
+  BedSingle,
+  Bookmark,
+  Box,
+  Circle,
+  LucideProps,
+  Shrink,
+} from "lucide-react";
 
 export const Icons = {
   logo: (props: LucideProps) => (
@@ -17,4 +25,7 @@ export const Icons = {
   Box: Box,
   BookMark: Bookmark,
   Circle: Circle,
+  SqFt: Shrink,
+  Bed: BedSingle,
+  Bath: Bath,
 };

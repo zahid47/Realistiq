@@ -51,14 +51,17 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
   return (
     <Button
       size="icon"
-      variant="ghost"
-      className="absolute right-2 top-2 cursor-pointer text-slate-500 hover:text-slate-700"
+      variant="link"
+      className="absolute right-2 top-2 bg-black bg-opacity-50 hover:bg-opacity-100"
+      onClick={(e) => {
+        mutation.mutate();
+        e.stopPropagation();
+      }}
     >
       <Icons.BookMark
+        className="text-white"
         fill={saved ? "currentColor" : "none"}
-        onClick={() => {
-          mutation.mutate();
-        }}
+        size={20}
       />
     </Button>
   );

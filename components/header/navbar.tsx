@@ -41,7 +41,7 @@ export default function Navbar({ session }: { session: Session | null }) {
       className={cn(
         "z-30 h-16 w-full bg-transparent",
         scrolled
-          ? "sticky top-0 border-b backdrop-blur-xl  transition-all duration-300 ease-in-out"
+          ? "sticky top-0 border-b backdrop-blur-xl transition-all duration-300 ease-in-out"
           : "relative"
       )}
     >
