@@ -1,5 +1,5 @@
-import { pluralized } from "@/lib/utils";
 import type { ListingDetails } from "@prisma/client";
+import { pluralized } from "@/lib/utils";
 import { Icons } from "@/components/ui/Icons";
 
 interface Props {

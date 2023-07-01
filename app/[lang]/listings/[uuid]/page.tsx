@@ -1,8 +1,8 @@
-import ListingDetails from "@/components/listings/single-listing/SingleListing";
-import getQueryClient from "@/lib/getQueryClient";
-import { dehydrate } from "@tanstack/react-query";
-import HydrateWrapper from "@/components/providers/Hydrate";
 import { getListingFromDB } from "@/actions/db-calls/listing";
+import { dehydrate } from "@tanstack/react-query";
+import getQueryClient from "@/lib/getQueryClient";
+import ListingDetails from "@/components/listings/single-listing/SingleListing";
+import HydrateWrapper from "@/components/providers/Hydrate";
 
 interface Props {
   params: {

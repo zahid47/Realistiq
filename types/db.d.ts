@@ -1,11 +1,11 @@
 import type {
-  User,
   Listing,
   ListingDetails,
-  ListingPrice,
   ListingLocation,
   ListingPhotos,
+  ListingPrice,
   SavedListings,
+  User,
 } from "@prisma/client";
 
 export type ExtendedListing = Listing & {

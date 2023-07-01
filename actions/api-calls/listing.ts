@@ -1,6 +1,6 @@
+import { ExtendedListing, Meta } from "@/types/db";
 import { get } from "@/lib/customFetch";
 import { GetListingsPayload } from "@/lib/validators/listing";
-import { ExtendedListing, Meta } from "@/types/db";
 
 export interface ReturnData {
   listings: Array<ExtendedListing>;

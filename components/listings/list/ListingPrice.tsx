@@ -1,11 +1,11 @@
-import { formatPrice } from "@/lib/utils";
 import { ListingPrice } from "@prisma/client";
+import { formatPrice } from "@/lib/utils";
 
 interface Props {
   price: ListingPrice;
 }
 
-export default function ListingPrice({ price }: Props) {
+export default function ListingPriceComp({ price }: Props) {
   return (
     <div className="mt-2 text-center md:text-start">
       <p className="text-sm text-slate-500">Rent</p>

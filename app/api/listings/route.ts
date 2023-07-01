@@ -1,9 +1,9 @@
-export const dynamic = "force-dynamic";
-
+import { NextRequest, NextResponse } from "next/server";
 import { getListingsFromDB } from "@/actions/db-calls/listing";
 import { getSearchParamsObject, sendNextError } from "@/lib/utils";
 import { getListingsPayload } from "@/lib/validators/listing";
-import { NextRequest, NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {

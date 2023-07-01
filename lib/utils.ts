@@ -1,11 +1,11 @@
+import { NextResponse, type NextRequest } from "next/server";
 import { PRISMA_ERRORS } from "@/constants";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import { ClassValue, clsx } from "clsx";
 import Negotiator from "negotiator";
-import { NextResponse, type NextRequest } from "next/server";
 import { twMerge } from "tailwind-merge";
-import { i18n } from "../i18n-config";
 import { ZodError } from "zod";
+import { i18n } from "../i18n-config";
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));

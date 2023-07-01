@@ -1,19 +1,19 @@
 "use client";
 
+import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { getListings } from "@/actions/api-calls/listing";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { useQuery } from "@tanstack/react-query";
+import { ExtendedListing } from "@/types/db";
 import { getSearchParamsString } from "@/lib/utils";
 import {
   GetListingsPayload,
   getListingsPayload,
 } from "@/lib/validators/listing";
-import { useQuery } from "@tanstack/react-query";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import ListingPagination from "./list/ListingPagination";
 import ListingsList from "./list/ListingsList";
 import ListingsMap from "./map/ListingsMap";
-import { ExtendedListing } from "@/types/db";
 
 interface Props {
   searchParams: GetListingsPayload;

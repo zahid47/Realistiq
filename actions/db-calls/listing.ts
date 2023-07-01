@@ -1,7 +1,6 @@
 // GET ONLY, NO MUTATIONS
 
 import "server-only";
-
 import { getCurrentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { GetListingsPayload } from "@/lib/validators/listing";

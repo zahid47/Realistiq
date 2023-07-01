@@ -1,5 +1,5 @@
-import { Meta } from "@/types/db";
 import { Pagination } from "@mantine/core";
+import { Meta } from "@/types/db";
 
 interface Props {
   meta: Meta;

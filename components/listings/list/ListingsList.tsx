@@ -1,12 +1,12 @@
 "use client";
 
 import { Dispatch, SetStateAction } from "react";
-import ListingCard from "./ListingCard";
-import ListingsListSkeleton from "../../skeletons/ListingsListSkeleton";
+import { ReturnData } from "@/actions/api-calls/listing";
 import { QueryObserverSuccessResult } from "@tanstack/react-query";
 import { ExtendedListing } from "@/types/db";
-import { ReturnData } from "@/actions/api-calls/listing";
 import EmptyState from "@/components/skeletons/EmptyState";
+import ListingsListSkeleton from "../../skeletons/ListingsListSkeleton";
+import ListingCard from "./ListingCard";
 
 interface Props {
   listingsQueryResult: QueryObserverSuccessResult<ReturnData, unknown>;

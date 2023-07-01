@@ -4,13 +4,13 @@ import { env } from "@/env.mjs";
 import { QueryObserverSuccessResult } from "@tanstack/react-query";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
-import type { MapRef } from "react-map-gl";
-import Map, { Marker, Popup, NavigationControl } from "react-map-gl";
-import ListingsMapSkeleton from "../../skeletons/ListingsMapSkeleton";
-import MarkerIcon from "./MarkerIcon";
-import { ExtendedListing } from "@/types/db";
 import { ReturnData } from "@/actions/api-calls/listing";
 import { DEFAULT_LAT, DEFAULT_LNG, DEFAULT_ZOOM } from "@/constants";
+import type { MapRef } from "react-map-gl";
+import Map, { Marker, NavigationControl, Popup } from "react-map-gl";
+import { ExtendedListing } from "@/types/db";
+import ListingsMapSkeleton from "../../skeletons/ListingsMapSkeleton";
+import MarkerIcon from "./MarkerIcon";
 
 const MAPBOX_TOKEN = env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const MAPBOX_STYLE = "mapbox://styles/mapbox/streets-v12";

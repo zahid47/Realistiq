@@ -1,14 +1,14 @@
 // TODO: add lightbox to Image comp
 
+import { useState } from "react";
 import Image from "next/image";
+import { env } from "@/env.mjs";
 import { Carousel } from "@mantine/carousel";
-import { getRGBDataURL } from "@/lib/utils";
 import { createStyles, getStylesRef } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import { env } from "@/env.mjs";
 import { ListingPhotos } from "@prisma/client";
+import { getRGBDataURL } from "@/lib/utils";
 import ListingBookMark from "./ListingBookMark";
-import { useState } from "react";
 
 const largeScreenStyles = createStyles(() => ({
   controls: {

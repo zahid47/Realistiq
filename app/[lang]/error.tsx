@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@mantine/core";
 import { useEffect } from "react";
+import { Button } from "@mantine/core";
 
 export default function Error({
   error,

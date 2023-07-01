@@ -1,9 +1,9 @@
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { z } from "zod";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getRequestBodyGracefully, sendNextError } from "@/lib/utils";
-import { getServerSession } from "next-auth";
-import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 
 const bodySchema = z.object({
   listingId: z.coerce.number().int().positive(),

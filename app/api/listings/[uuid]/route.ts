@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendNextError } from "@/lib/utils";
 import { getListingFromDB } from "@/actions/db-calls/listing";
+import { sendNextError } from "@/lib/utils";
 
 interface Context {
   params: {

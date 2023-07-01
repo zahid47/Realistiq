@@ -1,12 +1,12 @@
 import "../../styles/globals.css";
+import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import NextAuthProvider from "@/components/providers/NextAuthProvider";
+import NextTopLoader from "nextjs-toploader";
+import { siteConfig } from "@/config/site";
 import Header from "@/components/header";
+import NextAuthProvider from "@/components/providers/NextAuthProvider";
 import QueryClientWrapper from "@/components/providers/QueryClientProvider";
 import { Toaster } from "@/components/ui/toaster";
-import NextTopLoader from "nextjs-toploader";
-import { Inter } from "next/font/google";
-import { siteConfig } from "@/config/site";
 
 const font = Inter({
   subsets: ["latin"],

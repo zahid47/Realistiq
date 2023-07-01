@@ -1,14 +1,14 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
-import ImageCarousel from "./ImageCarousel";
-import ListingPrice from "./ListingPrice";
 import Link from "next/link";
 import type { ExtendedListing } from "@/types/db";
-import ListingBadges from "./ListingBadges";
+import { cn } from "@/lib/utils";
+import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import ImageCarousel from "./ImageCarousel";
+import ListingBadges from "./ListingBadges";
+import ListingPrice from "./ListingPrice";
 
 interface Props {
   listing: ExtendedListing;

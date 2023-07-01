@@ -1,8 +1,8 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Modal, ScrollArea } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
-import { useRouter } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;

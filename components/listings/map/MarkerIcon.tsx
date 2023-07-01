@@ -1,5 +1,5 @@
-import { Icons } from "@/components/ui/Icons";
 import { cn } from "@/lib/utils";
+import { Icons } from "@/components/ui/Icons";
 
 interface Props {
   onClick: () => void;

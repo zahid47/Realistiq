@@ -1,16 +1,16 @@
 "use client";
 
-import { type Session } from "next-auth";
+import { useState } from "react";
 import Link from "next/link";
-import useScroll from "@/lib/hooks/use-scroll";
-import { cn } from "@/lib/utils";
-import UserAvatar from "./user-avatar";
+import { type Session } from "next-auth";
 import { signIn } from "next-auth/react";
+import useScroll from "@/lib/hooks/use-scroll";
+import { toast } from "@/lib/hooks/use-toast";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/ui/Icons";
-import { useState } from "react";
 import { ToastAction } from "@/components/ui/toast";
-import { toast } from "@/lib/hooks/use-toast";
+import UserAvatar from "./user-avatar";
 
 export default function Navbar({ session }: { session: Session | null }) {
   const scrolled = useScroll(30);
