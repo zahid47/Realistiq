@@ -21,11 +21,11 @@ export const metadata = {
 
 interface Props {
   children: React.ReactNode;
+  listingModal?: React.ReactNode;
   params: { lang: string };
-  listingModal?: boolean;
 }
 
-export default function RootLayout({ children, params, listingModal }: Props) {
+export default function RootLayout({ children, listingModal, params }: Props) {
   return (
     <html lang={params.lang} className={font.className}>
       <body>
