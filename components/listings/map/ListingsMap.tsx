@@ -4,17 +4,21 @@ import { env } from "@/env.mjs";
 import { QueryObserverSuccessResult } from "@tanstack/react-query";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { ReturnData } from "@/actions/api-calls/listing";
-import { DEFAULT_LAT, DEFAULT_LNG, DEFAULT_ZOOM } from "@/constants";
-import { useLocalStorage } from "@mantine/hooks";
+import {
+  DEFAULT_LAT,
+  DEFAULT_LNG,
+  DEFAULT_ZOOM,
+  MAPBOX_STYLE,
+} from "@/constants";
 import type { MapRef } from "react-map-gl";
 import Map, { Marker, NavigationControl, Popup } from "react-map-gl";
 import { ExtendedListing } from "@/types/db";
+import { getSearchParamsString } from "@/lib/utils";
+import type { GetListingsPayload } from "@/lib/validators/listing";
 import ListingsMapSkeleton from "../../skeletons/ListingsMapSkeleton";
 import MarkerIcon from "./MarkerIcon";
-
-const MAPBOX_TOKEN = env.NEXT_PUBLIC_MAPBOX_TOKEN;
-const MAPBOX_STYLE = "mapbox://styles/mapbox/streets-v12";
 
 interface Props {
   listingsQueryResult: QueryObserverSuccessResult<ReturnData, unknown>;
@@ -22,6 +26,7 @@ interface Props {
   hoveringListingId: null | number;
   popup: ExtendedListing | null;
   setPopup: Dispatch<SetStateAction<null | ExtendedListing>>;
+  searchParams: GetListingsPayload;
 }
 
 export default function ListingsMap({
@@ -30,18 +35,27 @@ export default function ListingsMap({
   hoveringListingId,
   popup,
   setPopup,
+  searchParams,
 }: Props) {
   const listings = listingsQueryResult.data.listings;
   const mapRef = useRef<MapRef>(null);
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const [viewState, setViewState] = useLocalStorage({
-    key: "viewState",
-    defaultValue: {
-      latitude: DEFAULT_LAT,
-      longitude: DEFAULT_LNG,
-      zoom: DEFAULT_ZOOM,
-    },
+  const [viewState, setViewState] = useState({
+    latitude: DEFAULT_LAT,
+    longitude: DEFAULT_LNG,
+    zoom: DEFAULT_ZOOM,
   });
+
+  type Bounds = NonNullable<GetListingsPayload["bounds"]>;
+
+  const addBoundsToUrl = (bounds: Bounds) => {
+    const newSearchParams = { ...searchParams, bounds: JSON.stringify(bounds) };
+    const qs = getSearchParamsString(newSearchParams);
+    const url = `${pathname}?${qs}`;
+    router.push(url);
+  };
 
   const markers = useMemo(
     () =>
@@ -75,10 +89,16 @@ export default function ListingsMap({
   return (
     <Map
       {...viewState}
-      mapboxAccessToken={MAPBOX_TOKEN}
+      mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_TOKEN}
       mapStyle={MAPBOX_STYLE}
       ref={mapRef}
       onMove={(e) => setViewState(e.viewState)}
+      onMoveEnd={() => {
+        if (mapRef.current) {
+          const bounds = mapRef.current.getMap().getBounds().toArray();
+          addBoundsToUrl(bounds);
+        }
+      }}
       dragRotate={false}
     >
       <NavigationControl showCompass={false} />

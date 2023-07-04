@@ -20,8 +20,6 @@ export type ExtendedListing = Listing & {
 export type Meta = {
   total: number;
   per_page: number;
-  from: number;
-  to: number;
   current_page: number;
   total_pages: number;
 };

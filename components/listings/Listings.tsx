@@ -6,10 +6,7 @@ import { getListings } from "@/actions/api-calls/listing";
 import { useQuery } from "@tanstack/react-query";
 import { ExtendedListing } from "@/types/db";
 import { getSearchParamsString } from "@/lib/utils";
-import {
-  GetListingsPayload,
-  getListingsPayload,
-} from "@/lib/validators/listing";
+import { GetListingsPayload } from "@/lib/validators/listing";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ListingPagination from "./list/ListingPagination";
 import ListingsList from "./list/ListingsList";
@@ -22,13 +19,12 @@ interface Props {
 export default function Listings({ searchParams }: Props) {
   const router = useRouter();
   const pathname = usePathname();
-  const payload = getListingsPayload.parse(searchParams);
 
   const listingsQueryResult = useQuery({
-    queryKey: ["listings", payload],
-    queryFn: () => getListings(payload),
+    queryKey: ["listings", searchParams],
+    queryFn: () => getListings(searchParams),
     keepPreviousData: true,
-    // enabled: false,
+    enabled: false,
   });
 
   const [popup, setPopup] = useState<ExtendedListing | null>(null);
@@ -49,10 +45,12 @@ export default function Listings({ searchParams }: Props) {
   return (
     <div className="flex">
       <div className="m-auto flex h-[calc(100vh-4rem)] flex-col lg:w-[38%]">
+        {/* <div className="flex justify-between"> */}
         <ListingPagination
           meta={listingsQueryResult.data?.meta}
           onPageChange={onPageChange}
         />
+        {/* </div> */}
         <ScrollArea className="">
           <ListingsList
             listingsQueryResult={listingsQueryResult}
@@ -69,8 +67,8 @@ export default function Listings({ searchParams }: Props) {
           hoveringListingId={hoveringListingId}
           popup={popup}
           setPopup={setPopup}
+          searchParams={searchParams}
         />
-        d
       </div>
     </div>
   );

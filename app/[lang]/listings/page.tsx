@@ -7,12 +7,19 @@ import HydrateWrapper from "@/components/providers/Hydrate";
 
 interface Props {
   searchParams: {
-    page: string;
+    bounds?: string;
+    //... there are more, but not using them here so no need to type them, we are validating it anyway so no worries hopefully
   };
 }
 
 export default async function ListingsPage({ searchParams }: Props) {
-  const parsedSearchParams = getListingsPayload.parse(searchParams);
+  const bounds = searchParams.bounds
+    ? JSON.parse(searchParams.bounds)
+    : undefined;
+  const parsedSearchParams = getListingsPayload.parse({
+    ...searchParams,
+    bounds,
+  });
 
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
