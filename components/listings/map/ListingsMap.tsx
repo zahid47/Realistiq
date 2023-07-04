@@ -6,6 +6,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
 import { ReturnData } from "@/actions/api-calls/listing";
 import { DEFAULT_LAT, DEFAULT_LNG, DEFAULT_ZOOM } from "@/constants";
+import { useLocalStorage } from "@mantine/hooks";
 import type { MapRef } from "react-map-gl";
 import Map, { Marker, NavigationControl, Popup } from "react-map-gl";
 import { ExtendedListing } from "@/types/db";
@@ -33,10 +34,13 @@ export default function ListingsMap({
   const listings = listingsQueryResult.data.listings;
   const mapRef = useRef<MapRef>(null);
 
-  const [viewState, setViewState] = useState({
-    latitude: DEFAULT_LAT,
-    longitude: DEFAULT_LNG,
-    zoom: DEFAULT_ZOOM,
+  const [viewState, setViewState] = useLocalStorage({
+    key: "viewState",
+    defaultValue: {
+      latitude: DEFAULT_LAT,
+      longitude: DEFAULT_LNG,
+      zoom: DEFAULT_ZOOM,
+    },
   });
 
   const markers = useMemo(
