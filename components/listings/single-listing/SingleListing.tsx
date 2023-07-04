@@ -22,5 +22,10 @@ export default function SingleListing({ uuid }: Props) {
 
   const listing = listingDetailsQueryResult.data;
 
-  return <pre>{JSON.stringify(listing, null, 2)}</pre>;
+  return (
+    <div>
+      Property for rent in <b>{listing.location.address}</b>
+    </div>
+  );
+  // return <pre>{JSON.stringify(listing, null, 2)}</pre>;
 }
