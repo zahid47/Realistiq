@@ -47,19 +47,21 @@ export default function Listings({ searchParams }: Props) {
   if (!listingsQueryResult.isSuccess) return null;
 
   return (
-    <div className="flex flex-row">
-      <ScrollArea className="m-auto h-[calc(100vh-4rem)] lg:w-[38%]">
+    <div className="flex">
+      <div className="m-auto flex h-[calc(100vh-4rem)] flex-col lg:w-[38%]">
         <ListingPagination
           meta={listingsQueryResult.data?.meta}
           onPageChange={onPageChange}
         />
-        <ListingsList
-          listingsQueryResult={listingsQueryResult}
-          clickedListingId={clickedListingId}
-          setHoveringListingId={setHoveringListingId}
-          setPopup={setPopup}
-        />
-      </ScrollArea>
+        <ScrollArea className="">
+          <ListingsList
+            listingsQueryResult={listingsQueryResult}
+            clickedListingId={clickedListingId}
+            setHoveringListingId={setHoveringListingId}
+            setPopup={setPopup}
+          />
+        </ScrollArea>
+      </div>
       <div className="mb-2 mr-2 hidden overflow-hidden rounded-lg lg:block lg:w-[62%]">
         <ListingsMap
           listingsQueryResult={listingsQueryResult}
@@ -68,6 +70,7 @@ export default function Listings({ searchParams }: Props) {
           popup={popup}
           setPopup={setPopup}
         />
+        d
       </div>
     </div>
   );
