@@ -16,7 +16,7 @@ import type { MapRef } from "react-map-gl";
 import Map, { Marker, NavigationControl, Popup } from "react-map-gl";
 import { ExtendedListing } from "@/types/db";
 import { getSearchParamsString } from "@/lib/utils";
-import type { GetListingsPayload } from "@/lib/validators/listing";
+import type { Bounds, GetListingsPayload } from "@/lib/validators/listing";
 import ListingsMapSkeleton from "../../skeletons/ListingsMapSkeleton";
 import MarkerIcon from "./MarkerIcon";
 
@@ -47,8 +47,6 @@ export default function ListingsMap({
     longitude: DEFAULT_LNG,
     zoom: DEFAULT_ZOOM,
   });
-
-  type Bounds = NonNullable<GetListingsPayload["bounds"]>;
 
   const addBoundsToUrl = (bounds: Bounds) => {
     const newSearchParams = { ...searchParams, bounds: JSON.stringify(bounds) };

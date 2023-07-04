@@ -13,13 +13,7 @@ interface Props {
 }
 
 export default async function ListingsPage({ searchParams }: Props) {
-  const bounds = searchParams.bounds
-    ? JSON.parse(searchParams.bounds)
-    : undefined;
-  const parsedSearchParams = getListingsPayload.parse({
-    ...searchParams,
-    bounds,
-  });
+  const parsedSearchParams = getListingsPayload.parse(searchParams);
 
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({

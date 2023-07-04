@@ -5,6 +5,8 @@ import { Meta } from "@/types/db";
 import { getCurrentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import {
+  Bounds,
+  boundsSchema,
   GetListingsPayload,
   getListingsPayload,
 } from "@/lib/validators/listing";
@@ -19,16 +21,23 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
   } = getListingsPayload.parse(payload);
 
   const user = await getCurrentUser();
+  let parsedBounds: Bounds | null = null;
+
+  if (bounds) {
+    try {
+      parsedBounds = boundsSchema.parse(JSON.parse(bounds));
+    } catch {}
+  }
 
   const filters = {
     status: "PUBLISHED",
-    ...(bounds && {
+    ...(parsedBounds && {
       location: {
         AND: [
-          { lng: { gte: bounds[0][0] } },
-          { lng: { lte: bounds[1][0] } },
-          { lat: { gte: bounds[0][1] } },
-          { lat: { lte: bounds[1][1] } },
+          { lng: { gte: parsedBounds[0][0] } },
+          { lng: { lte: parsedBounds[1][0] } },
+          { lat: { gte: parsedBounds[0][1] } },
+          { lat: { lte: parsedBounds[1][1] } },
         ],
       },
     }),
