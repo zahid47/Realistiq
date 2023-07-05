@@ -1,40 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { type Session } from "next-auth";
-import { signIn } from "next-auth/react";
 import useScroll from "@/lib/hooks/use-scroll";
-import { toast } from "@/lib/hooks/use-toast";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/ui/Icons";
-import { ToastAction } from "@/components/ui/toast";
 import UserAvatar from "./user-avatar";
 
 export default function Navbar({ session }: { session: Session | null }) {
   const scrolled = useScroll(30);
-  const [loading, setLoading] = useState(false);
-
-  const handleLogin = async () => {
-    setLoading(true);
-    try {
-      signIn("github");
-    } catch {
-      toast({
-        variant: "destructive",
-        title: "Something went wrong!",
-        description: "There was an error while signing in. Please try again.",
-        action: (
-          <ToastAction altText="Retry" onClick={handleLogin}>
-            Retry
-          </ToastAction>
-        ),
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <header
@@ -54,9 +29,12 @@ export default function Navbar({ session }: { session: Session | null }) {
             {session ? (
               <UserAvatar session={session} />
             ) : (
-              <Button variant="ghost" onClick={handleLogin} isLoading={loading}>
+              <Link
+                href="/signin"
+                className={cn(buttonVariants({ variant: "ghost" }))}
+              >
                 Sign In
-              </Button>
+              </Link>
             )}
           </div>
         </div>

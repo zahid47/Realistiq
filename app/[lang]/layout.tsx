@@ -21,11 +21,17 @@ export const metadata = {
 
 interface Props {
   children: React.ReactNode;
-  listingModal?: React.ReactNode;
   params: { lang: string };
+  signinModal?: React.ReactNode;
+  listingModal?: React.ReactNode;
 }
 
-export default function RootLayout({ children, listingModal, params }: Props) {
+export default function RootLayout({
+  children,
+  params,
+  signinModal,
+  listingModal,
+}: Props) {
   return (
     <html lang={params.lang} className={font.className}>
       <body>
@@ -34,6 +40,7 @@ export default function RootLayout({ children, listingModal, params }: Props) {
             <Header />
             <main>
               {children}
+              {signinModal}
               {listingModal}
             </main>
             <NextTopLoader color="#6d28d9" shadow={false} height={4} />

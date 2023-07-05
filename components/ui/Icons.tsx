@@ -5,6 +5,7 @@ import {
   Bookmark,
   Box,
   Circle,
+  Github,
   LucideProps,
   Shrink,
 } from "lucide-react";
@@ -30,4 +31,5 @@ export const Icons = {
   Bed: BedSingle,
   Bath: Bath,
   Sort: ArrowDownUp,
+  Github: Github,
 };
