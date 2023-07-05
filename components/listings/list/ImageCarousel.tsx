@@ -74,7 +74,7 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
       </Carousel>
       <ListingBookMark listingId={listingId} isSaved={isSaved} />
       <div className="absolute bottom-2 left-2 rounded-full bg-black bg-opacity-50">
-        <p className="mx-2 my-1 text-xs text-white">
+        <p className="mx-2 my-1 text-xs tracking-wider text-white">
           {currentSlide}/{photos.length}
         </p>
       </div>
