@@ -50,6 +50,7 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
 
   return (
     <Button
+      title="Save for later"
       size="icon"
       variant="link"
       className="absolute right-2 top-2 bg-black bg-opacity-50 hover:bg-opacity-100"
