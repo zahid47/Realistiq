@@ -5,6 +5,7 @@ export const getListingsPayload = z.object({
   limit: z.coerce.number().int().positive().optional(),
   sort_by: z.enum(["id"]).catch("id"),
   sort_order: z.enum(["asc", "desc"]).catch("desc"),
+  zoom: z.coerce.number().positive().optional(),
   bounds: z.string().optional(),
 });
 

@@ -14,8 +14,7 @@ import {
   MAX_BOUNDS,
   MIN_ZOOM,
 } from "@/constants";
-import { useLocalStorage } from "@mantine/hooks";
-import type { MapRef } from "react-map-gl";
+import type { MapRef, ViewState } from "react-map-gl";
 import Map, { Marker, NavigationControl, Popup } from "react-map-gl";
 import { ExtendedListing } from "@/types/db";
 import { getSearchParamsString } from "@/lib/utils";
@@ -47,36 +46,36 @@ export default function ListingsMap({
 
   const bounds =
     searchParams.bounds && (JSON.parse(searchParams.bounds) as Bounds);
+  const zoom = searchParams.zoom ? searchParams.zoom : DEFAULT_ZOOM;
 
-  const getCenterOfBounds = () => {
+  // this calculation is not 100% accurate, but it's good enough for now
+  // I think it's because of the no precise division
+  // TODO: improve this?
+  const { latitude, longitude } = useMemo(() => {
     if (bounds) {
-      const centerLng = (bounds[0][0] + bounds[1][0]) / 2;
-      const centerLat = (bounds[0][1] + bounds[1][1]) / 2;
+      const [neLng, neLat] = bounds[1];
+      const [swLng, swLat] = bounds[0];
 
-      return {
-        latitude: centerLat,
-        longitude: centerLng,
-      };
+      const latitude = (neLat + swLat) / 2;
+      const longitude = (neLng + swLng) / 2;
+
+      return { latitude, longitude };
     }
-    return {
-      latitude: DEFAULT_LAT,
-      longitude: DEFAULT_LNG,
-    };
-  };
+    return { latitude: DEFAULT_LAT, longitude: DEFAULT_LNG };
+  }, [bounds]);
 
-  const { latitude, longitude } = getCenterOfBounds();
-
-  const [viewState, setViewState] = useLocalStorage<any>({
-    key: "viewState",
-    defaultValue: {
-      latitude,
-      longitude,
-      zoom: DEFAULT_ZOOM,
-    },
+  const [viewState, setViewState] = useState<Partial<ViewState>>({
+    latitude,
+    longitude,
+    zoom,
   });
 
   const addBoundsToUrl = (bounds: Bounds) => {
-    const newSearchParams = { ...searchParams, bounds: JSON.stringify(bounds) };
+    const newSearchParams = {
+      ...searchParams,
+      bounds: JSON.stringify(bounds),
+      zoom: viewState.zoom,
+    };
     const qs = getSearchParamsString(newSearchParams);
     const url = `${pathname}?${qs}`;
     router.push(url);
@@ -119,12 +118,6 @@ export default function ListingsMap({
       ref={mapRef}
       onMove={(e) => setViewState(e.viewState)}
       onMoveEnd={() => {
-        if (mapRef.current) {
-          const bounds = mapRef.current.getMap().getBounds().toArray();
-          addBoundsToUrl(bounds);
-        }
-      }}
-      onLoad={() => {
         if (mapRef.current) {
           const bounds = mapRef.current.getMap().getBounds().toArray();
           addBoundsToUrl(bounds);
