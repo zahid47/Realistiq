@@ -66,7 +66,8 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
               alt={photo.alt}
               placeholder="blur"
               blurDataURL={getRGBDataURL(209, 209, 209)} // grey
-              unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
+              // unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
+              unoptimized={true} // (temp) TODO: remove this
             />
           </Carousel.Slide>
         ))}
