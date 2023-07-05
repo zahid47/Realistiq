@@ -83,7 +83,7 @@ model Listing {
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
 
-  status   ListingStatus    @default(PUBLISHED)
+  status   ListingStatus    @default(ACTIVE)
   details  ListingDetails?
   location ListingLocation?
   photos   ListingPhotos[]
@@ -95,8 +95,8 @@ model Listing {
 }
 
 enum ListingStatus {
-  PUBLISHED
-  UNPUBLISHED
+  ACTIVE
+  INACTIVE
 }
 
 model ListingDetails {

@@ -30,7 +30,7 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
   }
 
   const filters = {
-    status: "PUBLISHED",
+    status: "ACTIVE",
     ...(parsedBounds && {
       location: {
         AND: [
