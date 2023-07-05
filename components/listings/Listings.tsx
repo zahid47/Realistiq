@@ -10,6 +10,7 @@ import { GetListingsPayload } from "@/lib/validators/listing";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ListingPagination from "./list/ListingPagination";
 import ListingsList from "./list/ListingsList";
+import SortingDropdown from "./list/SortingDropdown";
 import ListingsMap from "./map/ListingsMap";
 
 interface Props {
@@ -45,13 +46,14 @@ export default function Listings({ searchParams }: Props) {
   return (
     <div className="flex">
       <div className="m-auto flex h-[calc(100vh-4rem)] flex-col lg:w-[38%]">
-        {/* <div className="flex justify-between"> */}
-        <ListingPagination
-          meta={listingsQueryResult.data?.meta}
-          onPageChange={onPageChange}
-        />
-        {/* </div> */}
-        <ScrollArea className="">
+        <div className="flex items-center justify-between border-t border-gray-200 px-2 py-3">
+          <SortingDropdown searchParams={searchParams} />
+          <ListingPagination
+            meta={listingsQueryResult.data?.meta}
+            onPageChange={onPageChange}
+          />
+        </div>
+        <ScrollArea>
           <ListingsList
             listingsQueryResult={listingsQueryResult}
             clickedListingId={clickedListingId}

@@ -11,14 +11,18 @@ import {
   getListingsPayload,
 } from "@/lib/validators/listing";
 
+const sortQueryMap = new Map([
+  ["Recommended", { created_at: "desc" }], // TODO: implement ranking algorithm based on plan
+  ["Latest", { created_at: "desc" }],
+  ["Cheapest", { price: { amount: "asc" } }],
+  ["Cheapest per sqm", { price: { amount: "asc" } }], // TODO: fix with computed column
+  ["Most expensive", { price: { amount: "desc" } }],
+  ["Largest", { details: { floor_area: "desc" } }],
+  ["Smallest", { details: { floor_area: "asc" } }],
+]);
+
 export const getListingsFromDB = async (payload: GetListingsPayload) => {
-  const {
-    page,
-    limit = 50,
-    sort_by,
-    sort_order,
-    bounds,
-  } = getListingsPayload.parse(payload);
+  const { page, limit = 50, sort, bounds } = getListingsPayload.parse(payload);
 
   const user = await getCurrentUser();
   let parsedBounds: Bounds | null = null;
@@ -43,16 +47,14 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
     }),
   } as const;
 
+  // TODO: fix types
+  const orderBy = sortQueryMap.get(sort) as any;
+
   const listings = await db.$transaction([
     db.listing.findMany({
       select: {
         id: true,
         uuid: true,
-        _count: {
-          select: {
-            photos: true,
-          },
-        },
         details: {
           select: {
             description: true,
@@ -95,7 +97,7 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
       where: filters,
       take: limit,
       skip: (page - 1) * limit,
-      orderBy: { [sort_by]: sort_order },
+      orderBy,
     }),
     db.listing.count({
       where: filters,

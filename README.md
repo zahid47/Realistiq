@@ -1,20 +1,15 @@
 # Checklist:
 
 - sorting (dropdown)
-  - default ranking
-  - latest
-  - oldest
-  - cheapest
-  - cheapest per sqm
-  - most expensive
-  - largest
-  - smallest
+  - recommended (ranking algo)
+  - cheapest per sqm (computed field)
 - filters
   - price
   - beds
   - baths
   - floor area
   - amenities
+  - map -> state bound selector, draw freehand
 - single listing page
 - create listing page
 - agency plan

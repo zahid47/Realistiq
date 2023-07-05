@@ -1,4 +1,5 @@
 import {
+  ArrowDownUp,
   Bath,
   BedSingle,
   Bookmark,
@@ -28,4 +29,5 @@ export const Icons = {
   SqFt: Shrink,
   Bed: BedSingle,
   Bath: Bath,
+  Sort: ArrowDownUp,
 };
