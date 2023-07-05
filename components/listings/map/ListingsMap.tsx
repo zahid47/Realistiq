@@ -11,7 +11,10 @@ import {
   DEFAULT_LNG,
   DEFAULT_ZOOM,
   MAPBOX_STYLE,
+  MAX_BOUNDS,
+  MIN_ZOOM,
 } from "@/constants";
+import { useLocalStorage } from "@mantine/hooks";
 import type { MapRef } from "react-map-gl";
 import Map, { Marker, NavigationControl, Popup } from "react-map-gl";
 import { ExtendedListing } from "@/types/db";
@@ -42,10 +45,34 @@ export default function ListingsMap({
   const router = useRouter();
   const pathname = usePathname();
 
-  const [viewState, setViewState] = useState({
-    latitude: DEFAULT_LAT,
-    longitude: DEFAULT_LNG,
-    zoom: DEFAULT_ZOOM,
+  const bounds =
+    searchParams.bounds && (JSON.parse(searchParams.bounds) as Bounds);
+
+  const getCenterOfBounds = () => {
+    if (bounds) {
+      const centerLng = (bounds[0][0] + bounds[1][0]) / 2;
+      const centerLat = (bounds[0][1] + bounds[1][1]) / 2;
+
+      return {
+        latitude: centerLat,
+        longitude: centerLng,
+      };
+    }
+    return {
+      latitude: DEFAULT_LAT,
+      longitude: DEFAULT_LNG,
+    };
+  };
+
+  const { latitude, longitude } = getCenterOfBounds();
+
+  const [viewState, setViewState] = useLocalStorage<any>({
+    key: "viewState",
+    defaultValue: {
+      latitude,
+      longitude,
+      zoom: DEFAULT_ZOOM,
+    },
   });
 
   const addBoundsToUrl = (bounds: Bounds) => {
@@ -97,7 +124,15 @@ export default function ListingsMap({
           addBoundsToUrl(bounds);
         }
       }}
+      onLoad={() => {
+        if (mapRef.current) {
+          const bounds = mapRef.current.getMap().getBounds().toArray();
+          addBoundsToUrl(bounds);
+        }
+      }}
       dragRotate={false}
+      minZoom={MIN_ZOOM}
+      maxBounds={MAX_BOUNDS}
     >
       <NavigationControl showCompass={false} />
       {markers}
