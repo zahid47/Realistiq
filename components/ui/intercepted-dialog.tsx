@@ -6,19 +6,19 @@ import { useMediaQuery } from "@mantine/hooks";
 
 interface Props {
   children: React.ReactNode;
+  title?: string;
 }
 
-export default function InterceptedDialog({ children }: Props) {
+export default function InterceptedDialog({ children, title }: Props) {
   const router = useRouter();
   const isMobile = useMediaQuery("(max-width: 50em)");
 
   return (
     <>
       <Modal
+        title={title}
         opened
-        onClose={() => {
-          router.back();
-        }}
+        onClose={() => router.back()}
         centered
         size="auto"
         fullScreen={isMobile}

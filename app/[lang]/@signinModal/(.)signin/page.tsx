@@ -3,7 +3,7 @@ import InterceptedDialog from "@/components/ui/intercepted-dialog";
 
 export default function page() {
   return (
-    <InterceptedDialog>
+    <InterceptedDialog title="Sign In">
       <SignIn />
     </InterceptedDialog>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { toast } from "@/lib/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -10,7 +9,6 @@ import { ToastAction } from "@/components/ui/toast";
 
 export default function SignIn() {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const handleLogin = async () => {
     setLoading(true);
