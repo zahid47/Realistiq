@@ -1,6 +1,5 @@
 # Checklist:
 
-- login -> restrict authorized users
 - sorting (dropdown)
   - recommended (ranking algo)
   - cheapest per sqm (computed field)
