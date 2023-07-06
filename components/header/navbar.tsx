@@ -1,14 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { type Session } from "next-auth";
+import type { User } from "next-auth";
 import useScroll from "@/lib/hooks/use-scroll";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/ui/Icons";
 import UserAvatar from "./user-avatar";
 
-export default function Navbar({ session }: { session: Session | null }) {
+interface Props {
+  user?: User & { id: string };
+}
+
+export default function Navbar({ user }: Props) {
   const scrolled = useScroll(30);
 
   return (
@@ -26,8 +30,8 @@ export default function Navbar({ session }: { session: Session | null }) {
             <Icons.logo className="h-6" />
           </Link>
           <div className=" flex items-center gap-x-2">
-            {session ? (
-              <UserAvatar session={session} />
+            {user ? (
+              <UserAvatar user={user} />
             ) : (
               <Link
                 href="/signin"

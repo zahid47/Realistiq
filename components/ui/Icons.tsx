@@ -6,6 +6,7 @@ import {
   Box,
   Circle,
   Github,
+  LogOut,
   LucideProps,
   Shrink,
 } from "lucide-react";
@@ -24,6 +25,7 @@ export const Icons = {
       />
     </svg>
   ),
+  LogOut: LogOut,
   Box: Box,
   BookMark: Bookmark,
   Circle: Circle,
