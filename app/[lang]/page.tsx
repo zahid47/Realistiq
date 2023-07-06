@@ -29,12 +29,12 @@ export default async function Home() {
               className="font-semibold text-primary"
             >
               <span className="absolute inset-0" aria-hidden="true" />
-              <span aria-hidden="true"> &rarr;</span>
+              {/* <span aria-hidden="true"> &rarr;</span> */}
             </a>
           </div>
         </div>
         <div className="text-center">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+          <h1 className="text-4xl font-black tracking-tight text-gray-900 sm:text-6xl">
             Stress free <span className="text-primary">home</span> renting for
             everyone
           </h1>
