@@ -15,3 +15,4 @@
 - single listing page
 - create listing page
 - agency plan
+- metadata for each page
