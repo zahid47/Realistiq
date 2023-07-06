@@ -24,6 +24,9 @@ export default function SingleListing({ uuid }: Props) {
 
   return (
     <div>
+      <p className="text-center text-sm text-slate-500">
+        <i>[Work in progress]</i>
+      </p>
       Property for rent in <b>{listing.location.address}</b>
     </div>
   );

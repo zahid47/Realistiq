@@ -35,6 +35,14 @@ export default function Navbar({ user }: Props) {
             <Icons.logo className="h-6" />
           </Link>
           <div className=" flex items-center gap-x-2">
+            <Link
+              href={{
+                pathname: `/${lang}/list`,
+              }}
+              className={cn(buttonVariants({ variant: "outline" }))}
+            >
+              List your property
+            </Link>
             {user ? (
               <UserAvatar user={user} />
             ) : (
