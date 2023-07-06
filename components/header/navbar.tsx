@@ -37,7 +37,7 @@ export default function Navbar({ user }: Props) {
           <div className=" flex items-center gap-x-2">
             <Link
               href={{
-                pathname: `/${lang}/list`,
+                pathname: `/${lang}/create-listing`,
               }}
               className={cn(buttonVariants({ variant: "outline" }))}
             >

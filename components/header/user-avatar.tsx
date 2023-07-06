@@ -16,6 +16,19 @@ interface Props {
   user?: User & { id: string };
 }
 
+const menuLinks = [
+  {
+    label: "Account",
+    href: "/account",
+    icon: <Icons.User className="mr-2 h-4 w-4" />,
+  },
+  {
+    label: "My Listings",
+    href: "/my-listings",
+    icon: <Icons.Home className="mr-2 h-4 w-4" />,
+  },
+];
+
 export default function UserAvatar({ user }: Props) {
   return (
     <DropdownMenu>
@@ -40,6 +53,12 @@ export default function UserAvatar({ user }: Props) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+        {menuLinks.map((link) => (
+          <DropdownMenuItem key={link.href} disabled>
+            {link.icon}
+            <span>{link.label}</span> <i>(soon)</i>
+          </DropdownMenuItem>
+        ))}
         <DropdownMenuItem onClick={() => signOut()}>
           <Icons.LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>

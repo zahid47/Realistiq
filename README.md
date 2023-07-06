@@ -1,7 +1,6 @@
 # Checklist:
 
-- create listing, single listing -> WIP
-- login -> intercept, restrict authorized users
+- login -> restrict authorized users
 - sorting (dropdown)
   - recommended (ranking algo)
   - cheapest per sqm (computed field)

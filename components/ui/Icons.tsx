@@ -6,9 +6,11 @@ import {
   Box,
   Circle,
   Github,
+  Home,
   LogOut,
   LucideProps,
   Shrink,
+  User2,
 } from "lucide-react";
 
 export const Icons = {
@@ -34,4 +36,6 @@ export const Icons = {
   Bath: Bath,
   Sort: ArrowDownUp,
   Github: Github,
+  User: User2,
+  Home: Home,
 };
