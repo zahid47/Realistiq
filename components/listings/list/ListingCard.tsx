@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import type { ExtendedListing } from "@/types/db";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,6 +25,7 @@ export default function ListingCard({
   setPopup,
 }: Props) {
   const listingRef = useRef<HTMLDivElement>(null);
+  const { lang } = useParams();
 
   useEffect(() => {
     if (!listingRef?.current) return;
@@ -62,7 +64,7 @@ export default function ListingCard({
         />
 
         <Link
-          href={`/listings/${listing.uuid}`}
+          href={`/${lang}/listings/${listing.uuid}`}
           className="flex flex-col gap-1"
         >
           <h1 className="line-clamp-2 text-center text-lg font-semibold md:text-start">

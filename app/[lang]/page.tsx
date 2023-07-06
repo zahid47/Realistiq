@@ -1,6 +1,4 @@
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import CTA from "@/components/home/CTA";
 
 export default async function Home() {
   return (
@@ -29,7 +27,6 @@ export default async function Home() {
               className="font-semibold text-primary"
             >
               <span className="absolute inset-0" aria-hidden="true" />
-              {/* <span aria-hidden="true"> &rarr;</span> */}
             </a>
           </div>
         </div>
@@ -44,12 +41,7 @@ export default async function Home() {
             process.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Link
-              href="/listings"
-              className={cn(buttonVariants({ variant: "default", size: "lg" }))}
-            >
-              Browse Listings
-            </Link>
+            <CTA />
           </div>
         </div>
       </div>

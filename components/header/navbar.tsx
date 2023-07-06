@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import type { User } from "next-auth";
 import useScroll from "@/lib/hooks/use-scroll";
 import { cn } from "@/lib/utils";
@@ -14,6 +15,10 @@ interface Props {
 
 export default function Navbar({ user }: Props) {
   const scrolled = useScroll(30);
+  const { lang } = useParams();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const callbackUrl = `${pathname}?${searchParams.toString()}`;
 
   return (
     <header
@@ -26,7 +31,7 @@ export default function Navbar({ user }: Props) {
     >
       <div className="container h-full">
         <div className="flex h-full items-center justify-between">
-          <Link href="/" className="flex items-center">
+          <Link href={`/${lang}`} className="flex items-center">
             <Icons.logo className="h-6" />
           </Link>
           <div className=" flex items-center gap-x-2">
@@ -34,7 +39,10 @@ export default function Navbar({ user }: Props) {
               <UserAvatar user={user} />
             ) : (
               <Link
-                href="/signin"
+                href={{
+                  pathname: `/${lang}/signin`,
+                  query: { callbackUrl },
+                }}
                 className={cn(buttonVariants({ variant: "ghost" }))}
               >
                 Sign In

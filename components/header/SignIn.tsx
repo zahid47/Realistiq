@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { toast } from "@/lib/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -9,13 +10,13 @@ import { ToastAction } from "@/components/ui/toast";
 
 export default function SignIn() {
   const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const handleLogin = async () => {
     setLoading(true);
     try {
-      signIn("github", {
-        callbackUrl: "/",
-      });
+      signIn("github", { callbackUrl });
     } catch {
       toast({
         variant: "destructive",
