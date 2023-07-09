@@ -5,7 +5,7 @@ import { ReturnData } from "@/actions/api-calls/listing";
 import { QueryObserverSuccessResult } from "@tanstack/react-query";
 import { ExtendedListing } from "@/types/db";
 import EmptyState from "@/components/skeletons/EmptyState";
-import ListingsListSkeleton from "../../skeletons/ListingsListSkeleton";
+import ListingsListSkeleton from "@/components/skeletons/ListingsListSkeleton";
 import ListingCard from "./ListingCard";
 
 interface Props {

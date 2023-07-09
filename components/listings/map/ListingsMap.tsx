@@ -19,7 +19,7 @@ import Map, { Marker, NavigationControl, Popup } from "react-map-gl";
 import { ExtendedListing } from "@/types/db";
 import { getSearchParamsString } from "@/lib/utils";
 import type { Bounds, GetListingsPayload } from "@/lib/validators/listing";
-import ListingsMapSkeleton from "../../skeletons/ListingsMapSkeleton";
+import ListingsMapSkeleton from "@/components/skeletons/ListingsMapSkeleton";
 import MarkerIcon from "./MarkerIcon";
 
 interface Props {
