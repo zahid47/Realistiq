@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 // import { env } from "@/env.mjs";
 import { Carousel } from "@mantine/carousel";
 import { createStyles, getStylesRef } from "@mantine/core";
@@ -35,10 +36,16 @@ const essentialStyles = {
 interface Props {
   photos: Array<ListingPhotos>;
   listingId: number;
+  listingUUID: string;
   isSaved: boolean;
 }
 
-export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
+export default function ImageCarousel({
+  photos,
+  listingId,
+  listingUUID,
+  isSaved,
+}: Props) {
   const isSmallScreen = useMediaQuery("(max-width: 1535px)");
   const { classes } = largeScreenStyles();
   const [currentSlide, setCurrentSlide] = useState(1);
@@ -61,17 +68,19 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
             key={photo.id}
             className="relative max-h-[320px] w-[200px] overflow-hidden rounded-lg"
           >
-            <Image
-              key={photo.id}
-              className="object-cover"
-              fill
-              src={photo.url}
-              alt={photo.alt}
-              placeholder="blur"
-              blurDataURL={getRGBDataURL(209, 209, 209)} // grey
-              // unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
-              unoptimized={true} // (temp) TODO: remove this
-            />
+            <Link href={`/listings/${listingUUID}`}>
+              <Image
+                key={photo.id}
+                className="object-cover"
+                fill
+                src={photo.url}
+                alt={photo.alt}
+                placeholder="blur"
+                blurDataURL={getRGBDataURL(209, 209, 209)} // grey
+                // unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
+                unoptimized={true} // (temp) TODO: remove this
+              />
+            </Link>
           </Carousel.Slide>
         ))}
       </Carousel>
