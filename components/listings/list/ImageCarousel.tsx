@@ -1,8 +1,8 @@
 // TODO: add lightbox to Image comp
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { env } from "@/env.mjs";
+// import { env } from "@/env.mjs";
 import { Carousel } from "@mantine/carousel";
 import { createStyles, getStylesRef } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
@@ -42,6 +42,7 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
   const isSmallScreen = useMediaQuery("(max-width: 1535px)");
   const { classes } = largeScreenStyles();
   const [currentSlide, setCurrentSlide] = useState(1);
+  const [isHovering, setIsHovering] = useState(false);
 
   return (
     <div className="relative">
@@ -52,6 +53,8 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
         height={200}
         styles={essentialStyles}
         onSlideChange={(index) => setCurrentSlide(index + 1)}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
       >
         {photos.map((photo) => (
           <Carousel.Slide
@@ -73,11 +76,13 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
         ))}
       </Carousel>
       <ListingBookMark listingId={listingId} isSaved={isSaved} />
-      <div className="absolute bottom-2 left-2 rounded-full bg-black bg-opacity-50">
-        <p className="mx-2 my-1 text-xs tracking-wider text-white">
-          {currentSlide}/{photos.length}
-        </p>
-      </div>
+      {photos.length > 1 && isHovering && (
+        <div className="absolute bottom-2 left-2 rounded-full bg-black bg-opacity-50">
+          <p className="mx-2 my-1 text-xs tracking-wider text-white">
+            {currentSlide}/{photos.length}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
