@@ -15,7 +15,6 @@ const sortOptions: Array<GetListingsPayload["sort"]> = [
   "Recommended",
   "Latest",
   "Cheapest",
-  "Cheapest per sqm",
   "Most expensive",
   "Largest",
   "Smallest",

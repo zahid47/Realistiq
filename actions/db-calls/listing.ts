@@ -15,7 +15,6 @@ const sortQueryMap = new Map([
   ["Recommended", { created_at: "desc" }], // TODO: implement ranking algorithm based on plan
   ["Latest", { created_at: "desc" }],
   ["Cheapest", { price: { amount: "asc" } }],
-  ["Cheapest per sqm", { price: { amount: "asc" } }], // TODO: fix with computed column
   ["Most expensive", { price: { amount: "desc" } }],
   ["Largest", { details: { floor_area: "desc" } }],
   ["Smallest", { details: { floor_area: "asc" } }],

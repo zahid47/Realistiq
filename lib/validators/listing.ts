@@ -10,7 +10,6 @@ export const getListingsPayload = z.object({
       "Recommended",
       "Latest",
       "Cheapest",
-      "Cheapest per sqm",
       "Most expensive",
       "Largest",
       "Smallest",

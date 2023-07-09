@@ -2,7 +2,6 @@
 
 - sorting (dropdown)
   - recommended (ranking algo)
-  - cheapest per sqm (computed field)
 - filters
   - price
   - beds
