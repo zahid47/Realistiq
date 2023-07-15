@@ -44,7 +44,7 @@ export default function ListingCard({
   return (
     <Card
       className={cn(
-        "relative transition-all duration-100 ease-in-out hover:shadow-lg",
+        "relative transition-all duration-100 ease-in-out hover:bg-slate-50",
         clickedListingId === listing.id && `border-4 border-primary`
       )}
       ref={listingRef}

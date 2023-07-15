@@ -1,5 +1,5 @@
 import "../../styles/globals.css";
-import { Inter, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import NextTopLoader from "nextjs-toploader";
 import { siteConfig } from "@/config/site";
