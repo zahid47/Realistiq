@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import type { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -16,20 +18,9 @@ interface Props {
   user?: Session["user"];
 }
 
-const menuLinks = [
-  {
-    label: "Account",
-    href: "/account",
-    icon: <Icons.User className="mr-2 h-4 w-4" />,
-  },
-  {
-    label: "My Listings",
-    href: "/my-listings",
-    icon: <Icons.Home className="mr-2 h-4 w-4" />,
-  },
-];
-
 export default function UserAvatar({ user }: Props) {
+  const { lang } = useParams();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -53,12 +44,12 @@ export default function UserAvatar({ user }: Props) {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {menuLinks.map((link) => (
-          <DropdownMenuItem key={link.href} disabled>
-            {link.icon}
-            <span>{link.label}</span> <i>(soon)</i>
-          </DropdownMenuItem>
-        ))}
+        <DropdownMenuItem asChild disabled>
+          <Link href={`/${lang}/dashboard`}>
+            <Icons.User className="mr-2 h-4 w-4" />
+            <span>Dashborad</span>
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()}>
           <Icons.LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
