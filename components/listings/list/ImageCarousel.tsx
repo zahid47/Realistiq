@@ -58,6 +58,7 @@ export default function ImageCarousel({
       className="relative"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      onClick={() => {}} // this is needed to prevent the propagation when clicking on the image (which is a link)
     >
       <Carousel
         classNames={!isSmallScreen ? classes : undefined}
