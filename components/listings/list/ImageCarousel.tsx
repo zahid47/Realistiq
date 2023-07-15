@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 // import { env } from "@/env.mjs";
 import { Carousel } from "@mantine/carousel";
 import { createStyles, getStylesRef } from "@mantine/core";
@@ -50,9 +51,14 @@ export default function ImageCarousel({
   const { classes } = largeScreenStyles();
   const [currentSlide, setCurrentSlide] = useState(1);
   const [isHovering, setIsHovering] = useState(false);
+  const { lang } = useParams();
 
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       <Carousel
         classNames={!isSmallScreen ? classes : undefined}
         loop
@@ -60,15 +66,13 @@ export default function ImageCarousel({
         height={200}
         styles={essentialStyles}
         onSlideChange={(index) => setCurrentSlide(index + 1)}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
       >
         {photos.map((photo) => (
           <Carousel.Slide
             key={photo.id}
             className="relative max-h-[320px] w-[200px] overflow-hidden rounded-lg"
           >
-            <Link href={`/listings/${listingUUID}`}>
+            <Link href={`/${lang}/listings/${listingUUID}`}>
               <Image
                 key={photo.id}
                 className="object-cover"
