@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import type { ExtendedListing } from "@/types/db";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import ImageCarousel from "./ImageCarousel";
@@ -42,9 +44,8 @@ export default function ListingCard({
   return (
     <Card
       className={cn(
-        "relative",
-        clickedListingId === listing.id &&
-          `border-4 border-primary transition-all duration-100 ease-in-out`
+        "relative transition-all duration-100 ease-in-out hover:shadow-lg",
+        clickedListingId === listing.id && `border-4 border-primary`
       )}
       ref={listingRef}
       onMouseEnter={() => {

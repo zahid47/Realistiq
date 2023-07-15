@@ -1,5 +1,5 @@
 import "../../styles/globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import NextTopLoader from "nextjs-toploader";
 import { siteConfig } from "@/config/site";
@@ -8,10 +8,11 @@ import NextAuthProvider from "@/components/providers/NextAuthProvider";
 import QueryClientWrapper from "@/components/providers/QueryClientProvider";
 import { Toaster } from "@/components/ui/toaster";
 
-const font = Inter({
+const font = Poppins({
+  weight: ["400", "500", "600", "700"],
+  style: ["normal"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-main",
 });
 
 export const metadata = {
