@@ -77,6 +77,7 @@ export default function ListingsMap({
       ...searchParams,
       bounds: JSON.stringify(bounds),
       zoom: viewState.zoom,
+      page: 1, // reset page to 1 when bounds change to avoid showing empty page
     };
     const qs = getSearchParamsString(newSearchParams);
     const url = `${pathname}?${qs}`;
