@@ -26,7 +26,12 @@ export const createListingSchema = z.object({
 
   beds: z.number().int().positive(),
   baths: z.number().int().positive(),
-  floor_area: z.number().int().positive(),
+  floor_area: z
+    .number({
+      required_error: "Floor area is required",
+    })
+    .int()
+    .positive(),
 
   description: z.string().nonempty().max(10000),
 
@@ -41,7 +46,8 @@ export const createListingSchema = z.object({
   //   )
   //   .length(20),
 
-  price: z.number().int().positive(),
+  amount: z.number().int().positive(),
+  interval: z.string().nonempty().max(1000),
 });
 
 export type GetListingsPayload = z.infer<typeof getListingsPayload>;

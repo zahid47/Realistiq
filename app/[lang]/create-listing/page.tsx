@@ -14,14 +14,14 @@ steps:
 5. price
 7. preview and publish
 */
-import CreateListingForm from "@/components/create/CreateListingForm";
+import CreateListingForm from "@/components/listings/create/CreateListingForm";
 
 export default function CreateListing() {
-  return (
-    <p className="text-center text-3xl text-slate-500">
-      <i>[Coming Soon]</i>
-    </p>
-  );
+  // return (
+  //   <p className="text-center text-3xl text-slate-500">
+  //     <i>[Coming Soon]</i>
+  //   </p>
+  // );
 
   return <CreateListingForm />;
 }

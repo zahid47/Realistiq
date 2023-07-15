@@ -24,11 +24,17 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import BedsBathsFloorAreaInput from "./BedsBathsFloorAreaInput";
+import PriceInput from "./PriceInput";
 
 export default function CreateListingForm() {
   const form = useForm<z.infer<typeof createListingSchema>>({
     resolver: zodResolver(createListingSchema),
-    defaultValues: {},
+    defaultValues: {
+      beds: 1,
+      baths: 1,
+      interval: "MONTH",
+    },
   });
 
   const onSubmit = (values: z.infer<typeof createListingSchema>) => {
@@ -57,56 +63,7 @@ export default function CreateListingForm() {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="beds"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Beds</FormLabel>
-                <FormControl>
-                  <Input type="number" placeholder="3" {...field} />
-                </FormControl>
-                <FormDescription>
-                  How many bedrooms does your property have?
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="baths"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Baths</FormLabel>
-                <FormControl>
-                  <Input type="number" placeholder="2" {...field} />
-                </FormControl>
-                <FormDescription>
-                  How many bathrooms does your property have?
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="floor_area"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Floor Area (SqFt)</FormLabel>
-                <FormControl>
-                  <Input type="number" placeholder="123" {...field} />
-                </FormControl>
-                <FormDescription>
-                  How many square feet is your property?
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <BedsBathsFloorAreaInput form={form} />
 
           <FormField
             control={form.control}
@@ -146,22 +103,7 @@ export default function CreateListingForm() {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="price"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Rent per month (USD)</FormLabel>
-                <FormControl>
-                  <Input type="number" placeholder="123" {...field} />
-                </FormControl>
-                <FormDescription>
-                  How much do you want to rent your property for?
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <PriceInput form={form} />
 
           <Button type="submit">Preview</Button>
         </form>

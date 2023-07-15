@@ -9,6 +9,8 @@ import {
   Home,
   LogOut,
   LucideProps,
+  Minus,
+  Plus,
   Shrink,
   User2,
 } from "lucide-react";
@@ -38,4 +40,6 @@ export const Icons = {
   Github: Github,
   User: User2,
   Home: Home,
+  Plus: Plus,
+  Minus: Minus,
 };
