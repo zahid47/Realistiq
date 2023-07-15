@@ -137,7 +137,7 @@ export default function ListingsMap({
           longitude={popup.location.lng}
           closeButton={false}
           maxWidth="300px"
-          offset={20}
+          offset={10}
         >
           <PopupInfo popup={popup} />
         </Popup>
