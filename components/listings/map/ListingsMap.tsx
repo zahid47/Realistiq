@@ -21,6 +21,7 @@ import { getSearchParamsString } from "@/lib/utils";
 import type { Bounds, GetListingsPayload } from "@/lib/validators/listing";
 import ListingsMapSkeleton from "@/components/skeletons/ListingsMapSkeleton";
 import MarkerIcon from "./MarkerIcon";
+import PopupInfo from "./PopupInfo";
 
 interface Props {
   listingsQueryResult: QueryObserverSuccessResult<ReturnData, unknown>;
@@ -48,8 +49,9 @@ export default function ListingsMap({
     searchParams.bounds && (JSON.parse(searchParams.bounds) as Bounds);
   const zoom = searchParams.zoom ? searchParams.zoom : DEFAULT_ZOOM;
 
-  // this calculation is not 100% accurate, but it's good enough for now
-  // I think it's because of the no precise division
+  // this calculation is not 100% accurate
+  // I think it's because of division being not precise
+  // but it's good enough for now
   // TODO: improve this?
   const { latitude, longitude } = useMemo(() => {
     if (bounds) {
@@ -88,7 +90,7 @@ export default function ListingsMap({
           key={listing.id}
           latitude={listing.location.lat}
           longitude={listing.location.lng}
-          anchor="bottom"
+          anchor="center"
         >
           <MarkerIcon
             onClick={() => {
@@ -134,10 +136,10 @@ export default function ListingsMap({
           latitude={popup.location.lat}
           longitude={popup.location.lng}
           closeButton={false}
-          offset={[0, -20]}
+          maxWidth="300px"
+          offset={20}
         >
-          {/* TODO */}
-          Property for rent in <b>{popup.location.address}</b>
+          <PopupInfo popup={popup} />
         </Popup>
       )}
     </Map>
