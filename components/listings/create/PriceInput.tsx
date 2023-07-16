@@ -41,9 +41,9 @@ export default function PriceInput({ form }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <p className="decoration-primary decoration-2 underline-offset-4 hover:text-gray-600 hover:underline">
+                    <span className="decoration-primary decoration-2 underline-offset-4 hover:text-gray-600 hover:underline">
                       How much should I charge?
-                    </p>
+                    </span>
                   </Link>
                 </FormDescription>
               )}
@@ -59,7 +59,7 @@ export default function PriceInput({ form }: Props) {
                   />
                 </FormControl>
 
-                <p>/</p>
+                <span>/</span>
 
                 <FormField
                   control={form.control}
