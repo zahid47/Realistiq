@@ -23,8 +23,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import BedsBathsFloorAreaInput from "./BedsBathsFloorAreaInput";
+import DescriptionInput from "./DescriptionInput";
 import PriceInput from "./PriceInput";
 
 export default function CreateListingForm() {
@@ -64,26 +64,7 @@ export default function CreateListingForm() {
 
           <BedsBathsFloorAreaInput form={form} />
 
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Tell us a little bit about your property..."
-                    className="resize-none"
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Add as much detail as you can to help potential buyers.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <DescriptionInput form={form} />
 
           <FormField
             control={form.control}
