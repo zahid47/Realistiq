@@ -43,7 +43,6 @@ export default function CreateListingForm() {
 
   return (
     <>
-      <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -108,6 +107,10 @@ export default function CreateListingForm() {
           <Button type="submit">Preview</Button>
         </form>
       </Form>
+      <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
+      <pre className="text-destructive">
+        {JSON.stringify(form.formState.errors, null, 2)}
+      </pre>
     </>
   );
 }

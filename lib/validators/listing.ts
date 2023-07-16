@@ -24,18 +24,12 @@ export const createListingSchema = z.object({
   latitude: z.number(),
   longitude: z.number(),
 
-  beds: z.number().int().positive(),
-  baths: z.number().int().positive(),
-  floor_area: z
-    .number({
-      required_error: "Floor area is required",
-    })
-    .int()
-    .positive(),
+  beds: z.coerce.number().int().positive(),
+  baths: z.coerce.number().int().positive(),
+  floor_area: z.coerce.number().int().positive(),
 
   description: z.string().nonempty().max(10000),
-
-  photos: z.array(z.string().nonempty().max(1000)).length(20),
+  photos: z.any(),
 
   // photos: z
   //   .array(
@@ -46,7 +40,7 @@ export const createListingSchema = z.object({
   //   )
   //   .length(20),
 
-  amount: z.number().int().positive(),
+  amount: z.coerce.number().int().positive(),
   interval: z.string().nonempty().max(1000),
 });
 
