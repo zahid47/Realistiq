@@ -23,23 +23,17 @@ export const createListingSchema = z.object({
   address: z.string().nonempty().max(1000),
   latitude: z.number(),
   longitude: z.number(),
-
   beds: z.coerce.number().int().positive(),
   baths: z.coerce.number().int().positive(),
   floor_area: z.coerce.number().int().positive(),
-
   description: z.string().nonempty().max(10000),
-  photos: z.any(),
-
-  // photos: z
-  //   .array(
-  //     z.object({
-  //       url: z.string().nonempty().max(1000),
-  //       alt: z.string().nonempty().max(1000).optional(),
-  //     })
-  //   )
-  //   .length(20),
-
+  photos: z
+    .array(
+      z.object({
+        src: z.string().nonempty().max(1000),
+      })
+    )
+    .length(20),
   amount: z.coerce.number().int().positive(),
   interval: z.string().nonempty().max(1000),
 });

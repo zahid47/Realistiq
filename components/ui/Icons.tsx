@@ -12,6 +12,7 @@ import {
   Minus,
   Plus,
   Shrink,
+  Trash2,
   User2,
 } from "lucide-react";
 
@@ -42,4 +43,5 @@ export const Icons = {
   Home: Home,
   Plus: Plus,
   Minus: Minus,
+  Trash: Trash2,
 };

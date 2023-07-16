@@ -25,6 +25,7 @@ import {
 import { Input } from "@/components/ui/input";
 import BedsBathsFloorAreaInput from "./BedsBathsFloorAreaInput";
 import DescriptionInput from "./DescriptionInput";
+import ImageInput from "./ImageInput";
 import PriceInput from "./PriceInput";
 
 export default function CreateListingForm() {
@@ -66,22 +67,7 @@ export default function CreateListingForm() {
 
           <DescriptionInput form={form} />
 
-          <FormField
-            control={form.control}
-            name="photos"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Photos</FormLabel>
-                <FormControl>
-                  <Input type="file" multiple placeholder="123" {...field} />
-                </FormControl>
-                <FormDescription>
-                  Max 20 photos, each less than 5mb.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <ImageInput form={form} />
 
           <PriceInput form={form} />
 
