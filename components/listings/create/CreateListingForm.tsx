@@ -26,6 +26,7 @@ import { Input } from "@/components/ui/input";
 import BedsBathsFloorAreaInput from "./BedsBathsFloorAreaInput";
 import DescriptionInput from "./DescriptionInput";
 import ImageInput from "./ImageInput";
+import LocationInput from "./LocationInput";
 import PriceInput from "./PriceInput";
 
 export default function CreateListingForm() {
@@ -46,22 +47,7 @@ export default function CreateListingForm() {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="address"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Address</FormLabel>
-                <FormControl>
-                  <Input placeholder="123 main st." {...field} />
-                </FormControl>
-                <FormDescription>
-                  Once published, you will not be able to modify the address.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <LocationInput form={form} />
 
           <BedsBathsFloorAreaInput form={form} />
 
