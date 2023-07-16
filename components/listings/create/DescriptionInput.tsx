@@ -70,7 +70,7 @@ export default function DescriptionInput({ form }: Props) {
         <FormItem>
           <FormLabel>Description</FormLabel>
           <FormDescription>
-            Keep it short and sweet, humble bragging is encouraged!
+            Keep it short and sweet, brag about your property a little!
           </FormDescription>
           <FormControl>
             <EditorArticle content={field.value} onUpdate={field.onChange} />
