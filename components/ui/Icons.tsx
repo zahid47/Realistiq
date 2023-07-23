@@ -11,6 +11,7 @@ import {
   LucideProps,
   Minus,
   Plus,
+  PlusSquare,
   Shrink,
   Trash2,
   User2,
@@ -44,4 +45,5 @@ export const Icons = {
   Plus: Plus,
   Minus: Minus,
   Trash: Trash2,
+  Add: PlusSquare,
 };

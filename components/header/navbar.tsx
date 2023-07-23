@@ -34,12 +34,15 @@ export default function Navbar({ user }: Props) {
           <Link href={`/${lang}`} className="flex items-center">
             <Icons.logo className="h-6" />
           </Link>
-          <div className=" flex items-center gap-x-2">
+          <div className="flex items-center gap-x-2">
             <Link
               href={{
                 pathname: `/${lang}/create-listing`,
               }}
-              className={cn(buttonVariants({ variant: "outline" }))}
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "hidden sm:block"
+              )}
             >
               List your property
             </Link>

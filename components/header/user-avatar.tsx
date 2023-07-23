@@ -50,6 +50,12 @@ export default function UserAvatar({ user }: Props) {
             <span>Dashborad</span>
           </Link>
         </DropdownMenuItem>
+        <DropdownMenuItem asChild className="sm:hidden">
+          <Link href={`/${lang}/create-listing`}>
+            <Icons.Add className="mr-2 h-4 w-4" />
+            <span>List your property</span>
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut()}>
           <Icons.LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
