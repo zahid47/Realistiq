@@ -20,30 +20,39 @@ export const getListingsPayload = z.object({
 });
 
 export const createListingSchema = z.object({
-  address: z.string({
-    required_error: "Please search for an address and select one from the list",
-  }),
+  address: z
+    .string({
+      required_error:
+        "Please search for an address and select one from the list",
+    })
+    .nonempty({
+      message: "Please search for an address and select one from the list",
+    }),
   latitude: z.number(),
   longitude: z.number(),
   beds: z.coerce.number().int().positive(),
   baths: z.coerce.number().int().positive(),
   floor_area: z.coerce
     .number({
-      invalid_type_error: "How big is the place?",
+      invalid_type_error: "Please enter a valid floor area",
     })
     .int({ message: "Floor area must be a whole number" })
-    .positive({ message: "How big is the place?" }),
-  description: z.string({
-    required_error: "Please describe the place, tell us how cool it is!",
-  }),
+    .positive({ message: "Please enter a valid floor area" }),
+  description: z
+    .string({
+      required_error: "Please describe the place, tell us how cool it is!",
+    })
+    .nonempty({
+      message: "Please describe the place, tell us how cool it is!",
+    }),
   photos: z
     .array(
       z.object({
         src: z.string().nonempty().max(1000),
       }),
-      { required_error: "Hey, upload at least 1 photo!" }
+      { required_error: "Please upload at least 1 photo!" }
     )
-    .min(1, { message: "Hey, upload at least 1 photo!" })
+    .min(1, { message: "Please upload at least 1 photo!" })
     .max(20, { message: "You can upload maximum 20 photos" }),
   amount: z.coerce
     .number({
