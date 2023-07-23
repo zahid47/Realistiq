@@ -41,7 +41,7 @@ export default function PriceInput({ form }: Props) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <span className="decoration-primary decoration-2 underline-offset-4 hover:text-gray-600 hover:underline">
+                    <span className="hidden decoration-primary decoration-2 underline-offset-4 hover:text-gray-600 hover:underline sm:block">
                       How much should I charge?
                     </span>
                   </Link>

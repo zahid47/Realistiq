@@ -40,7 +40,7 @@ export default function CreateListingForm() {
   };
 
   return (
-    <>
+    <div className="mx-auto max-w-2xl space-y-6 px-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <LocationInput form={form} />
@@ -60,6 +60,6 @@ export default function CreateListingForm() {
       <pre className="text-destructive">
         {JSON.stringify(form.formState.errors, null, 2)}
       </pre>
-    </>
+    </div>
   );
 }
