@@ -39,7 +39,7 @@ type Props = {
 
 export default function BedsBathsFloorAreaInput({ form }: Props) {
   return (
-    <div className="space-y-8">
+    <div className="mt-12 space-y-8">
       <FormField
         control={form.control}
         name="beds"
@@ -47,13 +47,9 @@ export default function BedsBathsFloorAreaInput({ form }: Props) {
           <FormItem className="flex items-center justify-between">
             <div>
               <FormLabel>Beds</FormLabel>
-              {form.formState.errors.beds ? (
-                <FormMessage />
-              ) : (
-                <FormDescription>
-                  How many bedrooms does your property have?
-                </FormDescription>
-              )}
+              <FormDescription>
+                How many bedrooms does your property have?
+              </FormDescription>
             </div>
             <div className="flex items-center gap-4">
               <CounterIcon
@@ -83,13 +79,9 @@ export default function BedsBathsFloorAreaInput({ form }: Props) {
             <div>
               <FormLabel>Baths</FormLabel>
 
-              {form.formState.errors.baths ? (
-                <FormMessage />
-              ) : (
-                <FormDescription>
-                  How many bathrooms does your property have?
-                </FormDescription>
-              )}
+              <FormDescription>
+                How many bathrooms does your property have?
+              </FormDescription>
             </div>
             <div className="flex items-center gap-4">
               <CounterIcon

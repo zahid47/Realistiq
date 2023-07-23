@@ -24,7 +24,7 @@ type Props = {
 
 export default function PriceInput({ form }: Props) {
   return (
-    <div>
+    <div className="mt-12">
       <FormField
         control={form.control}
         name="amount"

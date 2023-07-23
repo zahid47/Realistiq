@@ -42,7 +42,7 @@ export default function ImageInput({ form }: Props) {
   const openRef = useRef<() => void>(null);
 
   return (
-    <>
+    <div className="mt-12">
       <FormField
         control={form.control}
         name="photos"
@@ -54,27 +54,32 @@ export default function ImageInput({ form }: Props) {
               the thumbnail.
             </FormDescription>
             <FormControl>
-              <Dropzone
-                openRef={openRef}
-                className={cn("text-center", photosWatcher?.length && "hidden")}
-                accept={IMAGE_MIME_TYPE}
-                maxSize={5 * 1024 * 1024}
-                onDrop={(photos: FileWithPath[]) => {
-                  handlePhotoAdd(field, photos);
-                }}
-                onReject={() => {
-                  toast({
-                    variant: "destructive",
-                    title: "Could not upload some photos",
-                    description:
-                      "Please make sure to upload only photos less than 5MB in size.",
-                  });
-                }}
-              >
-                <span className="text-muted-foreground">
-                  Drag images here or click to select files
-                </span>
-              </Dropzone>
+              <div className="my-2">
+                <Dropzone
+                  openRef={openRef}
+                  className={cn(
+                    "text-center",
+                    photosWatcher?.length && "hidden"
+                  )}
+                  accept={IMAGE_MIME_TYPE}
+                  maxSize={5 * 1024 * 1024}
+                  onDrop={(photos: FileWithPath[]) => {
+                    handlePhotoAdd(field, photos);
+                  }}
+                  onReject={() => {
+                    toast({
+                      variant: "destructive",
+                      title: "Could not upload some photos",
+                      description:
+                        "Please make sure to upload only photos less than 5MB in size.",
+                    });
+                  }}
+                >
+                  <span className="text-muted-foreground">
+                    Drag images here or click to select files
+                  </span>
+                </Dropzone>
+              </div>
             </FormControl>
             {/* PREVIEW */}
             {!!photosWatcher?.length && (
@@ -125,6 +130,6 @@ export default function ImageInput({ form }: Props) {
           </FormItem>
         )}
       />
-    </>
+    </div>
   );
 }

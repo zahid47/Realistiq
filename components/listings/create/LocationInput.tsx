@@ -37,13 +37,14 @@ export default function LocationInput({ form }: Props) {
       "longitude",
       result.features[0].properties.coordinates.longitude
     );
+    form.clearErrors("address");
   };
 
   const coords = form.watch(["latitude", "longitude"]);
   const [mapInstance, setMapInstance] = useState<mapboxgl.Map>();
 
   return (
-    <div>
+    <div className="mt-12">
       <FormField
         control={form.control}
         name="address"
@@ -54,29 +55,30 @@ export default function LocationInput({ form }: Props) {
               Once published, you will not be able to modify the address.
             </FormDescription>
             <FormControl>
-              <SearchBox
-                accessToken={env.NEXT_PUBLIC_MAPBOX_TOKEN}
-                placeholder="2750 Karen Street"
-                options={{
-                  limit: 5,
-                  country: "us",
-                  types: "address",
-                }}
-                theme={{
-                  variables: {
-                    boxShadow: "none",
-                    borderRadius: "0.375rem",
-                    border: "1px solid #e2e8f0",
-                  },
-                }}
-                value={field.value || ""}
-                onRetrieve={setAddress}
-                map={mapInstance}
-              />
+              <div className="my-2">
+                <SearchBox
+                  accessToken={env.NEXT_PUBLIC_MAPBOX_TOKEN}
+                  placeholder="2750 Karen Street"
+                  options={{
+                    limit: 5,
+                    country: "us",
+                    types: "address",
+                  }}
+                  theme={{
+                    variables: {
+                      boxShadow: "none",
+                      borderRadius: "0.375rem",
+                      border: "1px solid #e2e8f0",
+                    },
+                  }}
+                  value={field.value || ""}
+                  onRetrieve={setAddress}
+                  map={mapInstance}
+                />
+              </div>
             </FormControl>
-            <FormMessage />
-
-            <div className="m-auto h-96 overflow-hidden rounded-lg">
+            <FormMessage className="mb-2" />
+            <div className="m-auto h-80 overflow-hidden rounded-lg">
               <Map
                 initialViewState={{
                   latitude: DEFAULT_LAT,

@@ -63,21 +63,32 @@ type Props = {
 
 export default function DescriptionInput({ form }: Props) {
   return (
-    <FormField
-      control={form.control}
-      name="description"
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel>Description</FormLabel>
-          <FormDescription>
-            Keep it short and sweet, brag about your property a little!
-          </FormDescription>
-          <FormControl>
-            <EditorArticle content={field.value} onUpdate={field.onChange} />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
+    <div className="mt-12">
+      <FormField
+        control={form.control}
+        name="description"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Description</FormLabel>
+
+            {form.formState.errors.description ? (
+              <FormMessage />
+            ) : (
+              <FormDescription>
+                Keep it short and sweet, brag about your property a little!
+              </FormDescription>
+            )}
+            <FormControl>
+              <div className="my-2">
+                <EditorArticle
+                  content={field.value}
+                  onUpdate={field.onChange}
+                />
+              </div>
+            </FormControl>
+          </FormItem>
+        )}
+      />
+    </div>
   );
 }
