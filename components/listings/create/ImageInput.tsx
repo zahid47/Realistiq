@@ -51,7 +51,7 @@ export default function ImageInput({ form }: Props) {
             <FormLabel>Photos</FormLabel>
             <FormDescription>
               Max 20 photos, each less than 5MB. The first photo will be used as
-              a thumbnail.
+              the thumbnail.
             </FormDescription>
             <FormControl>
               <Dropzone
