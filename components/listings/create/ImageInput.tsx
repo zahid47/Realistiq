@@ -71,7 +71,9 @@ export default function ImageInput({ form }: Props) {
                   });
                 }}
               >
-                Drag images here or click to select files
+                <span className="text-muted-foreground">
+                  Drag images here or click to select files
+                </span>
               </Dropzone>
             </FormControl>
             {/* PREVIEW */}
