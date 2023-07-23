@@ -67,7 +67,7 @@ export default function CreateListingForm() {
                 active={active}
                 onStepClick={setActive}
                 breakpoint="sm"
-                // allowNextStepsSelect={false}
+                allowNextStepsSelect={false}
               >
                 <Stepper.Step>
                   <LocationInput form={form} />
