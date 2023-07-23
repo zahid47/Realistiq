@@ -33,6 +33,7 @@ export const createListingSchema = z.object({
         src: z.string().nonempty().max(1000),
       })
     )
+    .min(1)
     .max(20),
   amount: z.coerce.number().int().positive(),
   interval: z.string().nonempty().max(1000),
