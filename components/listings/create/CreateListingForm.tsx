@@ -8,26 +8,22 @@ TODO:
 4. Sticky action buttons
 5. Add preview
 */
+import dynamic from "next/dynamic";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { createListingSchema } from "@/lib/validators/listing";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import BedsBathsFloorAreaInput from "./BedsBathsFloorAreaInput";
 import DescriptionInput from "./DescriptionInput";
 import ImageInput from "./ImageInput";
-import LocationInput from "./LocationInput";
 import PriceInput from "./PriceInput";
+
+const LocationInput = dynamic(() => import("./LocationInput"), {
+  ssr: false,
+  loading: () => <p>Loading map...</p>,
+});
 
 export default function CreateListingForm() {
   const form = useForm<z.infer<typeof createListingSchema>>({
