@@ -20,23 +20,39 @@ export const getListingsPayload = z.object({
 });
 
 export const createListingSchema = z.object({
-  address: z.string().nonempty().max(1000),
+  address: z.string({
+    required_error: "Please search for an address and select one from the list",
+  }),
   latitude: z.number(),
   longitude: z.number(),
   beds: z.coerce.number().int().positive(),
   baths: z.coerce.number().int().positive(),
-  floor_area: z.coerce.number().int().positive(),
-  description: z.string().nonempty().max(10000),
+  floor_area: z.coerce
+    .number({
+      invalid_type_error: "How big is the place?",
+    })
+    .int({ message: "Floor area must be a whole number" })
+    .positive({ message: "How big is the place?" }),
+  description: z.string({
+    required_error: "Please describe the place, tell us how cool it is!",
+  }),
   photos: z
     .array(
       z.object({
         src: z.string().nonempty().max(1000),
-      })
+      }),
+      { required_error: "Hey, upload at least 1 photo!" }
     )
-    .min(1)
-    .max(20),
-  amount: z.coerce.number().int().positive(),
-  interval: z.string().nonempty().max(1000),
+    .min(1, { message: "Hey, upload at least 1 photo!" })
+    .max(20, { message: "You can upload maximum 20 photos" }),
+  amount: z.coerce
+    .number({
+      invalid_type_error: "Rent can't be free!",
+    })
+    .positive({
+      message: "Rent can't be free!",
+    }),
+  interval: z.string(),
 });
 
 export type GetListingsPayload = z.infer<typeof getListingsPayload>;
