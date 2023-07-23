@@ -53,7 +53,9 @@ export default function CreateListingForm() {
 
           <PriceInput form={form} />
 
-          <Button type="submit">Preview</Button>
+          <div className="fixed bottom-0 left-0 right-0 flex items-center justify-center bg-muted p-4">
+            <Button type="submit">Preview</Button>
+          </div>
         </form>
       </Form>
       <pre>{JSON.stringify(form.watch(), null, 2)}</pre>
