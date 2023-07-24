@@ -37,7 +37,8 @@ export default function Navbar({ user }: Props) {
           <div className="flex items-center gap-x-2">
             <Link
               href={{
-                pathname: `/${lang}/create-listing`,
+                pathname: user ? `/${lang}/create-listing` : `/${lang}/signin`,
+                query: !user ? { callbackUrl: "/create-listing" } : {},
               }}
               className={cn(
                 buttonVariants({ variant: "outline" }),
