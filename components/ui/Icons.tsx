@@ -7,6 +7,7 @@ import {
   Circle,
   Github,
   Home,
+  Loader2,
   LogOut,
   LucideProps,
   Minus,
@@ -46,4 +47,5 @@ export const Icons = {
   Minus: Minus,
   Trash: Trash2,
   Add: PlusSquare,
+  Loader: Loader2,
 };

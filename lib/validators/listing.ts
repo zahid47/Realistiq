@@ -45,15 +45,12 @@ export const createListingSchema = z.object({
     .nonempty({
       message: "Please describe the place, tell us how cool it is!",
     }),
+
   photos: z
-    .array(
-      z.object({
-        src: z.string().nonempty().max(1000),
-      }),
-      { required_error: "Please upload at least 1 photo!" }
-    )
+    .array(z.string().nonempty({ message: "Please upload at least 1 photo!" }))
     .min(1, { message: "Please upload at least 1 photo!" })
     .max(20, { message: "You can upload maximum 20 photos." }),
+
   amount: z.coerce
     .number({
       invalid_type_error: "Rent can't be free!",

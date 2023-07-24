@@ -1,7 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getListingsFromDB } from "@/actions/db-calls/listing";
-import { getSearchParamsObject, sendNextError } from "@/lib/utils";
-import { getListingsPayload } from "@/lib/validators/listing";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { db } from "@/lib/db";
+import {
+  getRequestBodyGracefully,
+  getSearchParamsObject,
+  sendNextError,
+} from "@/lib/utils";
+import {
+  createListingSchema,
+  getListingsPayload,
+} from "@/lib/validators/listing";
 
 export const dynamic = "force-dynamic";
 
@@ -14,6 +24,57 @@ export async function GET(request: NextRequest) {
     const { listings, meta } = await getListingsFromDB(parsedPayload);
 
     return NextResponse.json({ listings, meta });
+  } catch (err) {
+    return sendNextError(err);
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+    if (!session)
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    const body = await getRequestBodyGracefully(request);
+    const parsedBody = createListingSchema.parse(body);
+
+    const photos = parsedBody.photos.map((photo) => {
+      return {
+        url: photo,
+        alt: "image", //TODO: get alt from user, if not provided, use ai to generate
+      };
+    });
+
+    const newListing = await db.listing.create({
+      data: {
+        user_id: session.user.id,
+        details: {
+          create: {
+            description: parsedBody.description,
+            beds: parsedBody.beds,
+            baths: parsedBody.baths,
+            floor_area: parsedBody.floor_area,
+          },
+        },
+        price: {
+          create: {
+            amount: parsedBody.amount,
+          },
+        },
+        location: {
+          create: {
+            lat: parsedBody.latitude,
+            lng: parsedBody.longitude,
+            address: parsedBody.address,
+          },
+        },
+        photos: {
+          create: photos,
+        },
+      },
+    });
+
+    return NextResponse.json(newListing);
   } catch (err) {
     return sendNextError(err);
   }

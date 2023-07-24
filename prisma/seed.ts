@@ -34,7 +34,7 @@ async function main() {
       user_id: user.id,
       details: {
         create: {
-          description: faker.lorem.paragraph(),
+          description: `<p>${faker.lorem.paragraph()}</p>`,
           beds: faker.number.int({ min: 1, max: 5 }),
           baths: faker.number.int({ min: 1, max: 5 }),
           floor_area: faker.number.int({ min: 20, max: 200 }),
