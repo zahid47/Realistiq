@@ -13,3 +13,4 @@
 - metadata for each page
 - edit a listing
 - saved listings, my listings page in dashboard
+- homepage overhaul
