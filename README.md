@@ -8,7 +8,6 @@
   - amenities
   - map -> state bound selector, draw freehand
 - single listing page
-- create listing page
 - agency plan
 - metadata for each page
 - edit a listing
