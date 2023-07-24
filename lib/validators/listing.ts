@@ -6,15 +6,8 @@ export const getListingsPayload = z.object({
   page: z.coerce.number().int().positive().catch(1),
   limit: z.coerce.number().int().positive().optional(),
   sort: z
-    .enum([
-      "Recommended",
-      "Latest",
-      "Cheapest",
-      "Most expensive",
-      "Largest",
-      "Smallest",
-    ])
-    .catch("Recommended"),
+    .enum(["Latest", "Cheapest", "Most expensive", "Largest", "Smallest"])
+    .catch("Latest"),
   zoom: z.coerce.number().positive().optional(),
   bounds: z.string().optional(),
 });

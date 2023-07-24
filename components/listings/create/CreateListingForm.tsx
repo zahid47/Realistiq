@@ -2,20 +2,14 @@
 
 /*
 TODO:
-1. Separate form into multiple components
-2. Fix each component
-3. Add steps
-4. Sticky action buttons
-5. Add preview
+1. Add preview before creating
 */
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useParams, useRouter } from "next/navigation";
 import { createListing } from "@/actions/api-calls/listing";
-import { env } from "@/env.mjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Stepper } from "@mantine/core";
-import { FileWithPath } from "@mantine/dropzone";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import * as z from "zod";

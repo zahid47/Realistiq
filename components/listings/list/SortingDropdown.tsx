@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/select";
 
 const sortOptions: Array<GetListingsPayload["sort"]> = [
-  "Recommended",
   "Latest",
   "Cheapest",
   "Most expensive",

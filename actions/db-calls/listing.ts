@@ -12,7 +12,6 @@ import {
 } from "@/lib/validators/listing";
 
 const sortQueryMap = new Map([
-  ["Recommended", { created_at: "desc" }], // TODO: implement ranking algorithm based on plan
   ["Latest", { created_at: "desc" }],
   ["Cheapest", { price: { amount: "asc" } }],
   ["Most expensive", { price: { amount: "desc" } }],

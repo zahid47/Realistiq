@@ -1,6 +1,6 @@
 // TODO: add lightbox to Image comp
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";

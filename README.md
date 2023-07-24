@@ -1,7 +1,5 @@
 # Checklist:
 
-- sorting (dropdown)
-  - recommended (ranking algo)
 - filters
   - price
   - beds
@@ -13,3 +11,5 @@
 - create listing page
 - agency plan
 - metadata for each page
+- edit a listing
+- saved listings, my listings page in dashboard

@@ -1,3 +1,11 @@
+/*
+TODO:
+1. rearrange images
+2. add alt text or generate via ai
+3. add image resizing, compression
+4. add image watermarking
+*/
+
 import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { Dropzone, FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { UseFormReturn } from "react-hook-form";
