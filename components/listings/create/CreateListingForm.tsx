@@ -8,15 +8,15 @@ TODO:
 4. Sticky action buttons
 5. Add preview
 */
-import { useState } from "react";
-import dynamic from "next/dynamic";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Stepper } from "@mantine/core";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { createListingSchema } from "@/lib/validators/listing";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import { createListingSchema } from "@/lib/validators/listing";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Stepper } from "@mantine/core";
+import dynamic from "next/dynamic";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import BedsBathsFloorAreaInput from "./BedsBathsFloorAreaInput";
 import DescriptionInput from "./DescriptionInput";
 import ImageInput from "./ImageInput";
@@ -90,8 +90,8 @@ export default function CreateListingForm() {
                 </Stepper.Step>
               </Stepper>
 
-              <div className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-4 bg-muted p-4">
-                <Button type="button" onClick={prevStep}>
+              <div className="fixed bottom-0 left-0 right-0 flex items-center justify-center gap-4 border-t-2 p-4 bg-white">
+                <Button variant="outline" type="button" onClick={prevStep}>
                   Back
                 </Button>
                 <Button
@@ -102,7 +102,7 @@ export default function CreateListingForm() {
                     });
                   }}
                 >
-                  {active === steps.length - 1 ? "Preview" : "Next"}
+                  {active === steps.length - 1 ? "Submit" : "Next"}
                 </Button>
               </div>
             </>

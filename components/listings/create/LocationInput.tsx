@@ -83,7 +83,7 @@ export default function LocationInput({ form }: Props) {
                 initialViewState={{
                   latitude: DEFAULT_LAT,
                   longitude: DEFAULT_LNG,
-                  zoom: 4,
+                  zoom: 1,
                 }}
                 onLoad={(e) => {
                   setMapInstance(e.target);
