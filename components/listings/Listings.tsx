@@ -46,12 +46,8 @@ export default function Listings({ searchParams }: Props) {
   return (
     <div className="flex">
       <div className="m-auto flex h-[calc(100vh-4rem)] flex-col lg:w-[38%]">
-        <div className="flex flex-col items-center justify-between gap-2 border-t border-gray-200 px-2 py-3 sm:flex-row">
+        <div className="flex items-center justify-between gap-2 border-t border-gray-200 px-2 py-3">
           <SortingDropdown searchParams={searchParams} />
-          <ListingPagination
-            meta={listingsQueryResult.data?.meta}
-            onPageChange={onPageChange}
-          />
         </div>
         <ScrollArea>
           <ListingsList
@@ -60,6 +56,12 @@ export default function Listings({ searchParams }: Props) {
             setHoveringListingId={setHoveringListingId}
             setPopup={setPopup}
           />
+          <div className="my-4 mr-2 flex justify-end">
+            <ListingPagination
+              meta={listingsQueryResult.data?.meta}
+              onPageChange={onPageChange}
+            />
+          </div>
         </ScrollArea>
       </div>
       <div className="mb-2 mr-2 hidden overflow-hidden rounded-lg lg:block lg:w-[62%]">
