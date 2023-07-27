@@ -31,7 +31,7 @@ export default function Photos({ photos }: Props) {
         sources={photos.map((photo) => photo.url)}
         slide={lightboxController.slide}
       />
-      <div className="columns-1 gap-2 sm:columns-2">
+      <div className="columns-1 gap-2 xl:columns-2">
         {photos.map((photo, index) => (
           <div
             className="after:content after:shadow-highlight group relative mb-2 block w-full cursor-zoom-in overflow-hidden rounded-lg after:pointer-events-none after:absolute after:inset-0 after:rounded-lg"

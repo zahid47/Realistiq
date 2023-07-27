@@ -12,7 +12,7 @@ interface Props {
 
 export default function StaticMap({ listing, saved }: Props) {
   return (
-    <div className="m-auto flex w-2/3 flex-col">
+    <div className="m-auto flex w-[100%] flex-col lg:w-2/3">
       <div className="h-64 overflow-hidden rounded-lg">
         <Map
           initialViewState={{

@@ -34,14 +34,14 @@ export default function SingleListing({ uuid }: Props) {
   const listing = listingDetailsQueryResult.data;
 
   return (
-    <div className="flex">
-      <div className="m-auto flex h-[calc(100vh-4rem)] w-[38%] flex-col p-4">
+    <div className="flex flex-col md:flex-row">
+      <div className="m-auto flex flex-col p-4 md:h-[calc(100vh-4rem)] md:w-[38%]">
         <Photos photos={listing.photos} />
       </div>
 
-      <div className="m-auto flex h-[calc(100vh-4rem)] w-[62%] flex-col border-l-2 p-4">
+      <div className="m-auto flex flex-col p-4 md:h-[calc(100vh-4rem)] md:w-[62%] md:border-l-2">
         <div className="space-y-6">
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 lg:flex-row">
             <StaticMap listing={listing} saved={saved} />
             <ProfileCardCTA listing={listing} />
           </div>

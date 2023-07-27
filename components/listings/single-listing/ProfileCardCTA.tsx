@@ -13,15 +13,13 @@ export default function ProfileCardCTA({ listing }: Props) {
   const pricePerSqFt = listing.price.amount / listing.details.floor_area;
 
   return (
-    <div className="flex w-1/3 flex-col justify-end space-y-4 rounded-lg border p-4">
+    <div className="flex w-[100%] flex-col justify-end space-y-4 rounded-lg border p-4 lg:w-1/3">
       <div>
         <ListingPriceComp price={listing.price} />
-        <p>
-          <span className="text-sm">
-            <span className="text-slate-500">Price per sqft:</span>{" "}
-            <span className="font-bold">
-              {formatPrice(pricePerSqFt, listing.price.currency)}
-            </span>
+        <p className="text-center text-sm md:text-start">
+          <span className="text-slate-500 ">Price per sqft:</span>{" "}
+          <span className="font-bold">
+            {formatPrice(pricePerSqFt, listing.price.currency)}
           </span>
         </p>
       </div>
@@ -50,13 +48,13 @@ export default function ProfileCardCTA({ listing }: Props) {
           target="_blank"
           className={cn(buttonVariants({ variant: "outline" }), "flex-grow")}
         >
-          Get directions
+          Directions
         </a>
         <a
           href={`mailto:${listing.owner.email}`}
           className={cn(buttonVariants({ variant: "default" }), "flex-grow")}
         >
-          <Mail className="mr-2 h-4 w-4" /> Contact owner
+          Contact
         </a>
       </div>
     </div>
