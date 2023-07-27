@@ -44,6 +44,7 @@ export default async function Home() {
         alt="hero"
         className="absolute inset-0 h-screen object-cover"
         priority
+        placeholder="blur"
       />
       <div className="absolute inset-0 flex h-screen w-screen flex-col items-center justify-center bg-black/70 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
