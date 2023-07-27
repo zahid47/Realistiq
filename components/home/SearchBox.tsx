@@ -5,7 +5,7 @@ import { useParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 
-export default function CTA() {
+export default function SearchBox() {
   const { lang } = useParams();
   return (
     <Link

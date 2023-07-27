@@ -20,32 +20,40 @@ export default function Navbar({ user }: Props) {
   const searchParams = useSearchParams();
   const callbackUrl = `${pathname}?${searchParams.toString()}`;
 
+  const isHomePage = pathname === `/${lang}`;
+
   return (
     <header
       className={cn(
-        "z-30 h-16 w-full bg-transparent",
-        scrolled
-          ? "sticky top-0 border-b backdrop-blur-xl transition-all duration-300 ease-in-out"
-          : "relative"
+        "z-30 h-16 w-full bg-transparent backdrop-blur-xl transition-all duration-300 ease-in-out",
+        scrolled ? "sticky top-0 border-b" : "relative"
       )}
     >
       <div className="container h-full">
         <div className="flex h-full items-center justify-between">
           <Link href={`/${lang}`} className="flex items-center">
-            <Icons.logo className="h-6" />
+            <Icons.logo
+              className="h-6"
+              color={isHomePage ? "white" : "#6D28D9"}
+            />
           </Link>
-          <div className="flex items-center gap-x-2">
+          <div className="flex items-center gap-x-4">
             <Link
               href={{
                 pathname: user ? `/${lang}/create-listing` : `/${lang}/signin`,
                 query: !user ? { callbackUrl: "/create-listing" } : {},
               }}
-              className={cn(
-                buttonVariants({ variant: "outline" }),
-                "hidden sm:block"
-              )}
             >
-              List your property
+              <span
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "hidden sm:block",
+                  isHomePage && "text-white",
+                  "font-semibold"
+                )}
+              >
+                List your property
+              </span>
             </Link>
             {user ? (
               <UserAvatar user={user} />
@@ -55,7 +63,12 @@ export default function Navbar({ user }: Props) {
                   pathname: `/${lang}/signin`,
                   query: { callbackUrl },
                 }}
-                className={cn(buttonVariants({ variant: "ghost" }))}
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "hidden sm:block",
+                  isHomePage && "text-white",
+                  "font-semibold"
+                )}
               >
                 Sign In
               </Link>
