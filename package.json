@@ -56,6 +56,7 @@
     "embla-carousel-react": "8.0.0-rc07",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.7",
+    "fslightbox-react": "^1.7.6",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.241.0",
     "mapbox-gl": "^2.15.0",
@@ -76,6 +77,7 @@
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
     "@tanstack/eslint-plugin-query": "^4.29.9",
+    "@types/fslightbox-react": "^1.7.3",
     "@types/negotiator": "^0.6.1",
     "@types/node": "^20.4.4",
     "eslint-config-prettier": "^8.8.0",

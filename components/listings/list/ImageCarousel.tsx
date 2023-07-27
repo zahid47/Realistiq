@@ -9,6 +9,7 @@ import { Carousel } from "@mantine/carousel";
 import { createStyles, getStylesRef } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import { ListingPhotos } from "@prisma/client";
+import FsLightbox from "fslightbox-react";
 import { getRGBDataURL } from "@/lib/utils";
 import ListingBookMark from "./ListingBookMark";
 
@@ -37,21 +38,25 @@ const essentialStyles = {
 interface Props {
   photos: Array<ListingPhotos>;
   listingId: number;
-  listingUUID: string;
   isSaved: boolean;
 }
 
-export default function ImageCarousel({
-  photos,
-  listingId,
-  listingUUID,
-  isSaved,
-}: Props) {
+export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
   const isSmallScreen = useMediaQuery("(max-width: 1535px)");
   const { classes } = largeScreenStyles();
   const [currentSlide, setCurrentSlide] = useState(1);
   const [isHovering, setIsHovering] = useState(false);
-  const { lang } = useParams();
+  const [lightboxController, setLightboxController] = useState({
+    toggler: false,
+    slide: 1,
+  });
+
+  function openLightboxOnSlide(slide: number) {
+    setLightboxController({
+      toggler: !lightboxController.toggler,
+      slide: slide,
+    });
+  }
 
   return (
     <div
@@ -60,6 +65,12 @@ export default function ImageCarousel({
       onMouseLeave={() => setIsHovering(false)}
       onClick={() => {}} // this is needed to prevent the propagation when clicking on the image (which is a link)
     >
+      <FsLightbox
+        toggler={lightboxController.toggler}
+        type="image"
+        sources={photos.map((photo) => photo.url)}
+        slide={lightboxController.slide}
+      />
       <Carousel
         classNames={!isSmallScreen ? classes : undefined}
         loop
@@ -68,12 +79,17 @@ export default function ImageCarousel({
         styles={essentialStyles}
         onSlideChange={(index) => setCurrentSlide(index + 1)}
       >
-        {photos.map((photo) => (
+        {photos.map((photo, index) => (
           <Carousel.Slide
             key={photo.id}
-            className="relative max-h-[320px] w-[200px] overflow-hidden rounded-lg"
+            className="relative max-h-[320px] w-[200px] cursor-zoom-in overflow-hidden rounded-lg"
           >
-            <Link href={`/${lang}/listings/${listingUUID}`}>
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                openLightboxOnSlide(index + 1);
+              }}
+            >
               <Image
                 key={photo.id}
                 className="object-cover"
@@ -83,9 +99,9 @@ export default function ImageCarousel({
                 placeholder="blur"
                 blurDataURL={getRGBDataURL(209, 209, 209)} // grey
                 // unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
-                unoptimized={true} // (temp) TODO: remove this
+                unoptimized={true} // TODO: remove this
               />
-            </Link>
+            </div>
           </Carousel.Slide>
         ))}
       </Carousel>

@@ -61,7 +61,6 @@ export default function ListingCard({
         <ImageCarousel
           photos={listing.photos}
           listingId={listing.id}
-          listingUUID={listing.uuid}
           isSaved={!!listing.saved.length}
         />
 

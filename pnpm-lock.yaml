@@ -131,6 +131,9 @@ dependencies:
   eslint-config-next:
     specifier: 13.4.7
     version: 13.4.7(eslint@8.42.0)(typescript@5.1.3)
+  fslightbox-react:
+    specifier: ^1.7.6
+    version: 1.7.6(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
   lottie-react:
     specifier: ^2.4.0
     version: 2.4.0(react-dom@18.2.0)(react@18.2.0)
@@ -187,6 +190,9 @@ devDependencies:
   '@tanstack/eslint-plugin-query':
     specifier: ^4.29.9
     version: 4.29.9
+  '@types/fslightbox-react':
+    specifier: ^1.7.3
+    version: 1.7.3
   '@types/negotiator':
     specifier: ^0.6.1
     version: 0.6.1
@@ -2428,6 +2434,12 @@ packages:
   /@tsconfig/node16@1.0.4:
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
 
+  /@types/fslightbox-react@1.7.3:
+    resolution: {integrity: sha512-6q1n54suIR77dTkvXDNBsd3YNK9k71T7AHgKORybi76i+Un2xYaK27bhcWyH1W/4YK/RUDHLIse1Yl8VnzPVlg==}
+    dependencies:
+      '@types/react': 18.2.10
+    dev: true
+
   /@types/geojson@7946.0.10:
     resolution: {integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==}
     dev: false
@@ -2467,7 +2479,6 @@ packages:
 
   /@types/prop-types@15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
-    dev: false
 
   /@types/react-dom@18.2.7:
     resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
@@ -2489,11 +2500,9 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
       csstype: 3.1.2
-    dev: false
 
   /@types/scheduler@0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
-    dev: false
 
   /@types/throttle-debounce@2.1.0:
     resolution: {integrity: sha512-5eQEtSCoESnh2FsiLTxE121IiE60hnMqcb435fShf4bpLRjEu1Eoekht23y6zXS9Ts3l+Szu3TARnTsA0GkOkQ==}
@@ -2980,7 +2989,6 @@ packages:
 
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
-    dev: false
 
   /damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
@@ -3659,6 +3667,18 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /fslightbox-react@1.7.6(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-7LN2GZRLHo2vZGKdH+BZDJUoUDkCRCLlZ5hOwtLtZplmGZQ9nqzpG54cTax7XNjbYGTWLT6BHdMiL5zOEhiRlA==}
+    peerDependencies:
+      prop-types: '>=15.6.2'
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /function-bind@1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
