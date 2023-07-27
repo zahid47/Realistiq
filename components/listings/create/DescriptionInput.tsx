@@ -42,7 +42,7 @@ const EditorArticle = ({ content, onUpdate }: EditorProps) => {
     <RichTextEditor editor={editor}>
       <RichTextEditor.Toolbar>
         <RichTextEditor.ControlsGroup>
-          <RichTextEditor.H1 />
+          <RichTextEditor.H2 />
           <RichTextEditor.Bold />
           <RichTextEditor.Italic />
           <RichTextEditor.Underline />
