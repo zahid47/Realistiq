@@ -1,8 +1,4 @@
-import {
-  DEFAULT_LAT,
-  DEFAULT_LNG,
-  MAPBOX_STYLE,
-} from "@/constants";
+import { DEFAULT_LAT, DEFAULT_LNG, MAPBOX_STYLE } from "@/constants";
 import { env } from "@/env.mjs";
 import type { SearchBoxRetrieveResponse } from "@mapbox/search-js-core";
 import { SearchBox } from "@mapbox/search-js-react";
