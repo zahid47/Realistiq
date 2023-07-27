@@ -2,7 +2,6 @@ import {
   DEFAULT_LAT,
   DEFAULT_LNG,
   MAPBOX_STYLE,
-  MAX_BOUNDS,
 } from "@/constants";
 import { env } from "@/env.mjs";
 import type { SearchBoxRetrieveResponse } from "@mapbox/search-js-core";
@@ -91,7 +90,6 @@ export default function LocationInput({ form }: Props) {
                 mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_TOKEN}
                 mapStyle={MAPBOX_STYLE}
                 dragRotate={false}
-                maxBounds={MAX_BOUNDS}
               >
                 <NavigationControl showCompass={false} />
 

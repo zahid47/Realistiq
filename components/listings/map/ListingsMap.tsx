@@ -11,7 +11,6 @@ import {
   DEFAULT_LNG,
   DEFAULT_ZOOM,
   MAPBOX_STYLE,
-  MAX_BOUNDS,
   MIN_ZOOM,
 } from "@/constants";
 import type { MapRef, ViewState } from "react-map-gl";
@@ -128,7 +127,6 @@ export default function ListingsMap({
       }}
       dragRotate={false}
       minZoom={MIN_ZOOM}
-      maxBounds={MAX_BOUNDS}
     >
       <NavigationControl showCompass={false} />
       {markers}
