@@ -100,6 +100,7 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
                 blurDataURL={getRGBDataURL(209, 209, 209)} // grey
                 // unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
                 unoptimized={true} // TODO: remove this
+                priority={index === 0}
               />
             </div>
           </Carousel.Slide>
