@@ -9,7 +9,7 @@ import type {
 } from "@prisma/client";
 
 export type ExtendedListing = Listing & {
-  user: User;
+  owner: User;
   details: ListingDetails;
   price: ListingPrice;
   location: ListingLocation;
