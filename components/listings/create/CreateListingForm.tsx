@@ -14,7 +14,10 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "@/lib/hooks/use-toast";
-import { createListingSchema, CreateListingSchema } from "@/lib/validators/listing";
+import {
+  createListingSchema,
+  CreateListingSchema,
+} from "@/lib/validators/listing";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Skeleton } from "@/components/ui/skeleton";
