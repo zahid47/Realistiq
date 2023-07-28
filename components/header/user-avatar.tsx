@@ -47,7 +47,7 @@ export default function UserAvatar({ user }: Props) {
         <DropdownMenuItem asChild disabled>
           <Link href={`/${lang}/dashboard`}>
             <Icons.User className="mr-2 h-4 w-4" />
-            <span>Dashborad</span>
+            <span>Dashborad (soon)</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild className="sm:hidden">
