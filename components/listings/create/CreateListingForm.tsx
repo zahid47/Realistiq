@@ -14,7 +14,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "@/lib/hooks/use-toast";
-import { createListingSchema } from "@/lib/validators/listing";
+import { createListingSchema, CreateListingSchema } from "@/lib/validators/listing";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -62,7 +62,7 @@ export default function CreateListingForm() {
   };
 
   const mutation = useMutation({
-    mutationFn: (values: z.infer<typeof createListingSchema>) => {
+    mutationFn: (values: CreateListingSchema) => {
       return createListing(values);
     },
     onError: () => {
@@ -77,7 +77,7 @@ export default function CreateListingForm() {
     },
   });
 
-  const form = useForm<z.infer<typeof createListingSchema>>({
+  const form = useForm<CreateListingSchema>({
     resolver: zodResolver(createListingSchema),
     mode: "all",
     defaultValues: {
