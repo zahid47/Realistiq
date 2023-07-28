@@ -10,6 +10,7 @@ export const getListingsPayload = z.object({
     .catch("Latest"),
   zoom: z.coerce.number().positive().optional(),
   bounds: z.string().optional(),
+  saved: z.enum(["true", "false"]).catch("false"),
 });
 
 export const createListingSchema = z.object({

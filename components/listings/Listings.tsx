@@ -10,6 +10,7 @@ import { GetListingsPayload } from "@/lib/validators/listing";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ListingPagination from "./list/ListingPagination";
 import ListingsList from "./list/ListingsList";
+import SavedToggle from "./list/SavedToggle";
 import SortingDropdown from "./list/SortingDropdown";
 import ListingsMap from "./map/ListingsMap";
 
@@ -46,8 +47,9 @@ export default function Listings({ searchParams }: Props) {
   return (
     <div className="flex">
       <div className="m-auto flex h-[calc(100vh-4rem)] flex-col lg:w-[38%]">
-        <div className="flex items-center justify-between gap-2 border-t border-gray-200 px-2 py-3">
+        <div className="flex items-center justify-start gap-2 border-t border-gray-200 px-2 py-3">
           <SortingDropdown searchParams={searchParams} />
+          <SavedToggle searchParams={searchParams} />
         </div>
         <ScrollArea>
           <ListingsList

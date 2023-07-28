@@ -20,7 +20,13 @@ const sortQueryMap = new Map([
 ]);
 
 export const getListingsFromDB = async (payload: GetListingsPayload) => {
-  const { page, limit = 50, sort, bounds } = getListingsPayload.parse(payload);
+  const {
+    page,
+    limit = 50,
+    sort,
+    bounds,
+    saved,
+  } = getListingsPayload.parse(payload);
 
   const user = await getCurrentUser();
   let parsedBounds: Bounds | null = null;
@@ -33,6 +39,14 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
 
   const filters = {
     status: "ACTIVE",
+    ...(user &&
+      saved === "true" && {
+        saved: {
+          some: {
+            user_id: user.id,
+          },
+        },
+      }),
     ...(parsedBounds && {
       location: {
         AND: [
