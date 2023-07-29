@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { getSearchParamsString } from "@/lib/utils";
 import { GetListingsPayload } from "@/lib/validators/listing";
 import { Icons } from "@/components/ui/Icons";
@@ -11,6 +12,7 @@ interface Props {
 
 export default function SavedToggle({ searchParams }: Props) {
   const [pressed, setPressed] = useState(searchParams.saved);
+  const { status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -26,14 +28,23 @@ export default function SavedToggle({ searchParams }: Props) {
   };
 
   return (
-    <Toggle
-      variant="outline"
-      aria-label="Toggle saved-only"
-      onPressedChange={handlePress}
-      pressed={pressed === "true"}
+    <div
+      title={
+        status !== "authenticated"
+          ? "You need to be signed in to view your saved listings"
+          : ""
+      }
     >
-      <Icons.BookMark className="h-4 w-4" />
-      <span className="ml-2 hidden sm:block">My Saved listings</span>
-    </Toggle>
+      <Toggle
+        variant="outline"
+        aria-label="Toggle saved-only"
+        onPressedChange={handlePress}
+        pressed={pressed === "true"}
+        disabled={status !== "authenticated"}
+      >
+        <Icons.BookMark className="h-4 w-4" />
+        <span className="ml-2 hidden sm:block">My Saved listings</span>
+      </Toggle>
+    </div>
   );
 }
