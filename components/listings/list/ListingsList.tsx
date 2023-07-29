@@ -1,11 +1,13 @@
 "use client";
 
 import { Dispatch, SetStateAction } from "react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { ReturnData } from "@/actions/api-calls/listing";
 import { QueryObserverSuccessResult } from "@tanstack/react-query";
 import { ExtendedListing } from "@/types/db";
-import EmptyState from "@/components/skeletons/EmptyState";
 import ListingsListSkeleton from "@/components/skeletons/ListingsListSkeleton";
+import { buttonVariants } from "@/components/ui/button";
 import ListingCard from "./ListingCard";
 
 interface Props {
@@ -21,16 +23,25 @@ export default function ListingsList({
   setHoveringListingId,
   setPopup,
 }: Props) {
+  const { lang } = useParams();
   const listings = listingsQueryResult.data.listings;
-
   if (listingsQueryResult.isLoading) return <ListingsListSkeleton />;
 
   if (!listings?.length)
     return (
-      <EmptyState
-        title="No listings found"
-        description="Please check back later"
-      />
+      <div className="flex flex-col items-center justify-center">
+        <h1>No listings found</h1>
+        <h3>
+          Please check back later or{" "}
+          {/* need to use <a/> here instead of <Link/> because otherwise map doesn't reset */}
+          <a
+            href={`/${lang}/listings`}
+            className="text-primary underline-offset-4 hover:underline"
+          >
+            clear filters
+          </a>
+        </h3>
+      </div>
     );
 
   return (
