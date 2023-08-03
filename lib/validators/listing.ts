@@ -3,6 +3,7 @@ import { z } from "zod";
 export const boundsSchema = z.array(z.array(z.coerce.number()).length(2));
 
 export const getListingsPayload = z.object({
+  owner_id: z.string().optional(),
   page: z.coerce.number().int().positive().catch(1),
   limit: z.coerce.number().int().positive().optional(),
   sort: z

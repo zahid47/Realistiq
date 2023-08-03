@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getListingsFromDB } from "@/actions/db-calls/listing";
 import { getCurrentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
+import { checkPlan } from "@/lib/plan";
 import {
   getRequestBodyGracefully,
   getSearchParamsObject,
@@ -33,6 +34,25 @@ export async function POST(request: NextRequest) {
     const user = await getCurrentUser();
     if (!user)
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    const { isAgency } = await checkPlan();
+    if (!isAgency) {
+      const { listings: UserLisings } = await getListingsFromDB({
+        owner_id: user.id,
+        limit: 2,
+        page: 1,
+        saved: "false",
+        sort: "Latest",
+      });
+      if (UserLisings.length >= 1) {
+        return NextResponse.json(
+          {
+            error: "You have reached the maximum number of listings",
+          },
+          { status: 403 }
+        );
+      }
+    }
 
     const body = await getRequestBodyGracefully(request);
     const parsedBody = createListingSchema.parse(body);

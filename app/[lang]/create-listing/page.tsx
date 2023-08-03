@@ -7,8 +7,11 @@ CRITERIA:
 */
 
 import { redirect } from "next/navigation";
+import { getListingsFromDB } from "@/actions/db-calls/listing";
 import { getCurrentUser } from "@/lib/auth";
+import { checkPlan } from "@/lib/plan";
 import CreateListingForm from "@/components/listings/create/CreateListingForm";
+import MaxListingsAlert from "./MaxListingsAlert";
 
 interface Props {
   params: {
@@ -19,5 +22,19 @@ interface Props {
 export default async function CreateListing({ params }: Props) {
   const user = await getCurrentUser();
   if (!user) redirect(`/${params.lang}/signin?callbackUrl=/create-listing`);
+
+  const { isAgency } = await checkPlan();
+  if (!isAgency) {
+    const { listings: UserLisings } = await getListingsFromDB({
+      owner_id: user.id,
+      limit: 2,
+      page: 1,
+      saved: "false",
+      sort: "Latest",
+    });
+    if (UserLisings.length >= 1) {
+      return <MaxListingsAlert />;
+    }
+  }
   return <CreateListingForm />;
 }

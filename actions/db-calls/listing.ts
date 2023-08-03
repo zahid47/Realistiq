@@ -26,6 +26,7 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
     sort,
     bounds,
     saved,
+    owner_id,
   } = getListingsPayload.parse(payload);
 
   const user = await getCurrentUser();
@@ -47,6 +48,9 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
           },
         },
       }),
+    ...(owner_id && {
+      user_id: owner_id,
+    }),
     ...(parsedBounds && {
       location: {
         AND: [
@@ -106,7 +110,6 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
           },
         },
       },
-      where: filters,
       take: limit,
       skip: (page - 1) * limit,
       orderBy,
