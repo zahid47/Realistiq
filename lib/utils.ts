@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { PRISMA_ERRORS } from "@/constants";
+import { env } from "@/env.mjs";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import { ClassValue, clsx } from "clsx";
 import Negotiator from "negotiator";
@@ -18,6 +19,14 @@ export const formatPrice = (price: number, currency: string) => {
     maximumFractionDigits: 0,
   }).format(price);
 };
+
+export function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+}
 
 /**
  * @description Returns "s" if the count is greater than 1
@@ -110,4 +119,17 @@ export const parseRelativePath = (relativePath: string) => {
     relativePath = relativePath.slice(0, -1);
   }
   return relativePath;
+};
+
+export const getAbsoluteURL = (relativePath: string) => {
+  // if path starts with / remove it
+  if (relativePath.startsWith("/")) {
+    relativePath = relativePath.slice(1);
+  }
+  // if path ends with / remove it
+  if (relativePath.endsWith("/")) {
+    relativePath = relativePath.slice(0, -1);
+  }
+
+  return `${env.NEXT_PUBLIC_APP_URL}/${relativePath}`;
 };

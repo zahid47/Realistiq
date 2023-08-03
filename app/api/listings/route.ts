@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getListingsFromDB } from "@/actions/db-calls/listing";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import {
   getRequestBodyGracefully,
@@ -31,8 +30,8 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session)
+    const user = await getCurrentUser();
+    if (!user)
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const body = await getRequestBodyGracefully(request);
@@ -47,7 +46,7 @@ export async function POST(request: NextRequest) {
 
     const newListing = await db.listing.create({
       data: {
-        user_id: session.user.id,
+        user_id: user.id,
         details: {
           create: {
             description: parsedBody.description,

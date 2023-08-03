@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import type { Session } from "next-auth";
+import type { User } from "next-auth";
 import { signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -13,12 +13,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Icons } from "../ui/Icons";
+import PlanBadge from "./PlanBadge";
 
 interface Props {
-  user?: Session["user"];
+  user?: User & { id: string };
+  isAgency: boolean;
 }
 
-export default function UserAvatar({ user }: Props) {
+export default function UserAvatar({ user, isAgency }: Props) {
   const { lang } = useParams();
 
   return (
@@ -37,17 +39,20 @@ export default function UserAvatar({ user }: Props) {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{user?.name}</p>
+            <div className="flex items-center space-x-1">
+              <p className="text-sm font-medium leading-none">{user?.name}</p>
+              <PlanBadge isAgency={isAgency} />
+            </div>
             <p className="text-xs leading-none text-muted-foreground">
               {user?.email}
             </p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild disabled>
+        <DropdownMenuItem asChild>
           <Link href={`/${lang}/dashboard`}>
             <Icons.User className="mr-2 h-4 w-4" />
-            <span>Dashborad (soon)</span>
+            <span>Dashborad</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild className="sm:hidden">

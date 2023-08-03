@@ -1,4 +1,5 @@
 import {
+  AlertTriangle,
   ArrowDownUp,
   Bath,
   BedSingle,
@@ -48,4 +49,5 @@ export const Icons = {
   Trash: Trash2,
   Add: PlusSquare,
   Loader: Loader2,
+  Warning: AlertTriangle,
 };

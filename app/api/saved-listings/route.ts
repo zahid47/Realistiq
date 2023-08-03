@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
 import { z } from "zod";
-import { authOptions } from "@/lib/auth";
+import { getCurrentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { getRequestBodyGracefully, sendNextError } from "@/lib/utils";
 
@@ -11,8 +10,8 @@ const bodySchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
-    if (!session)
+    const user = await getCurrentUser();
+    if (!user)
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const body = await getRequestBodyGracefully(request);
@@ -22,7 +21,7 @@ export async function POST(request: NextRequest) {
       await db.savedListings.create({
         data: {
           listing_id: parsedBody.listingId,
-          user_id: session?.user?.id,
+          user_id: user?.id,
         },
       });
     } catch (err: any) {
@@ -33,7 +32,7 @@ export async function POST(request: NextRequest) {
         await db.savedListings.delete({
           where: {
             user_id_listing_id: {
-              user_id: session?.user?.id,
+              user_id: user?.id,
               listing_id: parsedBody.listingId,
             },
           },

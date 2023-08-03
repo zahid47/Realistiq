@@ -12,7 +12,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createStyles, Stepper } from "@mantine/core";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { toast } from "@/lib/hooks/use-toast";
 import {
   createListingSchema,

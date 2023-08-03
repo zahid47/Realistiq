@@ -11,9 +11,10 @@ import UserAvatar from "./user-avatar";
 
 interface Props {
   user?: User & { id: string };
+  isAgency: boolean;
 }
 
-export default function Navbar({ user }: Props) {
+export default function Navbar({ user, isAgency }: Props) {
   const scrolled = useScroll(30);
   const { lang } = useParams();
   const pathname = usePathname();
@@ -56,7 +57,7 @@ export default function Navbar({ user }: Props) {
               </span>
             </Link>
             {user ? (
-              <UserAvatar user={user} />
+              <UserAvatar user={user} isAgency={isAgency} />
             ) : (
               <Link
                 href={{
