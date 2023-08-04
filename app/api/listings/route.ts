@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
 
     const newListing = await db.listing.create({
       data: {
-        user_id: user.id,
+        owner_id: user.id,
         details: {
           create: {
             description: parsedBody.description,

@@ -84,8 +84,8 @@ model Listing {
   id   Int    @id @default(autoincrement())
   uuid String @unique @default(cuid())
 
-  user_id String
-  owner   User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  owner_id String
+  owner   User   @relation(fields: [owner_id], references: [id], onDelete: Cascade)
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())

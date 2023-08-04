@@ -41,28 +41,42 @@ async function main() {
     return;
   }
 
-  // get the first user from db
-  const user = await db.user.findFirst();
+  console.log("Creating seed user...");
 
-  if (!user) {
-    throw new Error("❌ No user found");
+  let seedUser = await db.user.findUnique({
+    where: {
+      id: "seed-user",
+    },
+  });
+
+  if (!seedUser) {
+    seedUser = await db.user.create({
+      data: {
+        id: "seed-user",
+        name: "Test User",
+        email: "testuser@realistiq.com",
+        image: "https://avatars.githubusercontent.com/u/28688883?v=4",
+      },
+    });
   }
+
+  const user = seedUser;
 
   console.log("Clearing existing data...");
 
   await Promise.all([
-    db.listing.deleteMany({}),
-    db.listingDetails.deleteMany({}),
-    db.listingPrice.deleteMany({}),
-    db.listingLocation.deleteMany({}),
-    db.listingPhotos.deleteMany({}),
+    db.listing.deleteMany(),
+    db.listingDetails.deleteMany(),
+    db.listingPrice.deleteMany(),
+    db.listingLocation.deleteMany(),
+    db.listingPhotos.deleteMany(),
   ]);
 
   console.log("Seeding...");
 
   const fakeListings = Array.from({ length: 50 }).map(() => {
     return {
-      user_id: user.id,
+      owner_id: user.id,
       details: {
         create: {
           description: generateDescription(),
