@@ -2,6 +2,7 @@ import { env } from "@/env.mjs";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { getServerSession, NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import { db } from "@/lib/db";
 
 export const authOptions: NextAuthOptions = {
@@ -9,13 +10,14 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  pages: {
-    signIn: "/signin",
-  },
   providers: [
     GitHubProvider({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
+    }),
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   callbacks: {

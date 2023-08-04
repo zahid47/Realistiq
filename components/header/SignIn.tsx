@@ -13,17 +13,22 @@ export default function SignIn() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
-  const handleLogin = async () => {
+  const handleLogin = async (provider: "github" | "google") => {
     setLoading(true);
     try {
-      signIn("github", { callbackUrl });
+      signIn(provider, { callbackUrl });
     } catch {
       toast({
         variant: "destructive",
         title: "Something went wrong!",
         description: "There was an error while signing in. Please try again.",
         action: (
-          <ToastAction altText="Retry" onClick={handleLogin}>
+          <ToastAction
+            altText="Retry"
+            onClick={() => {
+              handleLogin(provider);
+            }}
+          >
             Retry
           </ToastAction>
         ),
@@ -37,7 +42,21 @@ export default function SignIn() {
     <div className="flex flex-col items-center justify-center gap-4">
       <Button
         variant="outline"
-        onClick={handleLogin}
+        onClick={() => {
+          handleLogin("google");
+        }}
+        disabled={loading}
+        isLoading={loading}
+        className="flex items-center gap-2"
+      >
+        <Icons.Google size={20} color="#334155" />
+        <span>Continue with Google</span>
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() => {
+          handleLogin("github");
+        }}
         disabled={loading}
         isLoading={loading}
         className="flex items-center gap-2"
