@@ -1,3 +1,4 @@
 - run cron job to hide extra listings if the plan is expired
+    - or maybe instead of cron job, we can look for stripe webhook for plan cancellation?
 - google oauth
 - explore other stripe payment methods like klarna
