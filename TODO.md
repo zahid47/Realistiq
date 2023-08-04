@@ -1,5 +1,3 @@
-- run cron job to send warning emails if they have expiring plans and more than 1 listing
-    - hide extra listings if the plan is expired already and send email
+- run cron job to hide extra listings if the plan is expired
 - google oauth
-- welcome email
 - explore other stripe payment methods like klarna

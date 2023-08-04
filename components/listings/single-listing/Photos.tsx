@@ -1,6 +1,6 @@
 import { useState } from "react";
-// import { env } from "@/env.mjs";
 import Image from "next/image";
+import { env } from "@/env.mjs";
 import { ListingPhotos } from "@prisma/client";
 import FsLightbox from "fslightbox-react";
 import { getRGBDataURL } from "@/lib/utils";
@@ -47,8 +47,7 @@ export default function Photos({ photos }: Props) {
               height={480}
               placeholder="blur"
               blurDataURL={getRGBDataURL(209, 209, 209)} // grey
-              // unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
-              unoptimized={true} // TODO: remove this
+              unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
               sizes="(max-width: 640px) 100vw,
                   (max-width: 1280px) 50vw,
                   (max-width: 1536px) 33vw,

@@ -1,10 +1,6 @@
-// TODO: add lightbox to Image comp
-
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-// import { env } from "@/env.mjs";
+import { env } from "@/env.mjs";
 import { Carousel } from "@mantine/carousel";
 import { createStyles, getStylesRef } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
@@ -98,8 +94,7 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
                 alt={photo.alt}
                 placeholder="blur"
                 blurDataURL={getRGBDataURL(209, 209, 209)} // grey
-                // unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
-                unoptimized={true} // TODO: remove this
+                unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
                 priority={index === 0}
               />
             </div>
