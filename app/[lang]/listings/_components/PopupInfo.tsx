@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { env } from "@/env.mjs";
 import { ExtendedListing } from "@/types/db";
 import { formatPrice, getRGBDataURL, pluralized } from "@/lib/utils";
 
@@ -19,7 +18,7 @@ export default function PopupInfo({ popup }: Props) {
           className="rounded-sm"
           placeholder="blur"
           blurDataURL={getRGBDataURL(209, 209, 209)} // grey
-          unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
+          unoptimized={true} // can't afford vercel image optimization lol
         />
       </div>
       <div>

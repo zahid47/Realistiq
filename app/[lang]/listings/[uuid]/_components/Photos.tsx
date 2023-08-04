@@ -47,7 +47,7 @@ export default function Photos({ photos }: Props) {
               height={480}
               placeholder="blur"
               blurDataURL={getRGBDataURL(209, 209, 209)} // grey
-              unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
+              unoptimized={true} // can't afford vercel image optimization lol
               sizes="(max-width: 640px) 100vw,
                   (max-width: 1280px) 50vw,
                   (max-width: 1536px) 33vw,

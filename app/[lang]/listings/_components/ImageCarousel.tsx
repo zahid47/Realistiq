@@ -94,7 +94,7 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
                 alt={photo.alt}
                 placeholder="blur"
                 blurDataURL={getRGBDataURL(209, 209, 209)} // grey
-                unoptimized={env.NEXT_PUBLIC_NODE_ENV === "development"}
+                unoptimized={true} // can't afford vercel image optimization lol
                 priority={index === 0}
               />
             </div>
