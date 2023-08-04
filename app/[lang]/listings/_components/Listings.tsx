@@ -11,15 +11,15 @@ import { getListings } from "@/actions/api-calls/listing";
 import { useQuery } from "@tanstack/react-query";
 import { X } from "lucide-react";
 import { ExtendedListing } from "@/types/db";
-import { getSearchParamsObject, getSearchParamsString } from "@/lib/utils";
+import { getSearchParamsString } from "@/lib/utils";
 import { GetListingsPayload } from "@/lib/validators/listing";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button, buttonVariants } from "../ui/button";
-import ListingPagination from "./list/ListingPagination";
-import ListingsList from "./list/ListingsList";
-import SavedToggle from "./list/SavedToggle";
-import SortingDropdown from "./list/SortingDropdown";
-import ListingsMap from "./map/ListingsMap";
+import { Button } from "../../../../components/ui/button";
+import ListingPagination from "./ListingPagination";
+import ListingsList from "./ListingsList";
+import ListingsMap from "./ListingsMap";
+import SavedToggle from "./SavedToggle";
+import SortingDropdown from "./SortingDropdown";
 
 interface Props {
   searchParams: GetListingsPayload;

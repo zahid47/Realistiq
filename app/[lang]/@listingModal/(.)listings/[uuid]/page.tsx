@@ -1,4 +1,4 @@
-import ListingDetails from "@/components/listings/single-listing/SingleListing";
+import ListingDetails from "@/app/[lang]/listings/[uuid]/_components/SingleListing";
 import InterceptedDialog from "@/components/ui/intercepted-dialog";
 
 interface Props {

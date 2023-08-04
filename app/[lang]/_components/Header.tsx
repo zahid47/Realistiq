@@ -1,6 +1,6 @@
 import { getCurrentUser } from "@/lib/auth";
 import { checkPlan } from "@/lib/plan";
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 
 async function Header() {
   const user = await getCurrentUser();

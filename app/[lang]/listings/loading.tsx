@@ -1,5 +1,5 @@
-import ListingsListSkeleton from "@/components/skeletons/ListingsListSkeleton";
-import ListingsMapSkeleton from "@/components/skeletons/ListingsMapSkeleton";
+import ListingsListSkeleton from "./_components/ListingsListSkeleton";
+import ListingsMapSkeleton from "./_components/ListingsMapSkeleton";
 
 export default function loading() {
   return (

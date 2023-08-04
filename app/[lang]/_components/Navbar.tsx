@@ -7,7 +7,7 @@ import useScroll from "@/lib/hooks/use-scroll";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "@/components/ui/Icons";
-import UserAvatar from "./user-avatar";
+import UserAvatar from "./UserAvatar";
 
 interface Props {
   user?: User & { id: string };

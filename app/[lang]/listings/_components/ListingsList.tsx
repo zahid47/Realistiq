@@ -1,14 +1,12 @@
 "use client";
 
 import { Dispatch, SetStateAction } from "react";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ReturnData } from "@/actions/api-calls/listing";
 import { QueryObserverSuccessResult } from "@tanstack/react-query";
 import { ExtendedListing } from "@/types/db";
-import ListingsListSkeleton from "@/components/skeletons/ListingsListSkeleton";
-import { buttonVariants } from "@/components/ui/button";
 import ListingCard from "./ListingCard";
+import ListingsListSkeleton from "./ListingsListSkeleton";
 
 interface Props {
   listingsQueryResult: QueryObserverSuccessResult<ReturnData, unknown>;

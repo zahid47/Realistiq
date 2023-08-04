@@ -1,7 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import heroImage from "@/public/hero.jpg";
+import { Search } from "lucide-react";
 import { getLanguage } from "@/lib/getLanguage";
-import SearchBox from "@/components/home/SearchBox";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 
 interface Props {
   params: {
@@ -61,7 +64,14 @@ export default async function Home({ params }: Props) {
           <Badge t={t} />
           <Text t={t} />
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <SearchBox />
+            <Link
+              href={{
+                pathname: `/${params.lang}/listings`,
+              }}
+              className={cn(buttonVariants({ variant: "default", size: "lg" }))}
+            >
+              <Search className="mr-2 h-4 w-4" /> Browse Listings
+            </Link>
           </div>
         </div>
       </div>

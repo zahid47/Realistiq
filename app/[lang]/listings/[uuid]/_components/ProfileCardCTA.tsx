@@ -3,7 +3,7 @@ import { ExtendedListing } from "@/types/db";
 import { cn, formatPrice } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { buttonVariants } from "@/components/ui/button";
-import ListingPriceComp from "../list/ListingPrice";
+import ListingPriceComp from "../../_components/ListingPrice";
 
 interface Props {
   listing: ExtendedListing;

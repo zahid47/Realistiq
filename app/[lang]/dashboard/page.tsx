@@ -1,6 +1,6 @@
 import { checkPlan } from "@/lib/plan";
-import PlanCard from "./PlanCard";
-import TestAppAlert from "./TestAppAlert";
+import PlanCard from "./_components/PlanCard";
+import TestAppAlert from "./_components/TestAppAlert";
 
 export default async function Dashboard() {
   const plan = await checkPlan();

@@ -1,5 +1,5 @@
 import { ExtendedListing } from "@/types/db";
-import ListingBadges from "../list/ListingBadges";
+import ListingBadges from "../../_components/ListingBadges";
 
 interface Props {
   listing: ExtendedListing;

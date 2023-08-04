@@ -18,7 +18,7 @@ import Map, { Marker, NavigationControl, Popup } from "react-map-gl";
 import { ExtendedListing } from "@/types/db";
 import { getSearchParamsString } from "@/lib/utils";
 import type { Bounds, GetListingsPayload } from "@/lib/validators/listing";
-import ListingsMapSkeleton from "@/components/skeletons/ListingsMapSkeleton";
+import ListingsMapSkeleton from "./ListingsMapSkeleton";
 import MarkerIcon from "./MarkerIcon";
 import PopupInfo from "./PopupInfo";
 

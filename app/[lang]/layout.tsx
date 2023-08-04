@@ -3,10 +3,10 @@ import { Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import NextTopLoader from "nextjs-toploader";
 import { siteConfig } from "@/config/site";
-import Header from "@/components/header";
-import NextAuthProvider from "@/components/providers/NextAuthProvider";
-import QueryClientWrapper from "@/components/providers/QueryClientProvider";
 import { Toaster } from "@/components/ui/toaster";
+import Header from "./_components/Header";
+import NextAuthProvider from "./_components/NextAuthProvider";
+import QueryClientWrapper from "./_components/QueryClientProvider";
 
 const font = Poppins({
   weight: ["400", "500", "600", "700"],
