@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { getListing } from "@/actions/api-calls/listing";
 import { useQuery } from "@tanstack/react-query";
+import { Icons } from "@/components/ui/Icons";
 import BookmarkShare from "./BookmarkShare";
 import Description from "./Description";
 import Details from "./Details";
@@ -23,6 +24,14 @@ export default function SingleListing({ uuid }: Props) {
   const [saved, setSaved] = useState(
     !!listingDetailsQueryResult.data?.saved.length
   );
+
+  if (listingDetailsQueryResult.isLoading) {
+    return (
+      <div>
+        <Icons.Loader className="m-auto animate-spin" /> Loading details...
+      </div>
+    );
+  }
 
   if (!listingDetailsQueryResult.isSuccess) return null;
 
