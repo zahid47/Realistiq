@@ -77,13 +77,13 @@ export default function Listings({ searchParams }: Props) {
             setHoveringListingId={setHoveringListingId}
             setPopup={setPopup}
           />
-          <div className="my-4 mr-2 flex justify-end">
-            <ListingPagination
-              meta={listingsQueryResult.data?.meta}
-              onPageChange={onPageChange}
-            />
-          </div>
         </ScrollArea>
+        <div className="my-4 mr-2 flex justify-end">
+          <ListingPagination
+            meta={listingsQueryResult.data?.meta}
+            onPageChange={onPageChange}
+          />
+        </div>
       </div>
       <div className="mb-2 mr-2 hidden overflow-hidden rounded-lg lg:block lg:w-[62%]">
         <ListingsMap
