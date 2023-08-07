@@ -1,8 +1,19 @@
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth";
 import { checkPlan } from "@/lib/plan";
 import PlanCard from "./_components/PlanCard";
 import TestAppAlert from "./_components/TestAppAlert";
 
-export default async function Dashboard() {
+interface Props {
+  params: {
+    lang: string;
+  };
+}
+
+export default async function Dashboard({ params }: Props) {
+  const user = await getCurrentUser();
+  if (!user) redirect(`/${params.lang}/`);
+
   const plan = await checkPlan();
 
   return (
