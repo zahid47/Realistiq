@@ -134,6 +134,8 @@ export default function ImageInput({ form, uploading, setUploading }: Props) {
                         <button
                           type="button"
                           onClick={() => {
+                            //TODO: delete from cloudinary as well
+                            // Also, delete the image if user doesnt submit the form
                             const newImages = [...photosWatcher];
                             newImages.splice(index, 1);
                             field.onChange(newImages);

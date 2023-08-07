@@ -43,7 +43,7 @@ export const createListingSchema = z.object({
 
   photos: z
     .array(z.string().nonempty({ message: "Please upload at least 1 photo!" }))
-    .min(1, { message: "Please upload at least 1 photo!" })
+    .min(2, { message: "Please upload at least 2 photos!" })
     .max(20, { message: "You can upload maximum 20 photos." }),
 
   amount: z.coerce

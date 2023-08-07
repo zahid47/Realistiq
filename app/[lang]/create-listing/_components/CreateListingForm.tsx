@@ -4,7 +4,7 @@
 TODO:
 1. Add preview before creating
 */
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import dynamic from "next/dynamic";
 import { useParams, useRouter } from "next/navigation";
 import { createListing } from "@/actions/api-calls/listing";
@@ -57,10 +57,17 @@ export default function CreateListingForm() {
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
-  const handleNextStep = () => {
-    form.trigger(steps[active]).then(async (isValid) => {
-      isValid && nextStep();
-    });
+  const handleNextStep = (
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) => {
+    e.preventDefault();
+    if (active === steps.length - 1) {
+      mutation.mutate(form.getValues());
+    } else {
+      form.trigger(steps[active]).then(async (isValid) => {
+        isValid && nextStep();
+      });
+    }
   };
 
   const mutation = useMutation({
@@ -96,7 +103,8 @@ export default function CreateListingForm() {
       <div className="mx-auto max-w-2xl space-y-6 px-4 sm:pt-12">
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit((values) => mutation.mutate(values))}
+            // FIXME: onSubmit not playing well with multi-step forms, so handling submit with button onClick for now
+            // onSubmit={form.handleSubmit((values) => mutation.mutate(values))}
             className="space-y-8"
           >
             <>
@@ -139,8 +147,8 @@ export default function CreateListingForm() {
                 <Button
                   isLoading={mutation.isLoading || uploading}
                   disabled={mutation.isLoading || uploading}
-                  type={active === steps.length - 1 ? "submit" : "button"}
-                  onClick={handleNextStep}
+                  type="button"
+                  onClick={(e) => handleNextStep(e)}
                 >
                   {active === steps.length - 1 ? "Submit" : "Next"}
                 </Button>
