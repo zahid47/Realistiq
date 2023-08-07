@@ -66,7 +66,7 @@ export default function Listings({ searchParams }: Props) {
           <Button variant="outline" disabled={!isFiltering}>
             <a href={`/${lang}/listings`} className="flex items-center gap-1">
               <X className="h-4 w-4" />{" "}
-              <span className="hidden sm:block">Clear filters</span>
+              <span className="hidden 2xl:block">Clear filters</span>
             </a>
           </Button>
         </div>
