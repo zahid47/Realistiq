@@ -1,3 +1,10 @@
+import { redirect } from "next/navigation";
+import { getListingsFromDB } from "@/actions/db-calls/listing";
+import { getCurrentUser } from "@/lib/auth";
+import { checkPlan } from "@/lib/plan";
+import CreateListingForm from "./_components/CreateListingForm";
+import MaxListingsAlert from "./_components/MaxListingsAlert";
+
 /*
 TODO:
 CRITERIA:
@@ -6,12 +13,7 @@ CRITERIA:
 3. if not signed in, ask to sign in before creating listing, and after sign in, load draft
 */
 
-import { redirect } from "next/navigation";
-import { getListingsFromDB } from "@/actions/db-calls/listing";
-import { getCurrentUser } from "@/lib/auth";
-import { checkPlan } from "@/lib/plan";
-import CreateListingForm from "./_components/CreateListingForm";
-import MaxListingsAlert from "./_components/MaxListingsAlert";
+export const dynamic = "force-dynamic";
 
 interface Props {
   params: {

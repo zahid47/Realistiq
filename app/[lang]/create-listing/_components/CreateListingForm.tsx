@@ -62,7 +62,9 @@ export default function CreateListingForm() {
   ) => {
     e.preventDefault();
     if (active === steps.length - 1) {
-      mutation.mutate(form.getValues());
+      form.trigger(steps[active]).then(async (isValid) => {
+        isValid && mutation.mutate(form.getValues());
+      });
     } else {
       form.trigger(steps[active]).then(async (isValid) => {
         isValid && nextStep();
