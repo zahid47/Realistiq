@@ -15,7 +15,7 @@ interface Props {
 const Badge = ({ t }: { t: Awaited<ReturnType<typeof getLanguage>> }) => {
   return (
     <div className="mb-2 flex justify-center">
-      <div className="text-mute relative rounded-full px-3 py-1 text-sm leading-6 ring-1 ring-amber-400/10 hover:ring-amber-400/20">
+      <div className="text-mute relative rounded-full px-3 py-1 text-sm leading-6 ring-1 ring-amber-400/10 animate-in slide-in-from-top duration-300 ease-linear hover:ring-amber-400/20">
         <span className="animate-text-shimmer bg-[linear-gradient(110deg,#fef3c7,45%,#fbbf24,55%,#f59e0b)] bg-[length:250%_100%] bg-clip-text text-transparent">
           {t["Realistiq is open source"]} &#8594;
         </span>
@@ -34,10 +34,10 @@ const Badge = ({ t }: { t: Awaited<ReturnType<typeof getLanguage>> }) => {
 const Text = ({ t }: { t: Awaited<ReturnType<typeof getLanguage>> }) => {
   return (
     <div>
-      <h1 className="text-4xl font-bold tracking-tight text-slate-50 sm:text-6xl">
+      <h1 className="text-4xl font-bold tracking-tight text-slate-50 animate-in slide-in-from-top duration-300 ease-linear sm:text-6xl">
         {t["Stress free home renting"]}
       </h1>
-      <p className="mt-6 text-xl leading-8 text-slate-100">
+      <p className="mt-6 text-xl leading-8 text-slate-100 animate-in slide-in-from-top duration-300 ease-linear">
         {
           t[
             "Find stress-free rental with Realistiq. Explore premium listings, connect with trusted landlords, and experience a hassle-free renting process."
@@ -63,7 +63,7 @@ export default async function Home({ params }: Props) {
         <div className="mx-auto max-w-3xl text-center">
           <Badge t={t} />
           <Text t={t} />
-          <div className="mt-10 flex items-center justify-center gap-x-6">
+          <div className="mt-10 flex items-center justify-center gap-x-6 animate-in slide-in-from-bottom duration-300 ease-linear">
             <Link
               href={{
                 pathname: `/${params.lang}/listings`,
