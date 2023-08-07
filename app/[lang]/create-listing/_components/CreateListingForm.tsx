@@ -4,7 +4,7 @@
 TODO:
 1. Add preview before creating
 */
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useParams, useRouter } from "next/navigation";
 import { createListing } from "@/actions/api-calls/listing";
@@ -43,6 +43,10 @@ export default function CreateListingForm() {
   const [uploading, setUploading] = useState(false);
   const router = useRouter();
   const { lang } = useParams();
+
+  useEffect(() => {
+    router.refresh(); // FIXME: this is a hack to combat next.js aggressively caching pages. "force-dynamic" doesn't work
+  }, [router]);
 
   const useStyles = createStyles((theme) => ({
     steps: {
