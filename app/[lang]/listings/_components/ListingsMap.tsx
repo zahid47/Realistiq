@@ -1,23 +1,24 @@
 "use client";
 
+import { ReturnData } from "@/actions/api-calls/listing";
+import { DEFAULT_LAT, DEFAULT_LNG, DEFAULT_ZOOM, MIN_ZOOM } from "@/constants";
 import { env } from "@/env.mjs";
 import { QueryObserverSuccessResult } from "@tanstack/react-query";
+import bbox from "@turf/bbox";
+import { ExtendedListing } from "@/types/db";
+import MAP_STYLE from "@/lib/map-style-with-overlay";
+import { getSearchParamsString } from "@/lib/utils";
+import type { Bounds, GetListingsPayload } from "@/lib/validators/listing";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { ReturnData } from "@/actions/api-calls/listing";
-import {
-  DEFAULT_LAT,
-  DEFAULT_LNG,
-  DEFAULT_ZOOM,
-  MAPBOX_STYLE,
-  MIN_ZOOM,
-} from "@/constants";
-import type { MapRef, ViewState } from "react-map-gl";
+import type {
+  MapboxStyle,
+  MapLayerMouseEvent,
+  MapRef,
+  ViewState,
+} from "react-map-gl";
 import Map, { Marker, NavigationControl, Popup } from "react-map-gl";
-import { ExtendedListing } from "@/types/db";
-import { getSearchParamsString } from "@/lib/utils";
-import type { Bounds, GetListingsPayload } from "@/lib/validators/listing";
 import ListingsMapSkeleton from "./ListingsMapSkeleton";
 import MarkerIcon from "./MarkerIcon";
 import PopupInfo from "./PopupInfo";
@@ -70,6 +71,7 @@ export default function ListingsMap({
     longitude,
     zoom,
   });
+  const [isDragging, setIsDragging] = useState(false); // when we are dragging we disable the popup for performance reasons
 
   const addBoundsToUrl = (bounds: Bounds) => {
     const newSearchParams = {
@@ -81,6 +83,23 @@ export default function ListingsMap({
     const qs = getSearchParamsString(newSearchParams);
     const url = `${pathname}?${qs}`;
     router.push(url);
+  };
+
+  const zoomToBounds = (event: MapLayerMouseEvent) => {
+    // @ts-ignore
+    const feature = event.features[0];
+    if (feature) {
+      // calculate the bounding box of the feature
+      const [minLng, minLat, maxLng, maxLat] = bbox(feature);
+
+      mapRef.current?.fitBounds(
+        [
+          [minLng, minLat],
+          [maxLng, maxLat],
+        ],
+        { padding: 40, duration: 1000 }
+      );
+    }
   };
 
   const markers = useMemo(
@@ -97,7 +116,7 @@ export default function ListingsMap({
               setClickedListingId(listing.id);
             }}
             onMouseEnter={() => {
-              setPopup(listing);
+              if (!isDragging) setPopup(listing);
             }}
             onMouseLeave={() => {
               setPopup(null);
@@ -107,7 +126,7 @@ export default function ListingsMap({
           />
         </Marker>
       )),
-    [hoveringListingId, listings, setClickedListingId, setPopup]
+    [hoveringListingId, isDragging, listings, setClickedListingId, setPopup]
   );
 
   if (listingsQueryResult.isLoading) return <ListingsMapSkeleton />;
@@ -116,14 +135,20 @@ export default function ListingsMap({
     <Map
       {...viewState}
       mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_TOKEN}
-      mapStyle={MAPBOX_STYLE}
       ref={mapRef}
+      mapStyle={MAP_STYLE as unknown as MapboxStyle}
+      onClick={zoomToBounds}
+      interactiveLayerIds={["us-states-fill"]}
+      onMoveStart={() => {
+        setIsDragging(true);
+      }}
       onMove={(e) => setViewState(e.viewState)}
       onMoveEnd={() => {
         if (mapRef.current) {
           const bounds = mapRef.current.getMap().getBounds().toArray();
           addBoundsToUrl(bounds);
         }
+        setIsDragging(false);
       }}
       dragRotate={false}
       minZoom={MIN_ZOOM}

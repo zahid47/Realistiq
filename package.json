@@ -48,6 +48,7 @@
     "@tiptap/pm": "^2.0.3",
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
+    "@turf/bbox": "^6.5.0",
     "@types/react": "18.2.10",
     "@types/react-dom": "18.2.7",
     "@vercel/analytics": "^1.0.1",
