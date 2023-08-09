@@ -85,9 +85,9 @@ export default function ListingsMap({
     router.push(url);
   };
 
-  const zoomToBounds = (event: MapLayerMouseEvent) => {
+  const zoomToBounds = (e: MapLayerMouseEvent) => {
     // @ts-ignore
-    const feature = event.features[0];
+    const feature = e.features[0];
     if (feature) {
       // calculate the bounding box of the feature
       const [minLng, minLat, maxLng, maxLat] = bbox(feature);
