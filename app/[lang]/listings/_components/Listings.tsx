@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   useParams,
   usePathname,
@@ -46,12 +46,15 @@ export default function Listings({ searchParams }: Props) {
     null
   );
 
-  const onPageChange = (page: number) => {
-    const newSearchParams = { ...searchParams, page };
-    const qs = getSearchParamsString(newSearchParams);
-    const url = `${pathname}?${qs}`;
-    router.push(url);
-  };
+  const onPageChange = useCallback(
+    (page: number) => {
+      const newSearchParams = { ...searchParams, page };
+      const qs = getSearchParamsString(newSearchParams);
+      const url = `${pathname}?${qs}`;
+      router.push(url);
+    },
+    [pathname, router, searchParams]
+  );
 
   if (!listingsQueryResult.isSuccess) return null;
 
