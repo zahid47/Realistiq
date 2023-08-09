@@ -26,7 +26,7 @@ export default function SignIn() {
           <ToastAction
             altText="Retry"
             onClick={() => {
-              handleLogin(provider);
+              signIn(provider, { callbackUrl });
             }}
           >
             Retry
