@@ -10,7 +10,14 @@ import MAP_STYLE from "@/lib/map-style-with-overlay";
 import { getSearchParamsString } from "@/lib/utils";
 import type { Bounds, GetListingsPayload } from "@/lib/validators/listing";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { usePathname, useRouter } from "next/navigation";
 import type {
   MapboxStyle,
@@ -41,13 +48,14 @@ export default function ListingsMap({
   searchParams,
 }: Props) {
   const listings = listingsQueryResult.data.listings;
+  const zoom = searchParams.zoom ? searchParams.zoom : DEFAULT_ZOOM;
+  const bounds =
+    searchParams.bounds && (JSON.parse(searchParams.bounds) as Bounds);
+
+  const [isDragging, setIsDragging] = useState(false); // when we are dragging we disable the popup for performance reasons
   const mapRef = useRef<MapRef>(null);
   const router = useRouter();
   const pathname = usePathname();
-
-  const bounds =
-    searchParams.bounds && (JSON.parse(searchParams.bounds) as Bounds);
-  const zoom = searchParams.zoom ? searchParams.zoom : DEFAULT_ZOOM;
 
   // this calculation is not 100% accurate
   // I think it's because of division being not precise
@@ -71,21 +79,23 @@ export default function ListingsMap({
     longitude,
     zoom,
   });
-  const [isDragging, setIsDragging] = useState(false); // when we are dragging we disable the popup for performance reasons
 
-  const addBoundsToUrl = (bounds: Bounds) => {
-    const newSearchParams = {
-      ...searchParams,
-      bounds: JSON.stringify(bounds),
-      zoom: viewState.zoom,
-      page: 1, // reset page to 1 when bounds change to avoid showing empty page
-    };
-    const qs = getSearchParamsString(newSearchParams);
-    const url = `${pathname}?${qs}`;
-    router.push(url);
-  };
+  const addBoundsToUrl = useCallback(
+    (bounds: Bounds) => {
+      const newSearchParams = {
+        ...searchParams,
+        bounds: JSON.stringify(bounds),
+        zoom: viewState.zoom,
+        page: 1, // reset page to 1 when bounds change to avoid showing empty page
+      };
+      const qs = getSearchParamsString(newSearchParams);
+      const url = `${pathname}?${qs}`;
+      router.push(url);
+    },
+    [pathname, router, searchParams, viewState.zoom]
+  );
 
-  const zoomToBounds = (e: MapLayerMouseEvent) => {
+  const zoomToBounds = useCallback((e: MapLayerMouseEvent) => {
     // @ts-ignore
     const feature = e.features[0];
     if (feature) {
@@ -100,7 +110,7 @@ export default function ListingsMap({
         { padding: 40, duration: 1000 }
       );
     }
-  };
+  }, []);
 
   const markers = useMemo(
     () =>
