@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Image from "next/image";
-import { env } from "@/env.mjs";
 import { Carousel } from "@mantine/carousel";
 import { createStyles, getStylesRef } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
@@ -59,7 +58,6 @@ export default function ImageCarousel({ photos, listingId, isSaved }: Props) {
       className="relative"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-      onClick={() => {}} // this is needed to prevent the propagation when clicking on the image (which is a link)
     >
       <FsLightbox
         toggler={lightboxController.toggler}

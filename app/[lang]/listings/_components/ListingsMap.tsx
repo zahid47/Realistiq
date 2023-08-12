@@ -125,6 +125,7 @@ export default function ListingsMap({
             onClick={() => {
               setClickedListingId(listing.id);
             }}
+            // FIXME: we are changing the popup on hover, but this causes the map to re-render, this causes huge performance hits.
             onMouseEnter={() => {
               if (!isDragging) setPopup(listing);
             }}
