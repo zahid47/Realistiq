@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { checkPlan } from "@/lib/plan";
-import { formatDate } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -9,6 +8,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+
+const formatDate = (date: Date): string => {
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+};
 
 interface Props {
   plan: Awaited<ReturnType<typeof checkPlan>>;

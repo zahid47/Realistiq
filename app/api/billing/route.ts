@@ -1,8 +1,22 @@
 import { NextResponse } from "next/server";
 import { getUserPlanFromDB } from "@/actions/db-calls/plan";
+import { env } from "@/env.mjs";
 import { getCurrentUser } from "@/lib/auth";
 import stripe from "@/lib/stripe";
-import { getAbsoluteURL, sendNextError } from "@/lib/utils";
+import { sendNextError } from "@/lib/utils";
+
+const getAbsoluteURL = (relativePath: string) => {
+  // if path starts with / remove it
+  if (relativePath.startsWith("/")) {
+    relativePath = relativePath.slice(1);
+  }
+  // if path ends with / remove it
+  if (relativePath.endsWith("/")) {
+    relativePath = relativePath.slice(0, -1);
+  }
+
+  return `${env.NEXT_PUBLIC_APP_URL}/${relativePath}`;
+};
 
 const dashboardUrl = getAbsoluteURL("dashboard");
 

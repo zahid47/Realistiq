@@ -1,5 +1,21 @@
 import { env } from "@/env.mjs";
-import { getSearchParamsString, parseRelativePath } from "./utils";
+import { getSearchParamsString } from "./utils";
+
+const parseRelativePath = (relativePath: string) => {
+  // if path starts with /api/ remove it
+  if (relativePath.startsWith("/api/")) {
+    relativePath = relativePath.slice(5);
+  }
+  // if path starts with / remove it
+  if (relativePath.startsWith("/")) {
+    relativePath = relativePath.slice(1);
+  }
+  // if path ends with / remove it
+  if (relativePath.endsWith("/")) {
+    relativePath = relativePath.slice(0, -1);
+  }
+  return relativePath;
+};
 
 export const get = async (relativePath: string, payload?: any) => {
   const parsedRelativePath = parseRelativePath(relativePath);

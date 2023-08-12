@@ -3,17 +3,17 @@ import { getListingsFromDB } from "@/actions/db-calls/listing";
 import { getCurrentUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { checkPlan } from "@/lib/plan";
-import {
-  getRequestBodyGracefully,
-  getSearchParamsObject,
-  sendNextError,
-} from "@/lib/utils";
+import { getRequestBodyGracefully, sendNextError } from "@/lib/utils";
 import {
   createListingSchema,
   getListingsPayload,
 } from "@/lib/validators/listing";
 
 export const dynamic = "force-dynamic";
+
+const getSearchParamsObject = (searchParams: URLSearchParams) => {
+  return Object.fromEntries(searchParams);
+};
 
 export async function GET(request: NextRequest) {
   try {
