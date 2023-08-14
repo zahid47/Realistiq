@@ -57,7 +57,7 @@
     "clsx": "^1.2.1",
     "embla-carousel-react": "8.0.0-rc07",
     "eslint": "8.42.0",
-    "eslint-config-next": "13.4.7",
+    "eslint-config-next": "13.4.13",
     "fslightbox-react": "^1.7.6",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.241.0",
