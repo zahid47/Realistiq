@@ -42,7 +42,7 @@ export default function SavedToggle({ searchParams }: Props) {
         disabled={status !== "authenticated"}
       >
         <Icons.BookMark className="h-4 w-4" />
-        <span className="ml-2 hidden 2xl:block">My Saved listings</span>
+        <span className="ml-2 hidden 2xl:block">Saved</span>
       </Toggle>
     </div>
   );
