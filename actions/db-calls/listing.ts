@@ -33,9 +33,10 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
   let parsedBounds: Bounds | null = null;
 
   if (bounds) {
-    try {
-      parsedBounds = boundsSchema.parse(JSON.parse(bounds));
-    } catch {}
+    const parseResults = boundsSchema.safeParse(JSON.parse(bounds));
+    if (parseResults.success) {
+      parsedBounds = parseResults.data;
+    }
   }
 
   const filters = {
