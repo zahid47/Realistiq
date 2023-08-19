@@ -11,13 +11,12 @@ interface Props {
 }
 
 export default function SavedToggle({ searchParams }: Props) {
-  const [pressed, setPressed] = useState(searchParams.saved);
+  const pressed = searchParams.saved;
   const { status } = useSession();
   const router = useRouter();
   const pathname = usePathname();
 
   const handlePress = (value: Boolean) => {
-    setPressed(value.toString() as "true" | "false");
     const newSearchParams = {
       ...searchParams,
       saved: value,
