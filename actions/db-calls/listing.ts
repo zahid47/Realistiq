@@ -27,6 +27,12 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
     bounds,
     saved,
     owner_id,
+    max_beds,
+    min_beds,
+    max_baths,
+    min_baths,
+    max_floor_area,
+    min_floor_area,
   } = getListingsPayload.parse(payload);
 
   const user = await getCurrentUser();
@@ -60,6 +66,48 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
           { lat: { gte: parsedBounds[0][1] } },
           { lat: { lte: parsedBounds[1][1] } },
         ],
+      },
+    }),
+    ...(max_beds && {
+      details: {
+        beds: {
+          lte: max_beds,
+        },
+      },
+    }),
+    ...(min_beds && {
+      details: {
+        beds: {
+          gte: min_beds,
+        },
+      },
+    }),
+    ...(max_baths && {
+      details: {
+        baths: {
+          lte: max_baths,
+        },
+      },
+    }),
+    ...(min_baths && {
+      details: {
+        baths: {
+          gte: min_baths,
+        },
+      },
+    }),
+    ...(max_floor_area && {
+      details: {
+        floor_area: {
+          lte: max_floor_area,
+        },
+      },
+    }),
+    ...(min_floor_area && {
+      details: {
+        floor_area: {
+          gte: min_floor_area,
+        },
       },
     }),
   } as const;

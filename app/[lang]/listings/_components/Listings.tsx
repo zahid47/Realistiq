@@ -18,6 +18,7 @@ import { Button } from "../../../../components/ui/button";
 import ListingPagination from "./ListingPagination";
 import ListingsList from "./ListingsList";
 import ListingsMap from "./ListingsMap";
+import OtherFilters from "./OtherFilters";
 import SavedToggle from "./SavedToggle";
 import SortingDropdown from "./SortingDropdown";
 
@@ -64,6 +65,7 @@ export default function Listings({ searchParams }: Props) {
         <div className="flex items-center justify-between gap-2 border-t border-gray-200 px-2 py-3">
           <div className="flex justify-start gap-2">
             <SortingDropdown searchParams={searchParams} />
+            <OtherFilters searchParams={searchParams} />
             <SavedToggle searchParams={searchParams} />
           </div>
           <Button variant="outline" disabled={!isFiltering}>

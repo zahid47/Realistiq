@@ -6,6 +6,7 @@ import {
   Bookmark,
   Box,
   Circle,
+  FilterIcon,
   Github,
   Home,
   Loader2,
@@ -65,4 +66,5 @@ export const Icons = {
   Add: PlusSquare,
   Loader: Loader2,
   Warning: AlertTriangle,
+  Filter: FilterIcon,
 };

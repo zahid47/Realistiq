@@ -1,15 +1,15 @@
 import { getListingsFromDB } from "@/actions/db-calls/listing";
 import { dehydrate } from "@tanstack/react-query";
 import getQueryClient from "@/lib/getQueryClient";
-import { getListingsPayload } from "@/lib/validators/listing";
+import {
+  GetListingsPayload,
+  getListingsPayload,
+} from "@/lib/validators/listing";
 import HydrateWrapper from "@/components/shared/Hydrate";
 import Listings from "./_components/Listings";
 
 interface Props {
-  searchParams: {
-    bounds?: string;
-    //... there are more, but not using them here so no need to type them, we are validating it anyway so no worries hopefully
-  };
+  searchParams: Partial<GetListingsPayload>;
 }
 
 export default async function ListingsPage({ searchParams }: Props) {

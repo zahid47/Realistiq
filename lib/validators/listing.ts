@@ -12,6 +12,12 @@ export const getListingsPayload = z.object({
   zoom: z.coerce.number().positive().optional(),
   bounds: z.string().optional(),
   saved: z.enum(["true", "false"]).catch("false"),
+  min_beds: z.coerce.number().int().positive().optional(),
+  max_beds: z.coerce.number().int().positive().optional(),
+  min_baths: z.coerce.number().int().positive().optional(),
+  max_baths: z.coerce.number().int().positive().optional(),
+  min_floor_area: z.coerce.number().int().positive().optional(),
+  max_floor_area: z.coerce.number().int().positive().optional(),
 });
 
 export const createListingSchema = z.object({
