@@ -18,6 +18,7 @@ export const getListingsPayload = z.object({
   max_baths: z.coerce.number().int().positive().optional(),
   min_floor_area: z.coerce.number().int().positive().optional(),
   max_floor_area: z.coerce.number().int().positive().optional(),
+  max_rent: z.coerce.number().int().positive().optional().or(z.literal("")),
 });
 
 export const createListingSchema = z.object({

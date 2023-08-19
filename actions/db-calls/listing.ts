@@ -33,6 +33,7 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
     min_baths,
     max_floor_area,
     min_floor_area,
+    max_rent,
   } = getListingsPayload.parse(payload);
 
   const user = await getCurrentUser();
@@ -47,6 +48,29 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
 
   const filters = {
     status: "ACTIVE",
+    ...{
+      details: {
+        beds: {
+          lte: max_beds,
+          gte: min_beds,
+        },
+        baths: {
+          lte: max_baths,
+          gte: min_baths,
+        },
+        floor_area: {
+          lte: max_floor_area,
+          gte: min_floor_area,
+        },
+      },
+      ...(max_rent && {
+        price: {
+          amount: {
+            lte: max_rent,
+          },
+        },
+      }),
+    },
     ...(user &&
       saved === "true" && {
         saved: {
@@ -66,48 +90,6 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
           { lat: { gte: parsedBounds[0][1] } },
           { lat: { lte: parsedBounds[1][1] } },
         ],
-      },
-    }),
-    ...(max_beds && {
-      details: {
-        beds: {
-          lte: max_beds,
-        },
-      },
-    }),
-    ...(min_beds && {
-      details: {
-        beds: {
-          gte: min_beds,
-        },
-      },
-    }),
-    ...(max_baths && {
-      details: {
-        baths: {
-          lte: max_baths,
-        },
-      },
-    }),
-    ...(min_baths && {
-      details: {
-        baths: {
-          gte: min_baths,
-        },
-      },
-    }),
-    ...(max_floor_area && {
-      details: {
-        floor_area: {
-          lte: max_floor_area,
-        },
-      },
-    }),
-    ...(min_floor_area && {
-      details: {
-        floor_area: {
-          gte: min_floor_area,
-        },
       },
     }),
   } as const;
