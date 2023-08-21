@@ -37,7 +37,7 @@ dependencies:
     version: 6.0.14(@emotion/react@11.11.1)(@emotion/server@11.11.0)(next@13.4.4)(react-dom@18.2.0)(react@18.2.0)
   '@mantine/tiptap':
     specifier: ^6.0.16
-    version: 6.0.16(@mantine/core@6.0.14)(@mantine/hooks@6.0.14)(@tabler/icons-react@2.25.0)(@tiptap/extension-link@2.0.3)(@tiptap/react@2.0.3)(react@18.2.0)
+    version: 6.0.16(@mantine/core@6.0.14)(@mantine/hooks@6.0.14)(@tabler/icons-react@2.31.0)(@tiptap/extension-link@2.0.3)(@tiptap/react@2.0.3)(react@18.2.0)
   '@mapbox/search-js-core':
     specifier: 1.0.0-beta.17
     version: 1.0.0-beta.17
@@ -87,8 +87,8 @@ dependencies:
     specifier: ^0.4.0
     version: 0.4.0(typescript@5.1.3)(zod@3.21.4)
   '@tabler/icons-react':
-    specifier: ^2.25.0
-    version: 2.25.0(react@18.2.0)
+    specifier: ^2.31.0
+    version: 2.31.0(react@18.2.0)
   '@tanstack/react-query':
     specifier: ^4.29.12
     version: 4.29.12(react-dom@18.2.0)(react@18.2.0)
@@ -925,7 +925,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@mantine/tiptap@6.0.16(@mantine/core@6.0.14)(@mantine/hooks@6.0.14)(@tabler/icons-react@2.25.0)(@tiptap/extension-link@2.0.3)(@tiptap/react@2.0.3)(react@18.2.0):
+  /@mantine/tiptap@6.0.16(@mantine/core@6.0.14)(@mantine/hooks@6.0.14)(@tabler/icons-react@2.31.0)(@tiptap/extension-link@2.0.3)(@tiptap/react@2.0.3)(react@18.2.0):
     resolution: {integrity: sha512-W/289lRW7AoNOh4/1WX31K0z+Uk9lJpZyC+m3TuywPSJCINU2ETmj1r+RZl3szf2hLCt5FhSspIAcPgkA2LYQw==}
     peerDependencies:
       '@mantine/core': 6.0.16
@@ -938,7 +938,7 @@ packages:
       '@mantine/core': 6.0.14(@emotion/react@11.11.1)(@mantine/hooks@6.0.14)(@types/react@18.2.10)(react-dom@18.2.0)(react@18.2.0)
       '@mantine/hooks': 6.0.14(react@18.2.0)
       '@mantine/utils': 6.0.16(react@18.2.0)
-      '@tabler/icons-react': 2.25.0(react@18.2.0)
+      '@tabler/icons-react': 2.31.0(react@18.2.0)
       '@tiptap/extension-link': 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
       '@tiptap/react': 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
@@ -2150,18 +2150,18 @@ packages:
       zod: 3.21.4
     dev: false
 
-  /@tabler/icons-react@2.25.0(react@18.2.0):
-    resolution: {integrity: sha512-so/amZZcvuZBBTMinReI219ek1MwlZfccGfRu7IwXEhgHftFTfyBOvTK9Kgf4vM+9+i0CcuVRoxyfQiuUwYUWg==}
+  /@tabler/icons-react@2.31.0(react@18.2.0):
+    resolution: {integrity: sha512-P0q4VtKXJEc9lv9kxBUYfRqNuPzAYGGl26Wt8nMeY8Ck6x6tdsIWyox9fmGQh9BEoYEln7hM6pOA9eNphVmg+A==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@tabler/icons': 2.25.0
+      '@tabler/icons': 2.31.0
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
 
-  /@tabler/icons@2.25.0:
-    resolution: {integrity: sha512-Z+FtSZoG/CM1TMCgg7elUew2m0+qMdh5gutMhvxiIY77KIIsE6L/6fUBy+rPXWE9v7MV296fsnCvbpfgwpXupQ==}
+  /@tabler/icons@2.31.0:
+    resolution: {integrity: sha512-vueOF4rjM0wcYAHOq7gcQB3fU04EAfHIwP0i/DVQdopXv84uu62DvOFHhYj9d0OBiM4O0PPoXEvsT8IVZDrYXw==}
     dev: false
 
   /@tanstack/eslint-plugin-query@4.29.9:
