@@ -212,8 +212,8 @@ devDependencies:
     specifier: ^0.6.1
     version: 0.6.1
   '@types/node':
-    specifier: ^20.4.4
-    version: 20.4.4
+    specifier: ^20.5.1
+    version: 20.5.1
   eslint-config-prettier:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.42.0)
@@ -231,7 +231,7 @@ devDependencies:
     version: 5.0.0
   ts-node:
     specifier: ^10.9.1
-    version: 10.9.1(@types/node@20.4.4)(typescript@5.1.3)
+    version: 10.9.1(@types/node@20.5.1)(typescript@5.1.3)
   typescript:
     specifier: ^5.1.3
     version: 5.1.3
@@ -2548,8 +2548,8 @@ packages:
     resolution: {integrity: sha512-c4mvXFByghezQ/eVGN5HvH/jI63vm3B7FiE81BUzDAWmuiohRecCO6ddU60dfq29oKUMiQujsoB2h0JQC7JHKA==}
     dev: true
 
-  /@types/node@20.4.4:
-    resolution: {integrity: sha512-CukZhumInROvLq3+b5gLev+vgpsIqC2D0deQr/yS1WnxvmYLlJXZpaQrQiseMY+6xusl79E04UjWoqyr+t1/Ew==}
+  /@types/node@20.5.1:
+    resolution: {integrity: sha512-4tT2UrL5LBqDwoed9wZ6N3umC4Yhz3W3FloMmiiG4JwmUJWpie0c7lcnUNd4gtMKuDEO4wRVS8B6Xa0uMRsMKg==}
 
   /@types/nprogress@0.2.0:
     resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
@@ -5043,7 +5043,7 @@ packages:
     dependencies:
       lilconfig: 2.1.0
       postcss: 8.4.24
-      ts-node: 10.9.1(@types/node@20.4.4)(typescript@5.1.3)
+      ts-node: 10.9.1(@types/node@20.5.1)(typescript@5.1.3)
       yaml: 2.3.1
     dev: false
 
@@ -5852,7 +5852,7 @@ packages:
     resolution: {integrity: sha512-iwVkyZsS9KsWmEVK5qnbPeX/m94+Z3fXIRU7Q4iNBS2Zuj1spGIjLKMN3tejUs/ZZ2o7dCYFJvVdC2aZMYo8GA==}
     engines: {node: '>=12.*'}
     dependencies:
-      '@types/node': 20.4.4
+      '@types/node': 20.5.1
       qs: 6.11.2
     dev: false
 
@@ -6101,7 +6101,7 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: false
 
-  /ts-node@10.9.1(@types/node@20.4.4)(typescript@5.1.3):
+  /ts-node@10.9.1(@types/node@20.5.1)(typescript@5.1.3):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -6120,7 +6120,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 20.4.4
+      '@types/node': 20.5.1
       acorn: 8.9.0
       acorn-walk: 8.2.0
       arg: 4.1.3
