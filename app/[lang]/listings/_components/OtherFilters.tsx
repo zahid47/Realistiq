@@ -69,7 +69,7 @@ export default function OtherFilters({ searchParams }: Props) {
   });
 
   const getFilteredURL = () => {
-    const values = form.getValues();
+    const values = form.watch();
     const newSearchParams = {
       ...searchParams,
       ...values,
