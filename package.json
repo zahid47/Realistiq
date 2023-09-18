@@ -84,7 +84,7 @@
     "@tanstack/eslint-plugin-query": "^4.29.9",
     "@types/fslightbox-react": "^1.7.3",
     "@types/negotiator": "^0.6.1",
-    "@types/node": "^20.4.4",
+    "@types/node": "^20.6.2",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
