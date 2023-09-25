@@ -36,8 +36,8 @@ dependencies:
     specifier: ^6.0.14
     version: 6.0.14(@emotion/react@11.11.1)(@emotion/server@11.11.0)(next@13.4.4)(react-dom@18.2.0)(react@18.2.0)
   '@mantine/tiptap':
-    specifier: ^6.0.16
-    version: 6.0.16(@mantine/core@6.0.14)(@mantine/hooks@6.0.14)(@tabler/icons-react@2.25.0)(@tiptap/extension-link@2.0.3)(@tiptap/react@2.0.3)(react@18.2.0)
+    specifier: ^7.0.0
+    version: 7.0.0(@mantine/core@6.0.14)(@mantine/hooks@6.0.14)(@tabler/icons-react@2.25.0)(@tiptap/extension-link@2.1.11)(@tiptap/react@2.0.3)(react-dom@18.2.0)(react@18.2.0)
   '@mapbox/search-js-core':
     specifier: 1.0.0-beta.17
     version: 1.0.0-beta.17
@@ -925,23 +925,24 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@mantine/tiptap@6.0.16(@mantine/core@6.0.14)(@mantine/hooks@6.0.14)(@tabler/icons-react@2.25.0)(@tiptap/extension-link@2.0.3)(@tiptap/react@2.0.3)(react@18.2.0):
-    resolution: {integrity: sha512-W/289lRW7AoNOh4/1WX31K0z+Uk9lJpZyC+m3TuywPSJCINU2ETmj1r+RZl3szf2hLCt5FhSspIAcPgkA2LYQw==}
+  /@mantine/tiptap@7.0.0(@mantine/core@6.0.14)(@mantine/hooks@6.0.14)(@tabler/icons-react@2.25.0)(@tiptap/extension-link@2.1.11)(@tiptap/react@2.0.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Xe+chsf3H2uoM3QrYSfEyKUNByXYOtGcr4hUB95Bxu7dMHMf4ciSeDeOoKJBujsLxXU1pfmtSZLlhco4xcEzrg==}
     peerDependencies:
-      '@mantine/core': 6.0.16
-      '@mantine/hooks': 6.0.16
-      '@tabler/icons-react': '>=2.1.0'
-      '@tiptap/extension-link': ^2.0.0-beta.202
-      '@tiptap/react': ^2.0.0-beta.202
-      react: '>=16.8.0'
+      '@mantine/core': 7.0.0
+      '@mantine/hooks': 7.0.0
+      '@tabler/icons-react': ^2.29.0
+      '@tiptap/extension-link': ^2.0.4
+      '@tiptap/react': ^2.0.4
+      react: ^18.2.0
+      react-dom: ^18.2.0
     dependencies:
       '@mantine/core': 6.0.14(@emotion/react@11.11.1)(@mantine/hooks@6.0.14)(@types/react@18.2.10)(react-dom@18.2.0)(react@18.2.0)
       '@mantine/hooks': 6.0.14(react@18.2.0)
-      '@mantine/utils': 6.0.16(react@18.2.0)
       '@tabler/icons-react': 2.25.0(react@18.2.0)
-      '@tiptap/extension-link': 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
+      '@tiptap/extension-link': 2.1.11(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)
       '@tiptap/react': 2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3)(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /@mantine/utils@6.0.14(react@18.2.0):
@@ -2356,8 +2357,8 @@ packages:
       '@tiptap/core': 2.0.3(@tiptap/pm@2.0.3)
     dev: false
 
-  /@tiptap/extension-link@2.0.3(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3):
-    resolution: {integrity: sha512-H72tXQ5rkVCkAhFaf08fbEU7EBUCK0uocsqOF+4th9sOlrhfgyJtc8Jv5EXPDpxNgG5jixSqWBo0zKXQm9s9eg==}
+  /@tiptap/extension-link@2.1.11(@tiptap/core@2.0.3)(@tiptap/pm@2.0.3):
+    resolution: {integrity: sha512-Dn8hq4ld8br53fE4/QUZ7/y6ejY/kqAxeNhtud+OZKRs6VRn/CQd0H6A26opL+mKAK0kzrs0rh7rJPpHvahx/Q==}
     peerDependencies:
       '@tiptap/core': ^2.0.0
       '@tiptap/pm': ^2.0.0
