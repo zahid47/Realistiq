@@ -85,7 +85,7 @@ model Listing {
   uuid String @unique @default(cuid())
 
   owner_id String
-  owner   User   @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  owner    User   @relation(fields: [owner_id], references: [id], onDelete: Cascade)
 
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
@@ -138,15 +138,20 @@ enum Interval {
   DAY
 }
 
+// FIXME: lat, lng is for display only, coords is for query only. do not query by lat, lng.
+// it is probably possible to do it with coords only, but I don't want to use raw queries.
+// maybe mix and match?
 model ListingLocation {
-  id      Int    @id @default(autoincrement())
+  id      Int                                   @id @default(autoincrement())
   lat     Float
   lng     Float
+  coords  Unsupported("geography(POINT, 4326)")
   address String
 
   listing_id Int     @unique
   listing    Listing @relation(fields: [listing_id], references: [id], onDelete: Cascade)
 
+  @@index([coords], name: "coords_index", type: Gist)
   @@map(name: "listing_location")
 }
 
