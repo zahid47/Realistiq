@@ -38,12 +38,28 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
 
   const user = await getCurrentUser();
   let parsedBounds: Bounds | null = null;
+  let listingIdsWithinBounds: number[] | null = null;
 
   if (bounds) {
     const parseResults = boundsSchema.safeParse(JSON.parse(bounds));
     if (parseResults.success) {
       parsedBounds = parseResults.data;
     }
+  }
+
+  if (parsedBounds) {
+    const min_lng = parsedBounds[0][0];
+    const max_lng = parsedBounds[1][0];
+    const min_lat = parsedBounds[0][1];
+    const max_lat = parsedBounds[1][1];
+
+    const res: Array<{ listing_id: number }> = await db.$queryRaw`
+      SELECT listing_id
+      FROM listing_location
+      WHERE coords && ST_SetSRID(ST_MakeBox2D(ST_Point(${min_lng}, ${min_lat}), ST_Point(${max_lng}, ${max_lat})), 4326)
+    `;
+
+    listingIdsWithinBounds = res.map((r) => r.listing_id);
   }
 
   const filters = {
@@ -82,14 +98,9 @@ export const getListingsFromDB = async (payload: GetListingsPayload) => {
     ...(owner_id && {
       owner_id,
     }),
-    ...(parsedBounds && {
-      location: {
-        AND: [
-          { lng: { gte: parsedBounds[0][0] } },
-          { lng: { lte: parsedBounds[1][0] } },
-          { lat: { gte: parsedBounds[0][1] } },
-          { lat: { lte: parsedBounds[1][1] } },
-        ],
+    ...(listingIdsWithinBounds && {
+      id: {
+        in: listingIdsWithinBounds,
       },
     }),
   } as const;

@@ -74,7 +74,7 @@ async function main() {
 
   console.log("Seeding...");
 
-  const fakeListings = Array.from({ length: 50 }).map(() => {
+  const fakeListings = Array.from({ length: 10 }).map(() => {
     return {
       owner_id: user.id,
       details: {
@@ -88,19 +88,6 @@ async function main() {
       price: {
         create: {
           amount: parseFloat(faker.commerce.price({ min: 99, max: 9999 })),
-        },
-      },
-      location: {
-        create: {
-          lat: faker.location.latitude({
-            min: 33,
-            max: 48,
-          }),
-          lng: faker.location.longitude({
-            min: -121,
-            max: -76,
-          }),
-          address: `${faker.location.city()}, ${faker.location.streetAddress()}, United States`,
         },
       },
       photos: {
@@ -124,6 +111,33 @@ async function main() {
       return db.listing.create({
         data: fakeListing,
       });
+    })
+  );
+
+  // FIXME: there has to be a better way to do this?
+  // now insert locations for each listing
+  const listings = await db.listing.findMany();
+
+  await Promise.all(
+    listings.map((listing) => {
+      const lat = faker.location.latitude({
+        min: 33,
+        max: 48,
+      });
+
+      const lng = faker.location.longitude({
+        min: -121,
+        max: -76,
+      });
+
+      const address = `${faker.location.city()}, ${faker.location.streetAddress()}, United States`;
+
+      return db.$queryRaw`
+        INSERT INTO listing_location (lat, lng, coords, address, listing_id) 
+        VALUES (${lat}, ${lng}, ${`POINT(${lng} ${lat})`}, ${address}, ${
+        listing.id
+      });
+      `;
     })
   );
 }
