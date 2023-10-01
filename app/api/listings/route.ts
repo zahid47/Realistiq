@@ -87,14 +87,20 @@ export async function POST(request: NextRequest) {
     });
 
     // create listing location
-    await db.$queryRaw`
+    const coords = `POINT(${parsedBody.longitude} ${parsedBody.latitude})`;
+    const rawQuery = `
       INSERT INTO listing_location (lat, lng, coords, address, listing_id) 
-      VALUES (${parsedBody.latitude}, ${
-      parsedBody.longitude
-    }, ${`POINT(${parsedBody.longitude} ${parsedBody.latitude})`}, ${
-      parsedBody.address
-    }, ${newListing.id});
+      VALUES (${parsedBody.latitude}, ${parsedBody.longitude}, '${coords}', '${parsedBody.address}', ${newListing.id});
     `;
+
+    // FIXME
+    await db.$queryRawUnsafe(rawQuery).catch(async () => {
+      await db.listing.delete({
+        where: {
+          id: newListing.id,
+        },
+      });
+    });
 
     return NextResponse.json(newListing);
   } catch (err) {
