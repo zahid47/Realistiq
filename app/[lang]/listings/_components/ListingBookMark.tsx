@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useParams,
   usePathname,
@@ -26,6 +26,10 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
+  useEffect(() => {
+    setSaved(isSaved); // sync
+  }, [isSaved]);
+
   const mutation = useMutation({
     mutationFn: () => addOrRemoveSaved(listingId),
     onMutate: () => {
@@ -36,7 +40,7 @@ export default function ListingBookMark({ listingId, isSaved }: Props) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: `Could not ${isSaved && "un"}save the listing.`,
+        description: `Something went wrong.`,
       });
     },
     onSettled: () => {

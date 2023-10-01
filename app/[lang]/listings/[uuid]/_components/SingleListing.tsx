@@ -25,10 +25,6 @@ export default function SingleListing({ uuid }: Props) {
     !!listingDetailsQueryResult.data?.saved.length
   );
 
-  useEffect(() => {
-    setSaved(!!listingDetailsQueryResult.data?.saved.length); // syncing data after listingDetailsQueryResult is loaded
-  }, [!!listingDetailsQueryResult.data?.saved.length]);
-
   if (listingDetailsQueryResult.isLoading) {
     return (
       <div>
@@ -37,7 +33,7 @@ export default function SingleListing({ uuid }: Props) {
     );
   }
 
-  if (!listingDetailsQueryResult.isSuccess) return null;
+  if (!listingDetailsQueryResult.data) return null;
 
   const listing = listingDetailsQueryResult.data;
 
