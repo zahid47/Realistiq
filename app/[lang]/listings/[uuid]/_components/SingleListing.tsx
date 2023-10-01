@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getListing } from "@/actions/api-calls/listing";
 import { useQuery } from "@tanstack/react-query";
 import { Icons } from "@/components/ui/Icons";
@@ -24,6 +24,10 @@ export default function SingleListing({ uuid }: Props) {
   const [saved, setSaved] = useState(
     !!listingDetailsQueryResult.data?.saved.length
   );
+
+  useEffect(() => {
+    setSaved(!!listingDetailsQueryResult.data?.saved.length); // syncing data after listingDetailsQueryResult is loaded
+  }, [!!listingDetailsQueryResult.data?.saved.length]);
 
   if (listingDetailsQueryResult.isLoading) {
     return (
