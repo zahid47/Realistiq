@@ -37,7 +37,7 @@ export default function BookmarkShare({ listing, saved, setSaved }: Props) {
       toast({
         variant: "destructive",
         title: "Error",
-        description: `Could not ${saved && "un"}save the listing.`,
+        description: `Something went wrong.`,
       });
     },
     onSettled: () => {

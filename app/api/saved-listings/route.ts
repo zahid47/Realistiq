@@ -37,6 +37,8 @@ export async function POST(request: NextRequest) {
             },
           },
         });
+      } else {
+        throw err;
       }
     }
 
