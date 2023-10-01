@@ -80,18 +80,21 @@ export async function POST(request: NextRequest) {
             amount: parsedBody.amount,
           },
         },
-        location: {
-          create: {
-            lat: parsedBody.latitude,
-            lng: parsedBody.longitude,
-            address: parsedBody.address,
-          },
-        },
         photos: {
           create: photos,
         },
       },
     });
+
+    // create listing location
+    await db.$queryRaw`
+      INSERT INTO listing_location (lat, lng, coords, address, listing_id) 
+      VALUES (${parsedBody.latitude}, ${
+      parsedBody.longitude
+    }, ${`POINT(${parsedBody.longitude} ${parsedBody.latitude})`}, ${
+      parsedBody.address
+    }, ${newListing.id});
+    `;
 
     return NextResponse.json(newListing);
   } catch (err) {
