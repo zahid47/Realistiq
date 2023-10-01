@@ -64,13 +64,7 @@ async function main() {
 
   console.log("Clearing existing data...");
 
-  await Promise.all([
-    db.listing.deleteMany(),
-    db.listingDetails.deleteMany(),
-    db.listingPrice.deleteMany(),
-    db.listingLocation.deleteMany(),
-    db.listingPhotos.deleteMany(),
-  ]);
+  await db.listing.deleteMany();
 
   console.log("Seeding...");
 
