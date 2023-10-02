@@ -70,7 +70,7 @@ async function main() {
 
   console.log("Seeding...");
 
-  const fakeListings = Array.from({ length: 10 }).map(() => {
+  const fakeListings = Array.from({ length: 25 }).map(() => {
     return {
       location: {
         lat: faker.location.latitude({
