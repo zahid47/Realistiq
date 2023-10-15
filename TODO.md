@@ -1,2 +1,0 @@
-- draw on map
-- update map with suspense/useTransition? reduce lag on scroll
