@@ -17,6 +17,7 @@ const font = Poppins({
 export const metadata = {
   title: siteConfig.title,
   description: siteConfig.description,
+  "google-site-verification": "Bg4tCKr7LDZYP5yznsI1MpWz4Zi78Tqagc2LV_RK6Po"
 };
 
 interface Props {
